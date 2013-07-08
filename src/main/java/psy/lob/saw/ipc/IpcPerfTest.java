@@ -11,8 +11,8 @@ import java.nio.channels.FileChannel.MapMode;
 import java.util.Queue;
 
 import psy.lob.saw.queues.offheap.P1C1OffHeapQueue;
-import psy.lob.saw.utils.UnsafeAccess;
-import psy.lob.saw.utils.UnsafeDirectByteBuffer;
+import psy.lob.saw.util.UnsafeAccess;
+import psy.lob.saw.util.UnsafeDirectByteBuffer;
 
 
 /**
