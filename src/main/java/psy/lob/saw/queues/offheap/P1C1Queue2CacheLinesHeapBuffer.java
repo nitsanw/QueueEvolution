@@ -15,8 +15,8 @@
  */
 package psy.lob.saw.queues.offheap;
 
-import static psy.lob.saw.utils.UnsafeDirectByteBuffer.CACHE_LINE_SIZE;
-import static psy.lob.saw.utils.UnsafeDirectByteBuffer.allocateAlignedByteBuffer;
+import static psy.lob.saw.util.UnsafeDirectByteBuffer.CACHE_LINE_SIZE;
+import static psy.lob.saw.util.UnsafeDirectByteBuffer.allocateAlignedByteBuffer;
 
 import java.nio.ByteBuffer;
 import java.util.Collection;
@@ -24,8 +24,8 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Queue;
 
-import psy.lob.saw.utils.UnsafeAccess;
-import psy.lob.saw.utils.UnsafeDirectByteBuffer;
+import psy.lob.saw.util.UnsafeAccess;
+import psy.lob.saw.util.UnsafeDirectByteBuffer;
 
 public final class P1C1Queue2CacheLinesHeapBuffer<E> implements Queue<E> {
 	// 24b,8b, 8b, 24b | ,24b,8b, 8b, 24b
