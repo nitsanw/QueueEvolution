@@ -1,8 +1,9 @@
-#echo "Same Core"
-#for IMPL in 3 31 41 42 43 44 45
-#do
-#	./repeatRunTestSC.sh $IMPL
-#done
+export JVM_OPTS=-XX:+UseNUMA -XX:+UseCondCardMark -XX:CompileThreshold=100000
+echo "Same Core"
+for IMPL in 3 31 41 42 43 44 45
+do
+	./repeatRunTestSC.sh $IMPL
+done
 echo "Cross Core"
 for IMPL in 3 31 41 42 43 44 45
 do 
