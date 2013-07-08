@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package psy.lob.saw.queues;
+package psy.lob.saw.queues.offheap;
 
-import static psy.lob.saw.queues.UnsafeDirectByteBuffer.*;
+import static psy.lob.saw.utils.UnsafeDirectByteBuffer.*;
 
 import java.nio.ByteBuffer;
 import java.util.Collection;
@@ -23,7 +23,10 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Queue;
 
-public final class P1C1Queue4CacheLinesHeapBuffer<E> implements Queue<E> {
+import psy.lob.saw.utils.UnsafeAccess;
+import psy.lob.saw.utils.UnsafeDirectByteBuffer;
+
+public final class P1C1Queue4CacheLinesHeapBufferUnsafe<E> implements Queue<E> {
 	// 24b,8b,32b | 24b,8b,32b | 24b,8b,32b | 24b,8b,32b
 	private final ByteBuffer buffy = allocateAlignedByteBuffer(
 	        4 * CACHE_LINE_SIZE, CACHE_LINE_SIZE);
@@ -35,9 +38,29 @@ public final class P1C1Queue4CacheLinesHeapBuffer<E> implements Queue<E> {
 	private final int capacity;
 	private final int mask;
 	private final E[] buffer;
+	private static final long arrayBase;
+	private static final int arrayScale;
+
+	static {
+		try {
+			arrayBase = UnsafeAccess.UNSAFE.arrayBaseOffset(Object[].class);
+			final int scale = UnsafeAccess.UNSAFE
+			        .arrayIndexScale(Object[].class);
+
+			if (4 == scale) {
+				arrayScale = 2;
+			} else if (8 == scale) {
+				arrayScale = 3;
+			} else {
+				throw new IllegalStateException("Unknown pointer size");
+			}
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
 
 	@SuppressWarnings("unchecked")
-	public P1C1Queue4CacheLinesHeapBuffer(final int capacity) {
+	public P1C1Queue4CacheLinesHeapBufferUnsafe(final int capacity) {
 		long alignedAddress = UnsafeDirectByteBuffer.getAddress(buffy);
 
 		headAddress = alignedAddress + (CACHE_LINE_SIZE / 2 - 8);
@@ -76,7 +99,9 @@ public final class P1C1Queue4CacheLinesHeapBuffer<E> implements Queue<E> {
 			}
 		}
 
-		buffer[(int) currentTail & mask] = e;
+		UnsafeAccess.UNSAFE.putObject(buffer, arrayBase
+		        + ((currentTail & mask) << arrayScale), e);
+
 		setTail(currentTail + 1);
 
 		return true;
@@ -91,9 +116,9 @@ public final class P1C1Queue4CacheLinesHeapBuffer<E> implements Queue<E> {
 			}
 		}
 
-		final int index = (int) currentHead & mask;
-		final E e = buffer[index];
-		buffer[index] = null;
+		final long offset = arrayBase + ((currentHead & mask) << arrayScale);
+		final E e = (E) UnsafeAccess.UNSAFE.getObject(buffer, offset);
+		UnsafeAccess.UNSAFE.putObject(buffer, offset, null);
 		setHead(currentHead + 1);
 
 		return e;
@@ -194,34 +219,34 @@ public final class P1C1Queue4CacheLinesHeapBuffer<E> implements Queue<E> {
 	}
 
 	private long getHead() {
-		return UnsafeAccess.unsafe.getLongVolatile(null, headAddress);
+		return UnsafeAccess.UNSAFE.getLongVolatile(null, headAddress);
 	}
 
 	private void setHead(final long value) {
-		UnsafeAccess.unsafe.putOrderedLong(null, headAddress, value);
+		UnsafeAccess.UNSAFE.putOrderedLong(null, headAddress, value);
 	}
 
 	private long getTail() {
-		return UnsafeAccess.unsafe.getLongVolatile(null, tailAddress);
+		return UnsafeAccess.UNSAFE.getLongVolatile(null, tailAddress);
 	}
 
 	private void setTail(final long value) {
-		UnsafeAccess.unsafe.putOrderedLong(null, tailAddress, value);
+		UnsafeAccess.UNSAFE.putOrderedLong(null, tailAddress, value);
 	}
 
 	private long getHeadCache() {
-		return UnsafeAccess.unsafe.getLong(null, headCacheAddress);
+		return UnsafeAccess.UNSAFE.getLong(null, headCacheAddress);
 	}
 
 	private void setHeadCache(final long value) {
-		UnsafeAccess.unsafe.putLong(headCacheAddress, value);
+		UnsafeAccess.UNSAFE.putLong(headCacheAddress, value);
 	}
 
 	private long getTailCache() {
-		return UnsafeAccess.unsafe.getLong(null, tailCacheAddress);
+		return UnsafeAccess.UNSAFE.getLong(null, tailCacheAddress);
 	}
 
 	private void setTailCache(final long value) {
-		UnsafeAccess.unsafe.putLong(tailCacheAddress, value);
+		UnsafeAccess.UNSAFE.putLong(tailCacheAddress, value);
 	}
 }

@@ -13,10 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package psy.lob.saw.queues;
+package psy.lob.saw.queues.offheap;
 
-import static psy.lob.saw.queues.UnsafeDirectByteBuffer.CACHE_LINE_SIZE;
-import static psy.lob.saw.queues.UnsafeDirectByteBuffer.allocateAlignedByteBuffer;
+import static psy.lob.saw.utils.UnsafeDirectByteBuffer.*;
 
 import java.nio.ByteBuffer;
 import java.util.Collection;
@@ -24,11 +23,13 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Queue;
 
-public final class P1C1Queue2CacheLinesHeapBuffer<E> implements Queue<E> {
-	// 24b,8b, 8b, 24b | ,24b,8b, 8b, 24b
-	// PAD,head,tailCache,PAD,PAD,tail,headCache,PAD
+import psy.lob.saw.utils.UnsafeAccess;
+import psy.lob.saw.utils.UnsafeDirectByteBuffer;
+
+public final class P1C1Queue4CacheLinesHeapBuffer<E> implements Queue<E> {
+	// 24b,8b,32b | 24b,8b,32b | 24b,8b,32b | 24b,8b,32b
 	private final ByteBuffer buffy = allocateAlignedByteBuffer(
-	        2 * CACHE_LINE_SIZE, CACHE_LINE_SIZE);
+	        4 * CACHE_LINE_SIZE, CACHE_LINE_SIZE);
 	private final long headAddress;
 	private final long tailCacheAddress;
 	private final long tailAddress;
@@ -39,13 +40,13 @@ public final class P1C1Queue2CacheLinesHeapBuffer<E> implements Queue<E> {
 	private final E[] buffer;
 
 	@SuppressWarnings("unchecked")
-	public P1C1Queue2CacheLinesHeapBuffer(final int capacity) {
+	public P1C1Queue4CacheLinesHeapBuffer(final int capacity) {
 		long alignedAddress = UnsafeDirectByteBuffer.getAddress(buffy);
 
 		headAddress = alignedAddress + (CACHE_LINE_SIZE / 2 - 8);
-		tailCacheAddress = headAddress + 8;
-		tailAddress = headAddress + CACHE_LINE_SIZE;
-		headCacheAddress = tailAddress + 8;
+		tailCacheAddress = headAddress + CACHE_LINE_SIZE;
+		tailAddress = tailCacheAddress + CACHE_LINE_SIZE;
+		headCacheAddress = tailAddress + CACHE_LINE_SIZE;
 
 		this.capacity = findNextPositivePowerOfTwo(capacity);
 		mask = this.capacity - 1;
@@ -196,34 +197,34 @@ public final class P1C1Queue2CacheLinesHeapBuffer<E> implements Queue<E> {
 	}
 
 	private long getHead() {
-		return UnsafeAccess.unsafe.getLongVolatile(null, headAddress);
+		return UnsafeAccess.UNSAFE.getLongVolatile(null, headAddress);
 	}
 
 	private void setHead(final long value) {
-		UnsafeAccess.unsafe.putOrderedLong(null, headAddress, value);
+		UnsafeAccess.UNSAFE.putOrderedLong(null, headAddress, value);
 	}
 
 	private long getTail() {
-		return UnsafeAccess.unsafe.getLongVolatile(null, tailAddress);
+		return UnsafeAccess.UNSAFE.getLongVolatile(null, tailAddress);
 	}
 
 	private void setTail(final long value) {
-		UnsafeAccess.unsafe.putOrderedLong(null, tailAddress, value);
+		UnsafeAccess.UNSAFE.putOrderedLong(null, tailAddress, value);
 	}
 
 	private long getHeadCache() {
-		return UnsafeAccess.unsafe.getLong(null, headCacheAddress);
+		return UnsafeAccess.UNSAFE.getLong(null, headCacheAddress);
 	}
 
 	private void setHeadCache(final long value) {
-		UnsafeAccess.unsafe.putLong(headCacheAddress, value);
+		UnsafeAccess.UNSAFE.putLong(headCacheAddress, value);
 	}
 
 	private long getTailCache() {
-		return UnsafeAccess.unsafe.getLong(null, tailCacheAddress);
+		return UnsafeAccess.UNSAFE.getLong(null, tailCacheAddress);
 	}
 
 	private void setTailCache(final long value) {
-		UnsafeAccess.unsafe.putLong(tailCacheAddress, value);
+		UnsafeAccess.UNSAFE.putLong(tailCacheAddress, value);
 	}
 }

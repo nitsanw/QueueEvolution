@@ -10,9 +10,9 @@ import java.nio.channels.FileChannel;
 import java.nio.channels.FileChannel.MapMode;
 import java.util.Queue;
 
-import psy.lob.saw.queues.P1C1OffHeapQueue;
-import psy.lob.saw.queues.UnsafeAccess;
-import psy.lob.saw.queues.UnsafeDirectByteBuffer;
+import psy.lob.saw.queues.offheap.P1C1OffHeapQueue;
+import psy.lob.saw.utils.UnsafeAccess;
+import psy.lob.saw.utils.UnsafeDirectByteBuffer;
 
 
 /**
@@ -99,7 +99,7 @@ public class IpcPerfTest {
 	private static void producerRun(final int runNumber,
 	        final Queue<Integer> queue) throws Exception {
 		long syncAddress = UnsafeDirectByteBuffer.getAddress(syncArea);
-		while(!UnsafeAccess.unsafe.compareAndSwapInt(null, syncAddress, 3*runNumber, 3*runNumber))
+		while(!UnsafeAccess.UNSAFE.compareAndSwapInt(null, syncAddress, 3*runNumber, 3*runNumber))
 			Thread.yield();
 		final long start = System.nanoTime();
 		int i = REPETITIONS;
@@ -108,7 +108,7 @@ public class IpcPerfTest {
 //				Thread.yield();
 			}
 		} while (0 != --i);
-		while(!UnsafeAccess.unsafe.compareAndSwapInt(null, syncAddress, 3*runNumber+1, 3*runNumber+2))
+		while(!UnsafeAccess.UNSAFE.compareAndSwapInt(null, syncAddress, 3*runNumber+1, 3*runNumber+2))
 			Thread.yield();
 		final long duration = System.nanoTime() - start;
 		final long ops = (REPETITIONS * 1000L * 1000L * 1000L) / duration;
@@ -120,7 +120,7 @@ public class IpcPerfTest {
 	private static void consumerRun(final int runNumber,
 	        final Queue<Integer> queue) throws Exception {
 		long syncAddress = UnsafeDirectByteBuffer.getAddress(syncArea);
-		while(!UnsafeAccess.unsafe.compareAndSwapInt(null, syncAddress, 3*runNumber-1, 3*runNumber))
+		while(!UnsafeAccess.UNSAFE.compareAndSwapInt(null, syncAddress, 3*runNumber-1, 3*runNumber))
 			Thread.yield();
 		Integer result;
 		int i = REPETITIONS;
@@ -129,7 +129,7 @@ public class IpcPerfTest {
 //				Thread.yield();
 			}
 		} while (0 != --i);
-		while(!UnsafeAccess.unsafe.compareAndSwapInt(null, syncAddress, 3*runNumber, 3*runNumber+1))
+		while(!UnsafeAccess.UNSAFE.compareAndSwapInt(null, syncAddress, 3*runNumber, 3*runNumber+1))
 			Thread.yield();
 	}
 

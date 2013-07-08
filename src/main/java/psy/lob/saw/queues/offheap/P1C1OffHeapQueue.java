@@ -13,17 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package psy.lob.saw.queues;
+package psy.lob.saw.queues.offheap;
 
-import static psy.lob.saw.queues.UnsafeDirectByteBuffer.CACHE_LINE_SIZE;
-import static psy.lob.saw.queues.UnsafeDirectByteBuffer.alignedSlice;
-import static psy.lob.saw.queues.UnsafeDirectByteBuffer.allocateAlignedByteBuffer;
+import static psy.lob.saw.utils.UnsafeDirectByteBuffer.CACHE_LINE_SIZE;
+import static psy.lob.saw.utils.UnsafeDirectByteBuffer.alignedSlice;
+import static psy.lob.saw.utils.UnsafeDirectByteBuffer.allocateAlignedByteBuffer;
 
 import java.nio.ByteBuffer;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Queue;
+
+import psy.lob.saw.utils.UnsafeAccess;
+import psy.lob.saw.utils.UnsafeDirectByteBuffer;
 
 public final class P1C1OffHeapQueue implements Queue<Integer> {
 	public final static byte PRODUCER = 1;
@@ -106,7 +109,7 @@ public final class P1C1OffHeapQueue implements Queue<Integer> {
 
 		long offset = arrayBase
 		        + ((currentTail & mask) << INT_ELEMENT_SCALE);
-		UnsafeAccess.unsafe.putInt(offset, e.intValue());
+		UnsafeAccess.UNSAFE.putInt(offset, e.intValue());
 
 		setTail(currentTail + 1);
 
@@ -123,7 +126,7 @@ public final class P1C1OffHeapQueue implements Queue<Integer> {
 		}
 
 		final long offset = arrayBase + ((currentHead & mask) << INT_ELEMENT_SCALE);
-		final int e = UnsafeAccess.unsafe.getInt(offset);
+		final int e = UnsafeAccess.UNSAFE.getInt(offset);
 //		UnsafeAccess.unsafe.putInt(null, offset, 0);
 		setHead(currentHead + 1);
 
@@ -214,34 +217,34 @@ public final class P1C1OffHeapQueue implements Queue<Integer> {
 	}
 
 	private long getHead() {
-		return UnsafeAccess.unsafe.getLongVolatile(null, headAddress);
+		return UnsafeAccess.UNSAFE.getLongVolatile(null, headAddress);
 	}
 
 	private void setHead(final long value) {
-		UnsafeAccess.unsafe.putOrderedLong(null, headAddress, value);
+		UnsafeAccess.UNSAFE.putOrderedLong(null, headAddress, value);
 	}
 
 	private long getTail() {
-		return UnsafeAccess.unsafe.getLongVolatile(null, tailAddress);
+		return UnsafeAccess.UNSAFE.getLongVolatile(null, tailAddress);
 	}
 
 	private void setTail(final long value) {
-		UnsafeAccess.unsafe.putOrderedLong(null, tailAddress, value);
+		UnsafeAccess.UNSAFE.putOrderedLong(null, tailAddress, value);
 	}
 
 	private long getHeadCache() {
-		return UnsafeAccess.unsafe.getLong(null, headCacheAddress);
+		return UnsafeAccess.UNSAFE.getLong(null, headCacheAddress);
 	}
 
 	private void setHeadCache(final long value) {
-		UnsafeAccess.unsafe.putLong(headCacheAddress, value);
+		UnsafeAccess.UNSAFE.putLong(headCacheAddress, value);
 	}
 
 	private long getTailCache() {
-		return UnsafeAccess.unsafe.getLong(null, tailCacheAddress);
+		return UnsafeAccess.UNSAFE.getLong(null, tailCacheAddress);
 	}
 
 	private void setTailCache(final long value) {
-		UnsafeAccess.unsafe.putLong(tailCacheAddress, value);
+		UnsafeAccess.UNSAFE.putLong(tailCacheAddress, value);
 	}
 }

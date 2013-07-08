@@ -18,10 +18,10 @@ package uk.co.real_logic.queues;
 import java.util.Queue;
 import java.util.concurrent.ArrayBlockingQueue;
 
-import psy.lob.saw.queues.P1C1OffHeapQueue;
-import psy.lob.saw.queues.P1C1Queue2CacheLinesHeapBuffer;
-import psy.lob.saw.queues.P1C1Queue4CacheLinesHeapBuffer;
-import psy.lob.saw.queues.P1C1Queue4CacheLinesHeapBufferUnsafe;
+import psy.lob.saw.queues.offheap.P1C1OffHeapQueue;
+import psy.lob.saw.queues.offheap.P1C1Queue2CacheLinesHeapBuffer;
+import psy.lob.saw.queues.offheap.P1C1Queue4CacheLinesHeapBuffer;
+import psy.lob.saw.queues.offheap.P1C1Queue4CacheLinesHeapBufferUnsafe;
 
 public class QueuePerfTest {
 	// 15 == 32* 1024
