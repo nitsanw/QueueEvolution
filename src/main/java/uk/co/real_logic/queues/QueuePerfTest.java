@@ -19,9 +19,13 @@ import java.util.Queue;
 import java.util.concurrent.ArrayBlockingQueue;
 
 import psy.lob.saw.queues.offheap.P1C1OffHeapQueue;
-import psy.lob.saw.queues.offheap.P1C1Queue2CacheLinesHeapBuffer;
 import psy.lob.saw.queues.offheap.P1C1Queue4CacheLinesHeapBuffer;
 import psy.lob.saw.queues.offheap.P1C1Queue4CacheLinesHeapBufferUnsafe;
+import psy.lob.saw.queues.spsc1.SPSCQueue1;
+import psy.lob.saw.queues.spsc2.SPSCQueue2;
+import psy.lob.saw.queues.spsc3.SPSCQueue3;
+import psy.lob.saw.queues.spsc4.SPSCQueue4;
+import psy.lob.saw.queues.spsc5.SPSCQueue5;
 
 public class QueuePerfTest {
 	// 15 == 32* 1024
@@ -35,10 +39,17 @@ public class QueuePerfTest {
 		        + REPETITIONS);
 		final Queue<Integer> queue = createQueue(args[0]);
 
+		final long[] results = new long[20];
 		for (int i = 0; i < 20; i++) {
 			System.gc();
-			performanceRun(i, queue);
+			results[i] = performanceRun(i, queue);
 		}
+		// only average last 10 results for summary
+		long sum = 0;
+		for(int i = 10; i < 20; i++){
+		    sum+=results[i];
+		}
+		System.out.format("summary,%s,%d\n", queue.getClass().getSimpleName(), sum/10);
 	}
 
 	private static Queue<Integer> createQueue(final String option) {
@@ -57,15 +68,24 @@ public class QueuePerfTest {
 			return new P1C1QueueOriginal22<Integer>(QUEUE_CAPACITY);
 		case 23:
 			return new P1C1QueueOriginal23<Integer>(QUEUE_CAPACITY);
-		case 3:
-			return new P1C1QueueOriginal3<Integer>(QUEUE_CAPACITY);
-		case 4:
-			return new P1C1Queue2CacheLinesHeapBuffer<Integer>(QUEUE_CAPACITY);
+        case 3:
+            return new P1C1QueueOriginal3<Integer>(QUEUE_CAPACITY);
+        case 31:
+            return new P1C1QueueOriginal3PadData<Integer>(QUEUE_CAPACITY);
+        case 41:
+            return new SPSCQueue1<Integer>(QUEUE_CAPACITY);
+        case 42:
+            return new SPSCQueue2<Integer>(QUEUE_CAPACITY);
+        case 43:
+            return new SPSCQueue3<Integer>(QUEUE_CAPACITY);
+        case 44:
+            return new SPSCQueue4<Integer>(QUEUE_CAPACITY);
+        case 45:
+            return new SPSCQueue5<Integer>(QUEUE_CAPACITY);
 		case 5:
 			return new P1C1Queue4CacheLinesHeapBuffer<Integer>(QUEUE_CAPACITY);
 		case 6:
-			return new P1C1Queue4CacheLinesHeapBufferUnsafe<Integer>(
-			        QUEUE_CAPACITY);
+			return new P1C1Queue4CacheLinesHeapBufferUnsafe<Integer>(QUEUE_CAPACITY);
 		case 7:
 			return new P1C1OffHeapQueue(QUEUE_CAPACITY);
 		case 8:
@@ -76,7 +96,7 @@ public class QueuePerfTest {
 		}
 	}
 
-	private static void performanceRun(final int runNumber,
+	private static long performanceRun(final int runNumber,
 	        final Queue<Integer> queue) throws Exception {
 		final long start = System.nanoTime();
 		final Thread thread = new Thread(new Producer(queue));
@@ -97,6 +117,7 @@ public class QueuePerfTest {
 		System.out.format("%d - ops/sec=%,d - %s result=%d\n", Integer
 		        .valueOf(runNumber), Long.valueOf(ops), queue.getClass()
 		        .getSimpleName(), result);
+		return ops;
 	}
 
 	public static class Producer implements Runnable {

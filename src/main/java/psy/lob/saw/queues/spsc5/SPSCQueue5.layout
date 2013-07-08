@@ -1,0 +1,20 @@
+psy.lob.saw.queues.spsc3.SPSCQueue5
+ offset  size     type description
+      0    12          (assumed to be the object header + first field alignment)
+     12     4          (alignment/padding gap)
+     16-72  8     long L0Pad.p00-07
+     80     4      int ColdFields.capacity
+     84     4      int ColdFields.mask
+     88     4 Object[] ColdFields.buffer
+     92     4          (alignment/padding gap)
+     96-144 8     long L1Pad.p10-16
+    152     8     long TailField.tail
+    160-208 8     long L2Pad.p20-26
+    216     8     long HeadCache.headCache
+    224-272 8     long L3Pad.p30-36
+    280     8     long HeadField.head
+    288-336 8     long L4Pad.p40-46
+    344     8     long TailCache.tailCache
+    352-400 8     long L5Pad.p50-56
+    408                (object boundary, size estimate)
+
