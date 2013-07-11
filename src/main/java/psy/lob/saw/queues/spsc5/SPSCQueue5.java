@@ -37,7 +37,7 @@ class ColdFields<E> extends L0Pad {
     protected final E[] buffer;
     @SuppressWarnings("unchecked")
     public ColdFields(int capacity) {
-        if(!Pow2.isPowerOf2(capacity)){
+        if(Pow2.isPowerOf2(capacity)){
             this.capacity = capacity;
         }
         else{
