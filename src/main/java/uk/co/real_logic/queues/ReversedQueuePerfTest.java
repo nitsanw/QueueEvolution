@@ -27,7 +27,7 @@ import psy.lob.saw.queues.spsc3.SPSCQueue3;
 import psy.lob.saw.queues.spsc4.SPSCQueue4;
 import psy.lob.saw.queues.spsc5.SPSCQueue5;
 
-public class QueuePerfTest {
+public class ReversedQueuePerfTest {
 	// 15 == 32 * 1024
 	public static final int QUEUE_CAPACITY = 1 << Integer.getInteger("scale", 15);
 	public static final int REPETITIONS = Integer.getInteger("reps", 50) * 1000 * 1000;
@@ -97,41 +97,44 @@ public class QueuePerfTest {
 	private static long performanceRun(final int runNumber,
 	        final Queue<Integer> queue) throws Exception {
 		final long start = System.nanoTime();
-		final Thread thread = new Thread(new Producer(queue));
-		thread.start();
+        Consumer c = new Consumer(queue);
+        final Thread thread = new Thread(c);
+        thread.start();
 
-		Integer result;
-		int i = REPETITIONS;
-		do {
-			while (null == (result = queue.poll())) {
-				Thread.yield();
-			}
-		} while (0 != --i);
+        int i = REPETITIONS;
+        do {
+            while (!queue.offer(TEST_VALUE)) {
+                Thread.yield();
+            }
+        } while (0 != --i);
 
-		thread.join();
 
-		final long duration = System.nanoTime() - start;
-		final long ops = (REPETITIONS * 1000L * 1000L * 1000L) / duration;
-		System.out.format("%d - ops/sec=%,d - %s result=%d\n", Integer
-		        .valueOf(runNumber), Long.valueOf(ops), queue.getClass()
-		        .getSimpleName(), result);
-		return ops;
-	}
+        thread.join();
 
-	public static class Producer implements Runnable {
-		private final Queue<Integer> queue;
+        final long duration = System.nanoTime() - start;
+        final long ops = (REPETITIONS * 1000L * 1000L * 1000L) / duration;
+        System.out.format("%d - ops/sec=%,d - %s result=%d\n", Integer
+                .valueOf(runNumber), Long.valueOf(ops), queue.getClass()
+                .getSimpleName(), c.result);
+        return ops;
+    }
 
-		public Producer(final Queue<Integer> queue) {
-			this.queue = queue;
-		}
+    public static class Consumer implements Runnable {
+        private final Queue<Integer> queue;
+        Integer result;
+        public Consumer(final Queue<Integer> queue) {
+            this.queue = queue;
+        }
 
-		public void run() {
-			int i = REPETITIONS;
-			do {
-				while (!queue.offer(TEST_VALUE)) {
-					Thread.yield();
-				}
-			} while (0 != --i);
-		}
-	}
+        public void run() {
+            Integer result;
+            int i = REPETITIONS;
+            do {
+                while (null == (result = queue.poll())) {
+                    Thread.yield();
+                }
+            } while (0 != --i);
+            this.result = result;
+        }
+    }
 }
