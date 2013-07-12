@@ -21,6 +21,7 @@ import java.util.concurrent.ArrayBlockingQueue;
 import psy.lob.saw.queues.offheap.P1C1OffHeapQueue;
 import psy.lob.saw.queues.offheap.P1C1Queue4CacheLinesHeapBuffer;
 import psy.lob.saw.queues.offheap.P1C1Queue4CacheLinesHeapBufferUnsafe;
+import psy.lob.saw.queues.spsc.fc.SPSPQueueFloatingCounters;
 import psy.lob.saw.queues.spsc1.SPSCQueue1;
 import psy.lob.saw.queues.spsc2.SPSCQueue2;
 import psy.lob.saw.queues.spsc3.SPSCQueue3;
@@ -70,6 +71,8 @@ public class QueuePerfTest {
             return new P1C1QueueOriginal3<Integer>(QUEUE_CAPACITY);
         case 31:
             return new P1C1QueueOriginal3PadData<Integer>(QUEUE_CAPACITY);
+        case 32:
+            return new SPSPQueueFloatingCounters<Integer>(QUEUE_CAPACITY);
         case 41:
             return new SPSCQueue1<Integer>(QUEUE_CAPACITY);
         case 42:
