@@ -54,7 +54,7 @@ class SPSPQueueFloatingCountersFields<E> extends SPSPQueueFloatingCountersP0 {
      }
  }
 public final class SPSPQueueFloatingCounters<E> extends SPSPQueueFloatingCountersFields<E> implements Queue<E> {
-    public long p10, p11, p12, p13, p14, p15, p16;
+    public long p10, p11, p12, p13, p14, p15, p16, p17;
 
 	public SPSPQueueFloatingCounters(final int capacity) {
 		super(capacity);
