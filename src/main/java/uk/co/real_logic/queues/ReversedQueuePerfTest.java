@@ -17,6 +17,7 @@ package uk.co.real_logic.queues;
 
 import java.util.Queue;
 import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.CountDownLatch;
 
 import psy.lob.saw.queues.offheap.P1C1OffHeapQueue;
 import psy.lob.saw.queues.offheap.P1C1Queue4CacheLinesHeapBuffer;
@@ -36,7 +37,7 @@ public class ReversedQueuePerfTest {
 
 	public static void main(final String[] args) throws Exception {
 		System.out.println("capacity:" + QUEUE_CAPACITY + " reps:" + REPETITIONS);
-		final Queue<Integer> queue = createQueue(args[0]);
+		final Queue<Integer> queue = QueuePerfTest.createQueue(args[0]);
 
 		final long[] results = new long[20];
 		for (int i = 0; i < 20; i++) {
@@ -51,85 +52,37 @@ public class ReversedQueuePerfTest {
 		System.out.format("summary,%s,%d\n", queue.getClass().getSimpleName(), sum/10);
 	}
 
-	private static Queue<Integer> createQueue(final String option) {
-		switch (Integer.parseInt(option)) {
-		case 0:
-			return new ArrayBlockingQueue<Integer>(QUEUE_CAPACITY);
-		case 1:
-			return new P1C1QueueOriginal1<Integer>(QUEUE_CAPACITY);
-		case 12:
-			return new P1C1QueueOriginal12<Integer>(QUEUE_CAPACITY);
-		case 2:
-			return new P1C1QueueOriginal2<Integer>(QUEUE_CAPACITY);
-		case 21:
-			return new P1C1QueueOriginal21<Integer>(QUEUE_CAPACITY);
-		case 22:
-			return new P1C1QueueOriginal22<Integer>(QUEUE_CAPACITY);
-		case 23:
-			return new P1C1QueueOriginal23<Integer>(QUEUE_CAPACITY);
-        case 3:
-            return new P1C1QueueOriginal3<Integer>(QUEUE_CAPACITY);
-        case 31:
-            return new P1C1QueueOriginal3PadData<Integer>(QUEUE_CAPACITY);
-        case 32:
-            return new SPSPQueueFloatingCounters<Integer>(QUEUE_CAPACITY);
-        case 41:
-            return new SPSCQueue1<Integer>(QUEUE_CAPACITY);
-        case 42:
-            return new SPSCQueue2<Integer>(QUEUE_CAPACITY);
-        case 43:
-            return new SPSCQueue3<Integer>(QUEUE_CAPACITY);
-        case 44:
-            return new SPSCQueue4<Integer>(QUEUE_CAPACITY);
-        case 45:
-            return new SPSCQueue5<Integer>(QUEUE_CAPACITY);
-		case 5:
-			return new P1C1Queue4CacheLinesHeapBuffer<Integer>(QUEUE_CAPACITY);
-		case 6:
-			return new P1C1Queue4CacheLinesHeapBufferUnsafe<Integer>(QUEUE_CAPACITY);
-		case 7:
-			return new P1C1OffHeapQueue(QUEUE_CAPACITY);
-		case 8:
-			return new P1C1QueueOriginalPrimitive(QUEUE_CAPACITY);
-
-		default:
-			throw new IllegalArgumentException("Invalid option: " + option);
-		}
-	}
-
 	private static long performanceRun(final int runNumber,
 	        final Queue<Integer> queue) throws Exception {
-		final long start = System.nanoTime();
         Consumer c = new Consumer(queue);
         final Thread thread = new Thread(c);
         thread.start();
-
+        c.latch.await();
         int i = REPETITIONS;
         do {
             while (!queue.offer(TEST_VALUE)) {
                 Thread.yield();
             }
         } while (0 != --i);
-
-
         thread.join();
-
-        final long duration = System.nanoTime() - start;
-        final long ops = (REPETITIONS * 1000L * 1000L * 1000L) / duration;
+        final long ops = (REPETITIONS * 1000L * 1000L * 1000L) / c.duration;
         System.out.format("%d - ops/sec=%,d - %s result=%d\n", Integer
                 .valueOf(runNumber), Long.valueOf(ops), queue.getClass()
-                .getSimpleName(), c.result);
-        return ops;
+                .getSimpleName(), c.result);        return ops;
     }
 
     public static class Consumer implements Runnable {
+        final CountDownLatch latch = new CountDownLatch(1);
         private final Queue<Integer> queue;
         Integer result;
+        long duration;
         public Consumer(final Queue<Integer> queue) {
             this.queue = queue;
         }
 
         public void run() {
+            final long start = System.nanoTime();
+            latch.countDown();
             Integer result;
             int i = REPETITIONS;
             do {
@@ -138,6 +91,7 @@ public class ReversedQueuePerfTest {
                 }
             } while (0 != --i);
             this.result = result;
+            duration = System.nanoTime() - start;
         }
     }
 }

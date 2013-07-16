@@ -17,11 +17,13 @@ package uk.co.real_logic.queues;
 
 import java.util.Queue;
 import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.CountDownLatch;
 
 import psy.lob.saw.queues.offheap.P1C1OffHeapQueue;
 import psy.lob.saw.queues.offheap.P1C1Queue4CacheLinesHeapBuffer;
 import psy.lob.saw.queues.offheap.P1C1Queue4CacheLinesHeapBufferUnsafe;
 import psy.lob.saw.queues.spsc.fc.SPSPQueueFloatingCounters;
+import psy.lob.saw.queues.spsc.fc.SPSPQueueFloatingCounters2;
 import psy.lob.saw.queues.spsc1.SPSCQueue1;
 import psy.lob.saw.queues.spsc2.SPSCQueue2;
 import psy.lob.saw.queues.spsc3.SPSCQueue3;
@@ -51,28 +53,72 @@ public class QueuePerfTest {
 		System.out.format("summary,%s,%d\n", queue.getClass().getSimpleName(), sum/10);
 	}
 
-	private static Queue<Integer> createQueue(final String option) {
-		switch (Integer.parseInt(option)) {
-		case 0:
-			return new ArrayBlockingQueue<Integer>(QUEUE_CAPACITY);
-		case 1:
-			return new P1C1QueueOriginal1<Integer>(QUEUE_CAPACITY);
-		case 12:
-			return new P1C1QueueOriginal12<Integer>(QUEUE_CAPACITY);
-		case 2:
-			return new P1C1QueueOriginal2<Integer>(QUEUE_CAPACITY);
-		case 21:
-			return new P1C1QueueOriginal21<Integer>(QUEUE_CAPACITY);
-		case 22:
-			return new P1C1QueueOriginal22<Integer>(QUEUE_CAPACITY);
-		case 23:
-			return new P1C1QueueOriginal23<Integer>(QUEUE_CAPACITY);
+
+	private static long performanceRun(final int runNumber,
+	        final Queue<Integer> queue) throws Exception {
+        Producer p = new Producer(queue);
+        final Thread thread = new Thread(p);
+        thread.start();
+        p.latch.await();
+		final long start = System.nanoTime();
+		Integer result;
+		int i = REPETITIONS;
+		do {
+			while (null == (result = queue.poll())) {
+				Thread.yield();
+			}
+		} while (0 != --i);
+		final long duration = System.nanoTime() - start;
+        thread.join();
+		final long ops = (REPETITIONS * 1000L * 1000L * 1000L) / duration;
+		System.out.format("%d - ops/sec=%,d - %s result=%d\n", Integer
+		        .valueOf(runNumber), Long.valueOf(ops), queue.getClass()
+		        .getSimpleName(), result);
+		return ops;
+	}
+
+	public static class Producer implements Runnable {
+		private final Queue<Integer> queue;
+		final CountDownLatch latch = new CountDownLatch(1);
+        
+		public Producer(final Queue<Integer> queue) {
+			this.queue = queue;
+		}
+
+		public void run() {
+		    latch.countDown();
+			int i = REPETITIONS;
+			do {
+				while (!queue.offer(TEST_VALUE)) {
+					Thread.yield();
+				}
+			} while (0 != --i);
+		}
+	}
+    public static Queue<Integer> createQueue(final String option) {
+        switch (Integer.parseInt(option)) {
+        case 0:
+            return new ArrayBlockingQueue<Integer>(QUEUE_CAPACITY);
+        case 1:
+            return new P1C1QueueOriginal1<Integer>(QUEUE_CAPACITY);
+        case 12:
+            return new P1C1QueueOriginal12<Integer>(QUEUE_CAPACITY);
+        case 2:
+            return new P1C1QueueOriginal2<Integer>(QUEUE_CAPACITY);
+        case 21:
+            return new P1C1QueueOriginal21<Integer>(QUEUE_CAPACITY);
+        case 22:
+            return new P1C1QueueOriginal22<Integer>(QUEUE_CAPACITY);
+        case 23:
+            return new P1C1QueueOriginal23<Integer>(QUEUE_CAPACITY);
         case 3:
             return new P1C1QueueOriginal3<Integer>(QUEUE_CAPACITY);
         case 31:
             return new P1C1QueueOriginal3PadData<Integer>(QUEUE_CAPACITY);
         case 32:
             return new SPSPQueueFloatingCounters<Integer>(QUEUE_CAPACITY);
+        case 33:
+            return new SPSPQueueFloatingCounters2<Integer>(QUEUE_CAPACITY);
         case 41:
             return new SPSCQueue1<Integer>(QUEUE_CAPACITY);
         case 42:
@@ -83,58 +129,17 @@ public class QueuePerfTest {
             return new SPSCQueue4<Integer>(QUEUE_CAPACITY);
         case 45:
             return new SPSCQueue5<Integer>(QUEUE_CAPACITY);
-		case 5:
-			return new P1C1Queue4CacheLinesHeapBuffer<Integer>(QUEUE_CAPACITY);
-		case 6:
-			return new P1C1Queue4CacheLinesHeapBufferUnsafe<Integer>(QUEUE_CAPACITY);
-		case 7:
-			return new P1C1OffHeapQueue(QUEUE_CAPACITY);
-		case 8:
-			return new P1C1QueueOriginalPrimitive(QUEUE_CAPACITY);
+        case 5:
+            return new P1C1Queue4CacheLinesHeapBuffer<Integer>(QUEUE_CAPACITY);
+        case 6:
+            return new P1C1Queue4CacheLinesHeapBufferUnsafe<Integer>(QUEUE_CAPACITY);
+        case 7:
+            return new P1C1OffHeapQueue(QUEUE_CAPACITY);
+        case 8:
+            return new P1C1QueueOriginalPrimitive(QUEUE_CAPACITY);
 
-		default:
-			throw new IllegalArgumentException("Invalid option: " + option);
-		}
-	}
-
-	private static long performanceRun(final int runNumber,
-	        final Queue<Integer> queue) throws Exception {
-		final long start = System.nanoTime();
-		final Thread thread = new Thread(new Producer(queue));
-		thread.start();
-
-		Integer result;
-		int i = REPETITIONS;
-		do {
-			while (null == (result = queue.poll())) {
-				Thread.yield();
-			}
-		} while (0 != --i);
-
-		thread.join();
-
-		final long duration = System.nanoTime() - start;
-		final long ops = (REPETITIONS * 1000L * 1000L * 1000L) / duration;
-		System.out.format("%d - ops/sec=%,d - %s result=%d\n", Integer
-		        .valueOf(runNumber), Long.valueOf(ops), queue.getClass()
-		        .getSimpleName(), result);
-		return ops;
-	}
-
-	public static class Producer implements Runnable {
-		private final Queue<Integer> queue;
-
-		public Producer(final Queue<Integer> queue) {
-			this.queue = queue;
-		}
-
-		public void run() {
-			int i = REPETITIONS;
-			do {
-				while (!queue.offer(TEST_VALUE)) {
-					Thread.yield();
-				}
-			} while (0 != --i);
-		}
-	}
+        default:
+            throw new IllegalArgumentException("Invalid option: " + option);
+        }
+    }
 }
