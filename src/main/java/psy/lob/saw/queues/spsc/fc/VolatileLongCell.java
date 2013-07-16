@@ -2,13 +2,12 @@ package psy.lob.saw.queues.spsc.fc;
 
 import psy.lob.saw.util.UnsafeAccess;
 
-abstract class VolatileLongCellP0{
-    public long p0,p1,p2,p3,p4,p5,p6;
-}
+abstract class VolatileLongCellP0{long p0,p1,p2,p3,p4,p5,p6;}
 abstract class VolatileLongCellValue extends VolatileLongCellP0 {
     protected volatile long value;
 }
-public class VolatileLongCell extends VolatileLongCellValue {
+public final class VolatileLongCell extends VolatileLongCellValue {
+    long p10,p11,p12,p13,p14,p15,p16;
     private final static long VALUE_OFFSET;
     static {
         try {
@@ -17,7 +16,6 @@ public class VolatileLongCell extends VolatileLongCellValue {
             throw new RuntimeException(e);
         }
     }
-    public long p10,p11,p12,p13,p14,p15,p16;
     public VolatileLongCell(){
         this(0L);
     }
