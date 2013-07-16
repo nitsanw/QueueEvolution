@@ -54,10 +54,11 @@ public class ReversedQueuePerfTest {
 
 	private static long performanceRun(final int runNumber,
 	        final Queue<Integer> queue) throws Exception {
+        final long start = System.nanoTime();
         Consumer c = new Consumer(queue);
         final Thread thread = new Thread(c);
         thread.start();
-        c.latch.await();
+
         int i = REPETITIONS;
         do {
             while (!queue.offer(TEST_VALUE)) {
@@ -65,24 +66,23 @@ public class ReversedQueuePerfTest {
             }
         } while (0 != --i);
         thread.join();
-        final long ops = (REPETITIONS * 1000L * 1000L * 1000L) / c.duration;
+        
+        final long duration = System.nanoTime() - start;
+        final long ops = (REPETITIONS * 1000L * 1000L * 1000L) / duration;
         System.out.format("%d - ops/sec=%,d - %s result=%d\n", Integer
                 .valueOf(runNumber), Long.valueOf(ops), queue.getClass()
-                .getSimpleName(), c.result);        return ops;
+                .getSimpleName(), c.result);
+        return ops;
     }
 
     public static class Consumer implements Runnable {
-        final CountDownLatch latch = new CountDownLatch(1);
         private final Queue<Integer> queue;
         Integer result;
-        long duration;
         public Consumer(final Queue<Integer> queue) {
             this.queue = queue;
         }
 
         public void run() {
-            final long start = System.nanoTime();
-            latch.countDown();
             Integer result;
             int i = REPETITIONS;
             do {
@@ -91,7 +91,6 @@ public class ReversedQueuePerfTest {
                 }
             } while (0 != --i);
             this.result = result;
-            duration = System.nanoTime() - start;
         }
     }
 }
