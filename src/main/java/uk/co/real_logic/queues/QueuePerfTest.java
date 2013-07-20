@@ -56,11 +56,10 @@ public class QueuePerfTest {
 
 	private static long performanceRun(final int runNumber,
 	        final Queue<Integer> queue) throws Exception {
-        Producer p = new Producer(queue);
-        final Thread thread = new Thread(p);
-        thread.start();
-        p.latch.await();
 		final long start = System.nanoTime();
+        final Thread thread = new Thread(new Producer(queue));
+        thread.start();
+        
 		Integer result;
 		int i = REPETITIONS;
 		do {
@@ -68,8 +67,10 @@ public class QueuePerfTest {
 				Thread.yield();
 			}
 		} while (0 != --i);
+
+		thread.join();
+		
 		final long duration = System.nanoTime() - start;
-        thread.join();
 		final long ops = (REPETITIONS * 1000L * 1000L * 1000L) / duration;
 		System.out.format("%d - ops/sec=%,d - %s result=%d\n", Integer
 		        .valueOf(runNumber), Long.valueOf(ops), queue.getClass()
@@ -79,14 +80,12 @@ public class QueuePerfTest {
 
 	public static class Producer implements Runnable {
 		private final Queue<Integer> queue;
-		final CountDownLatch latch = new CountDownLatch(1);
         
 		public Producer(final Queue<Integer> queue) {
 			this.queue = queue;
 		}
 
 		public void run() {
-		    latch.countDown();
 			int i = REPETITIONS;
 			do {
 				while (!queue.offer(TEST_VALUE)) {
