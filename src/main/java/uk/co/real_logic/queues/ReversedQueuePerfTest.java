@@ -22,7 +22,7 @@ import java.util.concurrent.CountDownLatch;
 import psy.lob.saw.queues.offheap.P1C1OffHeapQueue;
 import psy.lob.saw.queues.offheap.P1C1Queue4CacheLinesHeapBuffer;
 import psy.lob.saw.queues.offheap.P1C1Queue4CacheLinesHeapBufferUnsafe;
-import psy.lob.saw.queues.spsc.fc.SPSPQueueFloatingCounters;
+import psy.lob.saw.queues.spsc.fc.SPSPQueueFloatingCounters4;
 import psy.lob.saw.queues.spsc1.SPSCQueue1;
 import psy.lob.saw.queues.spsc2.SPSCQueue2;
 import psy.lob.saw.queues.spsc3.SPSCQueue3;

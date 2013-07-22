@@ -19,22 +19,21 @@ import java.util.Queue;
 import java.util.concurrent.CountDownLatch;
 
 public class FairQueuePerfTest {
-    enum MainThread{
-        PRODUCER,
-        CONSUMER,
-        NEUTRAL
+    enum MainThread {
+        PRODUCER, CONSUMER, NEUTRAL
     }
+
     // 15 == 32 * 1024
     public static final int QUEUE_CAPACITY = 1 << Integer.getInteger("scale", 15);
     public static final int REPETITIONS = Integer.getInteger("reps", 50) * 1000 * 1000;
+    public static final boolean PRODUCER_TRIGGERS = !Boolean.getBoolean("consumer.triggers");
     public static final MainThread MAIN_TYPE;
-    static{
+    static {
         String typeName = System.getProperty("main.type");
         MainThread type;
-        try{
+        try {
             type = MainThread.valueOf(typeName);
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             type = MainThread.CONSUMER;
         }
         MAIN_TYPE = type;
@@ -42,7 +41,7 @@ public class FairQueuePerfTest {
     public static final Integer TEST_VALUE = Integer.valueOf(777);
 
     public static void main(final String[] args) throws Exception {
-        System.out.println("type:" + MAIN_TYPE +" capacity:" + QUEUE_CAPACITY + " reps:" + REPETITIONS);
+        System.out.println("type:" + MAIN_TYPE + " trigger:"+(PRODUCER_TRIGGERS?"P":"C")+" capacity:" + QUEUE_CAPACITY + " reps:" + REPETITIONS);
         final Queue<Integer> queue = QueuePerfTest.createQueue(args[0]);
 
         final long[] results = new long[20];
@@ -61,10 +60,10 @@ public class FairQueuePerfTest {
     private static long performanceRun(final int runNumber, final Queue<Integer> queue) throws Exception {
         CountDownLatch cLatch = new CountDownLatch(1);
         CountDownLatch pLatch = new CountDownLatch(1);
-        
+
         Consumer c = new Consumer(queue, pLatch, cLatch);
         Producer p = new Producer(queue, pLatch, cLatch);
-        switch(MAIN_TYPE){
+        switch (MAIN_TYPE) {
         case PRODUCER:
             producerIsMain(c, p);
             break;
@@ -88,12 +87,14 @@ public class FairQueuePerfTest {
         p.run();
         cThread.join();
     }
+
     private static void consumerIsMain(Consumer c, Producer p) throws InterruptedException {
         final Thread pThread = new Thread(p);
         pThread.start();
         c.run();
         pThread.join();
     }
+
     private static void mainIsMain(Consumer c, Producer p) throws InterruptedException {
         final Thread pThread = new Thread(p);
         final Thread cThread = new Thread(c);
@@ -102,6 +103,7 @@ public class FairQueuePerfTest {
         pThread.join();
         cThread.join();
     }
+
     public static class Consumer implements Runnable {
         final Queue<Integer> queue;
         final CountDownLatch cLatch;
@@ -116,12 +118,22 @@ public class FairQueuePerfTest {
         }
 
         public void run() {
-            cLatch.countDown();
-            try {
-                pLatch.await();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-                System.exit(-1);
+            if (PRODUCER_TRIGGERS) {
+                cLatch.countDown();
+                try {
+                    pLatch.await();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                    System.exit(-1);
+                }
+            } else {
+                try {
+                    pLatch.await();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                    System.exit(-1);
+                }
+                cLatch.countDown();
             }
             Integer result;
             int i = REPETITIONS;
@@ -148,13 +160,23 @@ public class FairQueuePerfTest {
         }
 
         public void run() {
-            try {
-                cLatch.await();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-                System.exit(-1);
+            if (PRODUCER_TRIGGERS) {
+                try {
+                    cLatch.await();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                    System.exit(-1);
+                }
+                pLatch.countDown();
+            } else {
+                pLatch.countDown();
+                try {
+                    cLatch.await();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                    System.exit(-1);
+                }
             }
-            pLatch.countDown();
             start = System.nanoTime();
             int i = REPETITIONS;
             do {

@@ -25,13 +25,14 @@ import psy.lob.saw.util.Pow2;
 /**
  * <ul>
  * <li>Fully padded counters
+ * <li>Fully padded data
  * <li>Fully padded class fields
  * 
  * </ul>
  */
-abstract class SPSPQueueFloatingCounters2P0 {long p00, p01, p02, p03, p04, p05, p06, p07;}
-abstract class SPSPQueueFloatingCounters2Fields<E> extends SPSPQueueFloatingCounters2P0 {
-     protected static final int BUFFER_PAD = 0;
+abstract class SPSPQueueFloatingCounters4P0 {long p00, p01, p02, p03, p04, p05, p06, p07;}
+abstract class SPSPQueueFloatingCounters4Fields<E> extends SPSPQueueFloatingCounters4P0 {
+     protected static final int BUFFER_PAD = 16;
      protected final int capacity;
      protected final int mask;
      protected final E[] buffer;
@@ -41,7 +42,7 @@ abstract class SPSPQueueFloatingCounters2Fields<E> extends SPSPQueueFloatingCoun
      protected final LongCell tailCache = new LongCell();
      protected final LongCell headCache = new LongCell();
      @SuppressWarnings("unchecked")
-     public SPSPQueueFloatingCounters2Fields(int capacity) {
+     public SPSPQueueFloatingCounters4Fields(int capacity) {
          if(Pow2.isPowerOf2(capacity)){
              this.capacity = capacity;
          }
@@ -52,10 +53,10 @@ abstract class SPSPQueueFloatingCounters2Fields<E> extends SPSPQueueFloatingCoun
          buffer = (E[]) new Object[this.capacity + BUFFER_PAD * 2];
      }
  }
-public final class SPSPQueueFloatingCounters2<E> extends SPSPQueueFloatingCounters2Fields<E> implements Queue<E> {
+public final class SPSPQueueFloatingCounters4<E> extends SPSPQueueFloatingCounters4Fields<E> implements Queue<E> {
     long p10, p11, p12, p13, p14, p15, p16, p17;
 
-	public SPSPQueueFloatingCounters2(final int capacity) {
+	public SPSPQueueFloatingCounters4(final int capacity) {
 		super(capacity);
 	}
 
