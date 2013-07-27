@@ -54,7 +54,7 @@ public class FairQueuePerfTest {
         for (int i = 10; i < 20; i++) {
             sum += results[i];
         }
-        System.out.format("summary,%s,%d\n", queue.getClass().getSimpleName(), sum / 10);
+        System.out.format("summary,%s,%d,%s,%s\n", queue.getClass().getSimpleName(), sum / 10,MAIN_TYPE.toString(),PRODUCER_TRIGGERS?"P":"C");
     }
 
     private static long performanceRun(final int runNumber, final Queue<Integer> queue) throws Exception {
