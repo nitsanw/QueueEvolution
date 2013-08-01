@@ -68,7 +68,7 @@ class L3Pad<E> extends HeadCache<E> {
     public L3Pad(int capacity) { super(capacity);}
 }
 class HeadField<E> extends L3Pad<E> {
-    protected long head;
+    protected volatile long head;
     public HeadField(int capacity) { super(capacity);}
 }
 class L4Pad<E> extends HeadField<E> {
@@ -88,10 +88,24 @@ class L5Pad<E> extends TailCache<E> {
 public final class SPSCQueue5<E> extends L5Pad<E> implements Queue<E> {
     private final static long TAIL_OFFSET;
     private final static long HEAD_OFFSET;
+    private static final long ARRAY_BASE;
+    private static final int ELEMENT_SHIFT;
     static {
         try {
             TAIL_OFFSET = UnsafeAccess.UNSAFE.objectFieldOffset(TailField.class.getDeclaredField("tail"));
             HEAD_OFFSET = UnsafeAccess.UNSAFE.objectFieldOffset(HeadField.class.getDeclaredField("head"));
+            final int scale = UnsafeAccess.UNSAFE
+                    .arrayIndexScale(Object[].class);
+
+            if (4 == scale) {
+                ELEMENT_SHIFT = 2;
+            } else if (8 == scale) {
+                ELEMENT_SHIFT = 3;
+            } else {
+                throw new IllegalStateException("Unknown pointer size");
+            }
+            ARRAY_BASE = UnsafeAccess.UNSAFE.arrayBaseOffset(Object[].class)
+                    + BUFFER_PAD << ELEMENT_SHIFT;
         } catch (NoSuchFieldException e) {
             throw new RuntimeException(e);
         }
@@ -103,18 +117,12 @@ public final class SPSCQueue5<E> extends L5Pad<E> implements Queue<E> {
         UnsafeAccess.UNSAFE.putOrderedLong(this, HEAD_OFFSET, v);
     }
     private long getHead() {
-        return UnsafeAccess.UNSAFE.getLongVolatile(this, HEAD_OFFSET);
-    }
-    private long getHeadPlain() {
         return head;
     }
     private void tailLazySet(long v) {
         UnsafeAccess.UNSAFE.putOrderedLong(this, TAIL_OFFSET, v);
     }
     private long getTail() {
-        return UnsafeAccess.UNSAFE.getLongVolatile(this, TAIL_OFFSET);
-    }
-    private long getTailPlain() {
         return tail;
     }
     public boolean add(final E e) {
@@ -129,7 +137,7 @@ public final class SPSCQueue5<E> extends L5Pad<E> implements Queue<E> {
             throw new NullPointerException("Null is not a valid element");
         }
 
-        final long currentTail = getTailPlain();
+        final long currentTail = getTail();
         final long wrapPoint = currentTail - capacity;
         if (headCache <= wrapPoint) {
             headCache = getHead();
@@ -137,31 +145,32 @@ public final class SPSCQueue5<E> extends L5Pad<E> implements Queue<E> {
                 return false;
             }
         }
-
-        buffer[getArrayIdx(currentTail)] = e;
+        UnsafeAccess.UNSAFE.putObject(buffer, ARRAY_BASE
+                + ((currentTail & mask) << ELEMENT_SHIFT), e);
         tailLazySet(currentTail + 1);
 
         return true;
     }
 
     public E poll() {
-        final long currentHead = getHeadPlain();
+        final long currentHead = getHead();
         if (currentHead >= tailCache) {
             tailCache = getTail();
             if (currentHead >= tailCache) {
                 return null;
             }
+            if(currentHead >= tailCache - 16){
+                Thread.yield();
+            }
         }
 
-        final int index = getArrayIdx(currentHead);
-        final E e = buffer[index];
-        buffer[index] = null;
+        final long offset = ARRAY_BASE + ((currentHead & mask) << ELEMENT_SHIFT);
+        final E e = (E) UnsafeAccess.UNSAFE.getObject(buffer, offset);
+        UnsafeAccess.UNSAFE.putObject(buffer, offset, null);
+        
         headLazySet(currentHead + 1);
 
         return e;
-    }
-    private int getArrayIdx(final long idx) {
-        return BUFFER_PAD + ((int) idx & mask);
     }
 
     public E remove() {
@@ -183,7 +192,12 @@ public final class SPSCQueue5<E> extends L5Pad<E> implements Queue<E> {
     }
 
     public E peek() {
-        return buffer[getArrayIdx(getHead())];
+        long currentHead = getHead();
+        return getElement(currentHead);
+    }
+    private E getElement(long index) {
+        final long offset = ARRAY_BASE + ((index & mask) << ELEMENT_SHIFT);
+        return (E) UnsafeAccess.UNSAFE.getObject(buffer, offset);
     }
 
     public int size() {
@@ -200,7 +214,7 @@ public final class SPSCQueue5<E> extends L5Pad<E> implements Queue<E> {
         }
 
         for (long i = getHead(), limit = getTail(); i < limit; i++) {
-            final E e = buffer[getArrayIdx(i)];
+            final E e = getElement(i);
             if (o.equals(e)) {
                 return true;
             }
