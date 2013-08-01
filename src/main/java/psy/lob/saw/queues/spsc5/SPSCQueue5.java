@@ -52,7 +52,7 @@ class L1Pad<E> extends ColdFields<E> {
     public L1Pad(int capacity) { super(capacity);}
 }
 class TailField<E> extends L1Pad<E> {
-    protected long tail;
+    protected volatile long tail;
     public TailField(int capacity) { super(capacity);}
 }
 class L2Pad<E> extends TailField<E> {
