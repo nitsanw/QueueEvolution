@@ -17,18 +17,18 @@ package uk.co.real_logic.queues;
 
 import java.util.Queue;
 import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.CountDownLatch;
 
 import psy.lob.saw.queues.offheap.P1C1OffHeapQueue;
 import psy.lob.saw.queues.offheap.P1C1Queue4CacheLinesHeapBuffer;
 import psy.lob.saw.queues.offheap.P1C1Queue4CacheLinesHeapBufferUnsafe;
-import psy.lob.saw.queues.spsc.fc.SPSPQueueFloatingCounters4;
 import psy.lob.saw.queues.spsc.fc.SPSPQueueFloatingCounters3;
+import psy.lob.saw.queues.spsc.fc.SPSPQueueFloatingCounters4;
 import psy.lob.saw.queues.spsc1.SPSCQueue1;
 import psy.lob.saw.queues.spsc2.SPSCQueue2;
 import psy.lob.saw.queues.spsc3.SPSCQueue3;
 import psy.lob.saw.queues.spsc4.SPSCQueue4;
 import psy.lob.saw.queues.spsc5.SPSCQueue5;
+import psy.lob.saw.queues.spsc6.SPSCQueue6;
 
 public class QueuePerfTest {
 	// 15 == 32 * 1024
@@ -128,6 +128,8 @@ public class QueuePerfTest {
             return new SPSCQueue4<Integer>(QUEUE_CAPACITY);
         case 45:
             return new SPSCQueue5<Integer>(QUEUE_CAPACITY);
+        case 46:
+            return new SPSCQueue6<Integer>(QUEUE_CAPACITY);
         case 5:
             return new P1C1Queue4CacheLinesHeapBuffer<Integer>(QUEUE_CAPACITY);
         case 6:
