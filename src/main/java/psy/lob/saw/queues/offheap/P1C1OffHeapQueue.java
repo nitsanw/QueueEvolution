@@ -45,7 +45,7 @@ public final class P1C1OffHeapQueue implements Queue<Integer> {
 
 	public P1C1OffHeapQueue(final int capacity) {
 		this(allocateAlignedByteBuffer(
-		        4 * CACHE_LINE_SIZE + findNextPositivePowerOfTwo(capacity)<<INT_ELEMENT_SCALE, CACHE_LINE_SIZE),
+		        4 * CACHE_LINE_SIZE + (findNextPositivePowerOfTwo(capacity)<<INT_ELEMENT_SCALE), CACHE_LINE_SIZE),
 		        findNextPositivePowerOfTwo(capacity),(byte)(PRODUCER | CONSUMER));
 	}
 	/**
@@ -59,7 +59,7 @@ public final class P1C1OffHeapQueue implements Queue<Integer> {
 	public P1C1OffHeapQueue(final ByteBuffer buff, 
 			final int capacity, byte viewMask) {
 		this.capacity = findNextPositivePowerOfTwo(capacity);
-		buffy = alignedSlice(4 * CACHE_LINE_SIZE + this.capacity<<INT_ELEMENT_SCALE, 
+		buffy = alignedSlice(4 * CACHE_LINE_SIZE + (this.capacity<<INT_ELEMENT_SCALE), 
 									CACHE_LINE_SIZE, buff);
 
 		long alignedAddress = UnsafeDirectByteBuffer.getAddress(buffy);
