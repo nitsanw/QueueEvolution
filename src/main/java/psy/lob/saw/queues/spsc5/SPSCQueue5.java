@@ -33,7 +33,7 @@ class L0Pad {public long p00, p01, p02, p03, p04, p05, p06, p07;}
 class ColdFields<E> extends L0Pad {
     protected static final int BUFFER_PAD = 16;
     protected final int capacity;
-    protected final int mask;
+    protected final long mask;
     protected final E[] buffer;
     @SuppressWarnings("unchecked")
     public ColdFields(int capacity) {
@@ -105,7 +105,7 @@ public final class SPSCQueue5<E> extends L5Pad<E> implements Queue<E> {
                 throw new IllegalStateException("Unknown pointer size");
             }
             ARRAY_BASE = UnsafeAccess.UNSAFE.arrayBaseOffset(Object[].class)
-                    + BUFFER_PAD << ELEMENT_SHIFT;
+                    + (BUFFER_PAD << ELEMENT_SHIFT);
         } catch (NoSuchFieldException e) {
             throw new RuntimeException(e);
         }
@@ -158,9 +158,6 @@ public final class SPSCQueue5<E> extends L5Pad<E> implements Queue<E> {
             tailCache = getTail();
             if (currentHead >= tailCache) {
                 return null;
-            }
-            if(currentHead >= tailCache - 16){
-                Thread.yield();
             }
         }
 
