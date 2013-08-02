@@ -141,6 +141,8 @@ public class QueuePerfTest {
             return new P1C1QueueOriginalPrimitive(QUEUE_CAPACITY);
         case 9:
             return new FFBuffer<Integer>(Integer.getInteger("scale", 15),2);
+        case 91:
+            return new FFBuffer<Integer>(Integer.getInteger("scale", 15),2);
 
         default:
             throw new IllegalArgumentException("Invalid option: " + option);

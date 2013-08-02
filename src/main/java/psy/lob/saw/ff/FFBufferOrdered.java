@@ -12,7 +12,22 @@ import java.util.Queue;
 import psy.lob.saw.util.UnsafeAccess;
 
 @SuppressWarnings("unused")
-final public class FFBuffer<T> extends AbstractQueue<T> implements Queue<T> {
+final public class FFBufferOrdered<T> extends AbstractQueue<T> implements Queue<T> {
+    private static final long ARRAY_BASE;
+    private static final int ELEMENT_SHIFT;
+    static {
+        final int scale = UnsafeAccess.UNSAFE
+                .arrayIndexScale(Object[].class);
+        if (4 == scale) {
+            ELEMENT_SHIFT = 2;
+        } else if (8 == scale) {
+            ELEMENT_SHIFT = 3;
+        } else {
+            throw new IllegalStateException("Unknown pointer size");
+        }
+        // Including the buffer pad in the array base offset
+        ARRAY_BASE = UnsafeAccess.UNSAFE.arrayBaseOffset(Object[].class);
+    }
     private int _pad000, _pad001, _pad002, _pad003, _pad004, _pad005, _pad006, _pad007;
     private int _pad008, _pad009, _pad00a, _pad00b, _pad00c, _pad00d, _pad00e, _pad00f;
     private int pread, _pread0;
@@ -33,7 +48,7 @@ final public class FFBuffer<T> extends AbstractQueue<T> implements Queue<T> {
     private T _pad400, _pad401, _pad402, _pad403, _pad404, _pad405, _pad406, _pad407;
     private T _pad408, _pad409, _pad40a, _pad40b, _pad40c, _pad40d, _pad40e, _pad40f;
 
-    public FFBuffer(int sizeByPowerOfTwo, int pow) {
+    public FFBufferOrdered(int sizeByPowerOfTwo, int pow) {
         this.size = 1 << sizeByPowerOfTwo;
         this.mask = size - 1;
         this.POW = pow;
@@ -50,7 +65,8 @@ final public class FFBuffer<T> extends AbstractQueue<T> implements Queue<T> {
         int id = id(pwrite);
         if (null != data[id])
             return false;
-        data[id] = obj;
+        //WMB(); data[id] = obj;
+        UnsafeAccess.UNSAFE.putOrderedObject(data, ARRAY_BASE + (id << ELEMENT_SHIFT), obj);
         pwrite++;
         return true;
     }
@@ -60,7 +76,8 @@ final public class FFBuffer<T> extends AbstractQueue<T> implements Queue<T> {
         T rc = data[id];
         if (null == rc)
             return null;
-        data[id] = null; 
+        //WMB(); data[id] = null; 
+        UnsafeAccess.UNSAFE.putOrderedObject(data, ARRAY_BASE + (id << ELEMENT_SHIFT), null);
         pread++;
         return rc;
     }
