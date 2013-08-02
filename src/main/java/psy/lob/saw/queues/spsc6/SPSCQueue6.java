@@ -44,6 +44,7 @@ class ColdFields<E> extends L0Pad {
             this.capacity = Pow2.findNextPositivePowerOfTwo(capacity);
         }
         mask = this.capacity - 1;
+        // pad data on either end with some empty slots.
         buffer = (E[]) new Object[this.capacity + BUFFER_PAD * 2];
     }
 }
@@ -59,33 +60,15 @@ class L2Pad<E> extends TailField<E> {
     public long p20, p21, p22, p23, p24, p25, p26;
     public L2Pad(int capacity) { super(capacity);}
 }
-class HeadCache<E> extends L2Pad<E> {
-    protected long headCache;
-    public HeadCache(int capacity) { super(capacity);}
-}
-class L3Pad<E> extends HeadCache<E> {
-    public long p30, p31, p32, p33, p34, p35, p36;
-    public L3Pad(int capacity) { super(capacity);}
-}
-class HeadField<E> extends L3Pad<E> {
-    protected volatile long head;
+class HeadField<E> extends L2Pad<E> {
+    protected long head;
     public HeadField(int capacity) { super(capacity);}
 }
-class L4Pad<E> extends HeadField<E> {
+class L3Pad<E> extends HeadField<E> {
     public long p40, p41, p42, p43, p44, p45, p46;
-    public L4Pad(int capacity) { super(capacity);}
+    public L3Pad(int capacity) { super(capacity);}
 }
-class TailCache<E> extends L4Pad<E> {
-    protected long tailCache;
-    public TailCache(int capacity) { super(capacity);}
-
-}
-class L5Pad<E> extends TailCache<E> {
-    public long p50, p51, p52, p53, p54, p55, p56;
-    public L5Pad(int capacity) { super(capacity);}
-}
-
-public final class SPSCQueue6<E> extends L5Pad<E> implements Queue<E> {
+public final class SPSCQueue6<E> extends L3Pad<E> implements Queue<E> {
     private final static long TAIL_OFFSET;
     private final static long HEAD_OFFSET;
     private static final long ARRAY_BASE;
@@ -96,7 +79,6 @@ public final class SPSCQueue6<E> extends L5Pad<E> implements Queue<E> {
             HEAD_OFFSET = UnsafeAccess.UNSAFE.objectFieldOffset(HeadField.class.getDeclaredField("head"));
             final int scale = UnsafeAccess.UNSAFE
                     .arrayIndexScale(Object[].class);
-
             if (4 == scale) {
                 ELEMENT_SHIFT = 2;
             } else if (8 == scale) {
@@ -104,6 +86,7 @@ public final class SPSCQueue6<E> extends L5Pad<E> implements Queue<E> {
             } else {
                 throw new IllegalStateException("Unknown pointer size");
             }
+            // Including the buffer pad in the array base offset
             ARRAY_BASE = UnsafeAccess.UNSAFE.arrayBaseOffset(Object[].class)
                     + (BUFFER_PAD << ELEMENT_SHIFT);
         } catch (NoSuchFieldException e) {
@@ -113,17 +96,11 @@ public final class SPSCQueue6<E> extends L5Pad<E> implements Queue<E> {
     public SPSCQueue6(final int capacity) {
         super(capacity);
     }
-    private void headLazySet(long v) {
-        UnsafeAccess.UNSAFE.putOrderedLong(this, HEAD_OFFSET, v);
-    }
     private long getHead() {
-        return head;
-    }
-    private void tailLazySet(long v) {
-        UnsafeAccess.UNSAFE.putOrderedLong(this, TAIL_OFFSET, v);
+        return UnsafeAccess.UNSAFE.getLongVolatile(this, HEAD_OFFSET);
     }
     private long getTail() {
-        return tail;
+        return UnsafeAccess.UNSAFE.getLongVolatile(this, TAIL_OFFSET);
     }
     public boolean add(final E e) {
         if (offer(e)) {
@@ -137,39 +114,26 @@ public final class SPSCQueue6<E> extends L5Pad<E> implements Queue<E> {
             throw new NullPointerException("Null is not a valid element");
         }
 
-        final long currentTail = getTail();
-        final long wrapPoint = currentTail - capacity;
-        if (headCache <= wrapPoint) {
-            headCache = getHead();
-            if (headCache <= wrapPoint) {
-                return false;
-            }
+        final long offset = computeOffsetInBuffer(tail);
+        if(null != UnsafeAccess.UNSAFE.getObject(buffer, offset)) {
+            return false;
         }
-        UnsafeAccess.UNSAFE.putObject(buffer, computeOffsetInBuffer(currentTail), e);
-        tailLazySet(currentTail + 1);
-
+        // STORE/STORE barrier, anything that happens before is visible
+        // when the value in the buffer is visible
+        UnsafeAccess.UNSAFE.putOrderedObject(buffer, offset, e);
+        tail++;
         return true;
     }
 
     public E poll() {
-        final long currentHead = getHead();
-        if(currentHead >= tailCache - 16){
-            tailCache = getTail();
-            if (currentHead >= tailCache - 16) {
-                Thread.yield();
-            }
-        }
-        if (currentHead >= tailCache) {
+        final long offset = computeOffsetInBuffer(head);
+        @SuppressWarnings("unchecked")
+        final E e = (E) UnsafeAccess.UNSAFE.getObject(buffer, offset);
+        if(null == e) {
             return null;
         }
-
-        // don;t compute twice
-        final long offset = computeOffsetInBuffer(currentHead);
-        final E e = (E) UnsafeAccess.UNSAFE.getObject(buffer, offset);
-        UnsafeAccess.UNSAFE.putObject(buffer, offset, null);
-        
-        headLazySet(currentHead + 1);
-
+        UnsafeAccess.UNSAFE.putOrderedObject(buffer, offset, null);
+        head++;
         return e;
     }
 
@@ -195,6 +159,7 @@ public final class SPSCQueue6<E> extends L5Pad<E> implements Queue<E> {
         long currentHead = getHead();
         return getElement(currentHead);
     }
+    @SuppressWarnings("unchecked")
     private E getElement(long index) {
         return (E) UnsafeAccess.UNSAFE.getObject(buffer, computeOffsetInBuffer(index));
     }
