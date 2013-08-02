@@ -18,6 +18,7 @@ package uk.co.real_logic.queues;
 import java.util.Queue;
 import java.util.concurrent.ArrayBlockingQueue;
 
+import psy.lob.saw.ff.FFBuffer;
 import psy.lob.saw.queues.offheap.P1C1OffHeapQueue;
 import psy.lob.saw.queues.offheap.P1C1Queue4CacheLinesHeapBuffer;
 import psy.lob.saw.queues.offheap.P1C1Queue4CacheLinesHeapBufferUnsafe;
@@ -138,6 +139,8 @@ public class QueuePerfTest {
             return new P1C1OffHeapQueue(QUEUE_CAPACITY);
         case 8:
             return new P1C1QueueOriginalPrimitive(QUEUE_CAPACITY);
+        case 9:
+            return new FFBuffer<Integer>(15,0);
 
         default:
             throw new IllegalArgumentException("Invalid option: " + option);
