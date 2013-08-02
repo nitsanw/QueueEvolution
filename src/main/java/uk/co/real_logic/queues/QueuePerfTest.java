@@ -19,6 +19,7 @@ import java.util.Queue;
 import java.util.concurrent.ArrayBlockingQueue;
 
 import psy.lob.saw.ff.FFBuffer;
+import psy.lob.saw.ff.FFBufferOrdered;
 import psy.lob.saw.queues.offheap.P1C1OffHeapQueue;
 import psy.lob.saw.queues.offheap.P1C1Queue4CacheLinesHeapBuffer;
 import psy.lob.saw.queues.offheap.P1C1Queue4CacheLinesHeapBufferUnsafe;
@@ -142,7 +143,7 @@ public class QueuePerfTest {
         case 9:
             return new FFBuffer<Integer>(Integer.getInteger("scale", 15),2);
         case 91:
-            return new FFBuffer<Integer>(Integer.getInteger("scale", 15),2);
+            return new FFBufferOrdered<Integer>(Integer.getInteger("scale", 15),2);
 
         default:
             throw new IllegalArgumentException("Invalid option: " + option);
