@@ -29,18 +29,21 @@ import psy.lob.saw.util.UnsafeAccess;
  * <li>Class is pre-padded
  * </ul>
  */
-class L0Pad {public long p00, p01, p02, p03, p04, p05, p06, p07;}
+class L0Pad {
+    public long p00, p01, p02, p03, p04, p05, p06, p07;
+}
+
 class ColdFields<E> extends L0Pad {
     protected static final int BUFFER_PAD = 16;
     protected final int capacity;
-    protected final long mask;
+    protected final int mask;
     protected final E[] buffer;
+
     @SuppressWarnings("unchecked")
     public ColdFields(int capacity) {
-        if(Pow2.isPowerOf2(capacity)){
+        if (Pow2.isPowerOf2(capacity)) {
             this.capacity = capacity;
-        }
-        else{
+        } else {
             this.capacity = Pow2.findNextPositivePowerOfTwo(capacity);
         }
         mask = this.capacity - 1;
@@ -48,26 +51,47 @@ class ColdFields<E> extends L0Pad {
         buffer = (E[]) new Object[this.capacity + BUFFER_PAD * 2];
     }
 }
+
 class L1Pad<E> extends ColdFields<E> {
     public long p10, p11, p12, p13, p14, p15, p16;
-    public L1Pad(int capacity) { super(capacity);}
+
+    public L1Pad(int capacity) {
+        super(capacity);
+    }
 }
+
 class TailField<E> extends L1Pad<E> {
-    protected long tail;
-    public TailField(int capacity) { super(capacity);}
+    protected int tail;
+
+    public TailField(int capacity) {
+        super(capacity);
+    }
 }
+
 class L2Pad<E> extends TailField<E> {
     public long p20, p21, p22, p23, p24, p25, p26;
-    public L2Pad(int capacity) { super(capacity);}
+
+    public L2Pad(int capacity) {
+        super(capacity);
+    }
 }
+
 class HeadField<E> extends L2Pad<E> {
-    protected long head;
-    public HeadField(int capacity) { super(capacity);}
+    protected int head;
+
+    public HeadField(int capacity) {
+        super(capacity);
+    }
 }
+
 class L3Pad<E> extends HeadField<E> {
     public long p40, p41, p42, p43, p44, p45, p46;
-    public L3Pad(int capacity) { super(capacity);}
+
+    public L3Pad(int capacity) {
+        super(capacity);
+    }
 }
+
 public final class SPSCQueue6<E> extends L3Pad<E> implements Queue<E> {
     private final static long TAIL_OFFSET;
     private final static long HEAD_OFFSET;
@@ -77,8 +101,7 @@ public final class SPSCQueue6<E> extends L3Pad<E> implements Queue<E> {
         try {
             TAIL_OFFSET = UnsafeAccess.UNSAFE.objectFieldOffset(TailField.class.getDeclaredField("tail"));
             HEAD_OFFSET = UnsafeAccess.UNSAFE.objectFieldOffset(HeadField.class.getDeclaredField("head"));
-            final int scale = UnsafeAccess.UNSAFE
-                    .arrayIndexScale(Object[].class);
+            final int scale = UnsafeAccess.UNSAFE.arrayIndexScale(Object[].class);
             if (4 == scale) {
                 ELEMENT_SHIFT = 2;
             } else if (8 == scale) {
@@ -87,21 +110,24 @@ public final class SPSCQueue6<E> extends L3Pad<E> implements Queue<E> {
                 throw new IllegalStateException("Unknown pointer size");
             }
             // Including the buffer pad in the array base offset
-            ARRAY_BASE = UnsafeAccess.UNSAFE.arrayBaseOffset(Object[].class)
-                    + (BUFFER_PAD << ELEMENT_SHIFT);
+            ARRAY_BASE = UnsafeAccess.UNSAFE.arrayBaseOffset(Object[].class) + (BUFFER_PAD << ELEMENT_SHIFT);
         } catch (NoSuchFieldException e) {
             throw new RuntimeException(e);
         }
     }
+
     public SPSCQueue6(final int capacity) {
         super(capacity);
     }
-    private long getHead() {
-        return UnsafeAccess.UNSAFE.getLongVolatile(this, HEAD_OFFSET);
+
+    private int getHead() {
+        return UnsafeAccess.UNSAFE.getIntVolatile(this, HEAD_OFFSET);
     }
-    private long getTail() {
-        return UnsafeAccess.UNSAFE.getLongVolatile(this, TAIL_OFFSET);
+
+    private int getTail() {
+        return UnsafeAccess.UNSAFE.getIntVolatile(this, TAIL_OFFSET);
     }
+
     public boolean add(final E e) {
         if (offer(e)) {
             return true;
@@ -115,7 +141,7 @@ public final class SPSCQueue6<E> extends L3Pad<E> implements Queue<E> {
         }
 
         final long offset = computeOffsetInBuffer(tail);
-        if(null != UnsafeAccess.UNSAFE.getObject(buffer, offset)) {
+        if (null != UnsafeAccess.UNSAFE.getObject(buffer, offset)) {
             return false;
         }
         // STORE/STORE barrier, anything that happens before is visible
@@ -129,7 +155,7 @@ public final class SPSCQueue6<E> extends L3Pad<E> implements Queue<E> {
         final long offset = computeOffsetInBuffer(head);
         @SuppressWarnings("unchecked")
         final E e = (E) UnsafeAccess.UNSAFE.getObject(buffer, offset);
-        if(null == e) {
+        if (null == e) {
             return null;
         }
         UnsafeAccess.UNSAFE.putOrderedObject(buffer, offset, null);
@@ -156,19 +182,27 @@ public final class SPSCQueue6<E> extends L3Pad<E> implements Queue<E> {
     }
 
     public E peek() {
-        long currentHead = getHead();
+        int currentHead = getHead();
         return getElement(currentHead);
     }
+
     @SuppressWarnings("unchecked")
-    private E getElement(long index) {
+    private E getElement(int index) {
         return (E) UnsafeAccess.UNSAFE.getObject(buffer, computeOffsetInBuffer(index));
     }
-    private long computeOffsetInBuffer(long index) {
+
+    private long computeOffsetInBuffer(int index) {
         return ARRAY_BASE + ((index & mask) << ELEMENT_SHIFT);
     }
 
     public int size() {
-        return (int) (getTail() - getHead());
+        int cTail = getTail() & mask;
+        int cHead = getHead() & mask;
+        if (cHead > cTail) {
+            return cTail + (capacity - cHead);
+        } else {
+            return cTail - cHead;
+        }
     }
 
     public boolean isEmpty() {
@@ -179,9 +213,17 @@ public final class SPSCQueue6<E> extends L3Pad<E> implements Queue<E> {
         if (null == o) {
             return false;
         }
+        int cTail = getTail() & mask;
+        int cHead = getHead() & mask;
+        int size;
+        if (cHead > cTail) {
+            size = cTail + (capacity - cHead);
+        } else {
+            size = cTail - cHead;
+        }
 
-        for (long i = getHead(), limit = getTail(); i < limit; i++) {
-            final E e = getElement(i);
+        for (int i = 0; i < size; i++) {
+            final E e = getElement(cHead + i);
             if (o.equals(e)) {
                 return true;
             }
