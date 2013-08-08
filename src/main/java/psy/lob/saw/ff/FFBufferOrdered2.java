@@ -29,7 +29,10 @@ import psy.lob.saw.util.UnsafeAccess;
  * <li>Class is pre-padded
  * </ul>
  */
-class L0Pad {public long p00, p01, p02, p03, p04, p05, p06, p07;}
+class L0Pad {
+    public long p00, p01, p02, p03, p04, p05, p06, p07;
+    public long p30, p31, p32, p33, p34, p35, p36,p37;
+}
 class ColdFields<E> extends L0Pad {
     protected static final int BUFFER_PAD = 16;
     protected static final int SPARSE_SHIFT = 2;
@@ -51,6 +54,7 @@ class ColdFields<E> extends L0Pad {
 }
 class L1Pad<E> extends ColdFields<E> {
     public long p10, p11, p12, p13, p14, p15, p16;
+    public long p30, p31, p32, p33, p34, p35, p36,p37;
     public L1Pad(int capacity) { super(capacity);}
 }
 class TailField<E> extends L1Pad<E> {
@@ -59,6 +63,7 @@ class TailField<E> extends L1Pad<E> {
 }
 class L2Pad<E> extends TailField<E> {
     public long p20, p21, p22, p23, p24, p25, p26;
+    public long p30, p31, p32, p33, p34, p35, p36,p37;
     public L2Pad(int capacity) { super(capacity);}
 }
 class HeadField<E> extends L2Pad<E> {
@@ -67,6 +72,7 @@ class HeadField<E> extends L2Pad<E> {
 }
 class L3Pad<E> extends HeadField<E> {
     public long p40, p41, p42, p43, p44, p45, p46;
+    public long p30, p31, p32, p33, p34, p35, p36,p37;
     public L3Pad(int capacity) { super(capacity);}
 }
 public final class FFBufferOrdered2<E> extends L3Pad<E> implements Queue<E> {
