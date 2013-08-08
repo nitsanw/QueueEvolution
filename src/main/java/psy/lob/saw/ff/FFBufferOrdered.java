@@ -48,6 +48,7 @@ final public class FFBufferOrdered<T> extends AbstractQueue<T> implements Queue<
     private T _pad400, _pad401, _pad402, _pad403, _pad404, _pad405, _pad406, _pad407;
     private T _pad408, _pad409, _pad40a, _pad40b, _pad40c, _pad40d, _pad40e, _pad40f;
 
+    @SuppressWarnings("unchecked")
     public FFBufferOrdered(int sizeByPowerOfTwo, int pow) {
         this.size = 1 << sizeByPowerOfTwo;
         this.mask = size - 1;
@@ -63,21 +64,24 @@ final public class FFBufferOrdered<T> extends AbstractQueue<T> implements Queue<
         if (null == obj)
             throw new IllegalArgumentException("elem is null");
         int id = id(pwrite);
-        if (null != data[id])
+        final long offset = ARRAY_BASE + (id << ELEMENT_SHIFT);
+        if (null != UnsafeAccess.UNSAFE.getObjectVolatile(data, offset))
             return false;
         //WMB(); data[id] = obj;
-        UnsafeAccess.UNSAFE.putOrderedObject(data, ARRAY_BASE + (id << ELEMENT_SHIFT), obj);
+        UnsafeAccess.UNSAFE.putOrderedObject(data, offset, obj);
         pwrite++;
         return true;
     }
 
     public T poll() {
-        int id = id(pread);
-        T rc = data[id];
+        final int id = id(pread);
+        final long offset = ARRAY_BASE + (id << ELEMENT_SHIFT);
+        @SuppressWarnings("unchecked")
+        T rc = (T) UnsafeAccess.UNSAFE.getObjectVolatile(data, offset);
         if (null == rc)
             return null;
         //WMB(); data[id] = null; 
-        UnsafeAccess.UNSAFE.putOrderedObject(data, ARRAY_BASE + (id << ELEMENT_SHIFT), null);
+        UnsafeAccess.UNSAFE.putOrderedObject(data, offset, null);
         pread++;
         return rc;
     }
