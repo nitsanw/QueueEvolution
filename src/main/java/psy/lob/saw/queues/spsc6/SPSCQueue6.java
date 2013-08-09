@@ -27,16 +27,16 @@ import psy.lob.saw.util.UnsafeAccess;
  * <li>Counters are padded
  * <li>Data is padded
  * <li>Class is pre-padded
- * <li>Double padding!
+ * <li>Data is sparse
  * </ul>
  */
 class L0Pad {
     public long p00, p01, p02, p03, p04, p05, p06, p07;
-    public long p10, p11, p12, p13, p14, p15, p16, p17;
 }
 
 class ColdFields<E> extends L0Pad {
     protected static final int BUFFER_PAD = 32;
+    protected static final int SPARSE_SHIFT = 2;
     protected final int capacity;
     protected final long mask;
     protected final E[] buffer;
@@ -49,12 +49,11 @@ class ColdFields<E> extends L0Pad {
             this.capacity = Pow2.findNextPositivePowerOfTwo(capacity);
         }
         mask = this.capacity - 1;
-        buffer = (E[]) new Object[this.capacity + BUFFER_PAD * 2];
+        buffer = (E[]) new Object[(this.capacity << SPARSE_SHIFT) + BUFFER_PAD * 2];
     }
 }
 
 class L1Pad<E> extends ColdFields<E> {
-    public long p00, p01, p02, p03, p04, p05, p06, p07;
     public long p10, p11, p12, p13, p14, p15, p16;
 
     public L1Pad(int capacity) {
@@ -71,7 +70,6 @@ class TailField<E> extends L1Pad<E> {
 }
 
 class L2Pad<E> extends TailField<E> {
-    public long p00, p01, p02, p03, p04, p05, p06, p07;
     public long p20, p21, p22, p23, p24, p25, p26;
 
     public L2Pad(int capacity) {
@@ -88,7 +86,6 @@ class HeadCache<E> extends L2Pad<E> {
 }
 
 class L3Pad<E> extends HeadCache<E> {
-    public long p00, p01, p02, p03, p04, p05, p06, p07;
     public long p30, p31, p32, p33, p34, p35, p36;
 
     public L3Pad(int capacity) {
@@ -105,7 +102,6 @@ class HeadField<E> extends L3Pad<E> {
 }
 
 class L4Pad<E> extends HeadField<E> {
-    public long p00, p01, p02, p03, p04, p05, p06, p07;
     public long p40, p41, p42, p43, p44, p45, p46;
 
     public L4Pad(int capacity) {
@@ -123,7 +119,6 @@ class TailCache<E> extends L4Pad<E> {
 }
 
 class L5Pad<E> extends TailCache<E> {
-    public long p00, p01, p02, p03, p04, p05, p06, p07;
     public long p50, p51, p52, p53, p54, p55, p56;
 
     public L5Pad(int capacity) {
@@ -143,14 +138,14 @@ public final class SPSCQueue6<E> extends L5Pad<E> implements Queue<E> {
             final int scale = UnsafeAccess.UNSAFE.arrayIndexScale(Object[].class);
 
             if (4 == scale) {
-                ELEMENT_SHIFT = 2;
+                ELEMENT_SHIFT = 2 + SPARSE_SHIFT;
             } else if (8 == scale) {
-                ELEMENT_SHIFT = 3;
+                ELEMENT_SHIFT = 3 + SPARSE_SHIFT;
             } else {
                 throw new IllegalStateException("Unknown pointer size");
             }
             ARRAY_BASE = UnsafeAccess.UNSAFE.arrayBaseOffset(Object[].class)
-                    + (BUFFER_PAD << ELEMENT_SHIFT);
+                    + (BUFFER_PAD << (ELEMENT_SHIFT - SPARSE_SHIFT));
         } catch (NoSuchFieldException e) {
             throw new RuntimeException(e);
         }
