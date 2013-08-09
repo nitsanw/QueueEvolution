@@ -11,7 +11,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package psy.lob.saw.queues.spsc6;
+package psy.lob.saw.queues.spsc7;
 
 import java.util.Collection;
 import java.util.Iterator;
@@ -27,6 +27,7 @@ import psy.lob.saw.util.UnsafeAccess;
  * <li>Counters are padded
  * <li>Data is padded
  * <li>Class is pre-padded
+ * <li>Data is sparse
  * <li>Double padding!
  * </ul>
  */
@@ -37,6 +38,7 @@ class L0Pad {
 
 class ColdFields<E> extends L0Pad {
     protected static final int BUFFER_PAD = 32;
+    protected static final int SPARSE_SHIFT = 2;
     protected final int capacity;
     protected final long mask;
     protected final E[] buffer;
@@ -49,7 +51,7 @@ class ColdFields<E> extends L0Pad {
             this.capacity = Pow2.findNextPositivePowerOfTwo(capacity);
         }
         mask = this.capacity - 1;
-        buffer = (E[]) new Object[this.capacity + BUFFER_PAD * 2];
+        buffer = (E[]) new Object[(this.capacity << SPARSE_SHIFT) + BUFFER_PAD * 2];
     }
 }
 
@@ -131,7 +133,7 @@ class L5Pad<E> extends TailCache<E> {
     }
 }
 
-public final class SPSCQueue6<E> extends L5Pad<E> implements Queue<E> {
+public final class SPSCQueue7<E> extends L5Pad<E> implements Queue<E> {
     private final static long TAIL_OFFSET;
     private final static long HEAD_OFFSET;
     private static final long ARRAY_BASE;
@@ -143,20 +145,20 @@ public final class SPSCQueue6<E> extends L5Pad<E> implements Queue<E> {
             final int scale = UnsafeAccess.UNSAFE.arrayIndexScale(Object[].class);
 
             if (4 == scale) {
-                ELEMENT_SHIFT = 2;
+                ELEMENT_SHIFT = 2 + SPARSE_SHIFT;
             } else if (8 == scale) {
-                ELEMENT_SHIFT = 3;
+                ELEMENT_SHIFT = 3 + SPARSE_SHIFT;
             } else {
                 throw new IllegalStateException("Unknown pointer size");
             }
             ARRAY_BASE = UnsafeAccess.UNSAFE.arrayBaseOffset(Object[].class)
-                    + (BUFFER_PAD << ELEMENT_SHIFT);
+                    + (BUFFER_PAD << (ELEMENT_SHIFT - SPARSE_SHIFT));
         } catch (NoSuchFieldException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public SPSCQueue6(final int capacity) {
+    public SPSCQueue7(final int capacity) {
         super(capacity);
     }
 

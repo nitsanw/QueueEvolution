@@ -42,7 +42,7 @@ public class FairQueuePerfTest {
 
     public static void main(final String[] args) throws Exception {
         System.out.println("type:" + MAIN_TYPE + " trigger:"+(PRODUCER_TRIGGERS?"P":"C")+" capacity:" + QUEUE_CAPACITY + " reps:" + REPETITIONS);
-        final Queue<Integer> queue = QueuePerfTest.createQueue(args[0]);
+        final Queue<Integer> queue = QueueFactory.createQueue(Integer.parseInt(args[0]), Integer.getInteger("scale", 15));
 
         final long[] results = new long[20];
         for (int i = 0; i < 20; i++) {

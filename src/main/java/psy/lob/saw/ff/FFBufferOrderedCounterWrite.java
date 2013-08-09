@@ -12,22 +12,18 @@ import java.util.Queue;
 import psy.lob.saw.util.UnsafeAccess;
 
 @SuppressWarnings("unused")
-final public class FFBufferOrdered<T> extends AbstractQueue<T> implements Queue<T> {
-    private static final long ARRAY_BASE;
-    private static final int ELEMENT_SHIFT;
+final public class FFBufferOrderedCounterWrite<T> extends AbstractQueue<T> implements Queue<T> {
+    private final static long PREAD_OFFSET;
+    private final static long PWRITE_OFFSET;
     static {
-        final int scale = UnsafeAccess.UNSAFE
-                .arrayIndexScale(Object[].class);
-        if (4 == scale) {
-            ELEMENT_SHIFT = 2;
-        } else if (8 == scale) {
-            ELEMENT_SHIFT = 3;
-        } else {
-            throw new IllegalStateException("Unknown pointer size");
+        try {
+            PREAD_OFFSET = UnsafeAccess.UNSAFE.objectFieldOffset(FFBufferOrderedCounterWrite.class.getDeclaredField("pread"));
+            PWRITE_OFFSET = UnsafeAccess.UNSAFE.objectFieldOffset(FFBufferOrderedCounterWrite.class.getDeclaredField("pwrite"));
+        } catch (NoSuchFieldException e) {
+            throw new RuntimeException(e);
         }
-        // Including the buffer pad in the array base offset
-        ARRAY_BASE = UnsafeAccess.UNSAFE.arrayBaseOffset(Object[].class);
     }
+
     private int _pad000, _pad001, _pad002, _pad003, _pad004, _pad005, _pad006, _pad007;
     private int _pad008, _pad009, _pad00a, _pad00b, _pad00c, _pad00d, _pad00e, _pad00f;
     private int pread, _pread0;
@@ -49,7 +45,7 @@ final public class FFBufferOrdered<T> extends AbstractQueue<T> implements Queue<
     private T _pad408, _pad409, _pad40a, _pad40b, _pad40c, _pad40d, _pad40e, _pad40f;
 
     @SuppressWarnings("unchecked")
-    public FFBufferOrdered(int sizeByPowerOfTwo, int pow) {
+    public FFBufferOrderedCounterWrite(int sizeByPowerOfTwo, int pow) {
         this.size = 1 << sizeByPowerOfTwo;
         this.mask = size - 1;
         this.POW = pow;
@@ -64,25 +60,22 @@ final public class FFBufferOrdered<T> extends AbstractQueue<T> implements Queue<
         if (null == obj)
             throw new IllegalArgumentException("elem is null");
         int id = id(pwrite);
-        final long offset = ARRAY_BASE + (id << ELEMENT_SHIFT);
-        if (null != UnsafeAccess.UNSAFE.getObjectVolatile(data, offset))
+        if (null != data[id])
             return false;
         //WMB(); data[id] = obj;
-        UnsafeAccess.UNSAFE.putOrderedObject(data, offset, obj);
-        pwrite++;
+        data[id] = obj;
+        UnsafeAccess.UNSAFE.putOrderedInt(this, PWRITE_OFFSET, pwrite + 1);
         return true;
     }
 
     public T poll() {
         final int id = id(pread);
-        final long offset = ARRAY_BASE + (id << ELEMENT_SHIFT);
-        @SuppressWarnings("unchecked")
-        T rc = (T) UnsafeAccess.UNSAFE.getObjectVolatile(data, offset);
+        T rc = (T) data[id];
         if (null == rc)
             return null;
         //WMB(); data[id] = null; 
-        UnsafeAccess.UNSAFE.putOrderedObject(data, offset, null);
-        pread++;
+        data[id] = null;
+        UnsafeAccess.UNSAFE.putOrderedInt(this, PREAD_OFFSET, pread + 1);
         return rc;
     }
 
