@@ -11,7 +11,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package psy.lob.saw.ff;
+package psy.lob.saw.ff3;
 
 import java.util.Collection;
 import java.util.Iterator;
@@ -75,7 +75,7 @@ class L3Pad<E> extends HeadField<E> {
     public long p30, p31, p32, p33, p34, p35, p36,p37;
     public L3Pad(int capacity) { super(capacity);}
 }
-public final class FFBufferOrdered2<E> extends L3Pad<E> implements Queue<E> {
+public final class FFBufferOrdered3<E> extends L3Pad<E> implements Queue<E> {
     private final static long TAIL_OFFSET;
     private final static long HEAD_OFFSET;
     private static final long ARRAY_BASE;
@@ -99,7 +99,7 @@ public final class FFBufferOrdered2<E> extends L3Pad<E> implements Queue<E> {
         }
     }
 
-    public FFBufferOrdered2(final int capacity) {
+    public FFBufferOrdered3(final int capacity) {
         super(capacity);
     }
 
