@@ -28,6 +28,7 @@ import psy.lob.saw.util.UnsafeAccess;
  * <li>Data is padded
  * <li>Class is pre-padded
  * <li>Data is sparse
+ * <li>Use Unsafe to access array
  * <li>Double padding!
  * </ul>
  */

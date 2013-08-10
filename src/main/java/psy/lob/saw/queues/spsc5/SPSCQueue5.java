@@ -27,6 +27,7 @@ import psy.lob.saw.util.UnsafeAccess;
  * <li>Counters are padded
  * <li>Data is padded
  * <li>Class is pre-padded
+ * <li>Use Unsafe for array access
  * </ul>
  */
 class L0Pad {public long p00, p01, p02, p03, p04, p05, p06, p07;}

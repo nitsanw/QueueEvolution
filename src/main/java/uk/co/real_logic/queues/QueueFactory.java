@@ -22,6 +22,7 @@ import psy.lob.saw.queues.spsc4.SPSCQueue4;
 import psy.lob.saw.queues.spsc5.SPSCQueue5;
 import psy.lob.saw.queues.spsc6.SPSCQueue6;
 import psy.lob.saw.queues.spsc7.SPSCQueue7;
+import psy.lob.saw.queues.spsc8.SPSCQueue8;
 
 public final class QueueFactory {
 
@@ -64,6 +65,8 @@ public final class QueueFactory {
             return new SPSCQueue6<Integer>(qCapacity);
         case 47:
             return new SPSCQueue7<Integer>(qCapacity);
+        case 48:
+            return new SPSCQueue8<Integer>(qCapacity);
         case 5:
             return new P1C1Queue4CacheLinesHeapBuffer<Integer>(qCapacity);
         case 6:
