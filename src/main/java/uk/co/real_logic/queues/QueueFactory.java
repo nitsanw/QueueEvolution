@@ -2,6 +2,7 @@ package uk.co.real_logic.queues;
 
 import java.util.Queue;
 import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 import psy.lob.saw.ff.FFBuffer;
 import psy.lob.saw.ff.FFBufferOrderedArrayReadWrite;
@@ -10,6 +11,7 @@ import psy.lob.saw.ff.FFBufferOrderedCounterWrite;
 import psy.lob.saw.ff1.FFBufferOrdered1;
 import psy.lob.saw.ff2.FFBufferOrdered2;
 import psy.lob.saw.ff3.FFBufferOrdered3;
+import psy.lob.saw.ff4.FFBufferOrdered4;
 import psy.lob.saw.queues.offheap.P1C1OffHeapQueue;
 import psy.lob.saw.queues.offheap.P1C1Queue4CacheLinesHeapBuffer;
 import psy.lob.saw.queues.offheap.P1C1Queue4CacheLinesHeapBufferUnsafe;
@@ -31,6 +33,8 @@ public final class QueueFactory {
         switch (qId) {
         case 0:
             return new ArrayBlockingQueue<Integer>(qCapacity);
+        case -1:
+            return new ConcurrentLinkedQueue<Integer>();
         case 1:
             return new P1C1QueueOriginal1<Integer>(qCapacity);
         case 12:
@@ -51,6 +55,8 @@ public final class QueueFactory {
             return new SPSPQueueFloatingCounters4<Integer>(qCapacity);
         case 33:
             return new SPSPQueueFloatingCounters3<Integer>(qCapacity);
+        case 34:
+            return new P1C1QueueOriginal3VReadCache<Integer>(qCapacity);
         case 41:
             return new SPSCQueue1<Integer>(qCapacity);
         case 42:
@@ -89,6 +95,8 @@ public final class QueueFactory {
             return new FFBufferOrdered2<Integer>(qCapacity);
         case 96:
             return new FFBufferOrdered3<Integer>(qCapacity);
+        case 97:
+            return new FFBufferOrdered4<Integer>(qCapacity);
     
         default:
             throw new IllegalArgumentException("Invalid option: " + qId);
