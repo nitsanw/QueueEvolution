@@ -1,5 +1,5 @@
 #!/bin/bash
-JVM_OPTS=''
+export JVM_OPTS=''
 ./runTestSuite.sh
 export JVM_OPTS='-XX:+UseCondCardMark'
 ./runTestSuite.sh

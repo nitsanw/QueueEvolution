@@ -4,4 +4,4 @@ if [ "$REVERSED" = "true" ]; then
 else
     MAIN=QueuePerfTest
 fi
-echo java -server $JVM_OPTS -cp examples-1.0-SNAPSHOT.jar uk.co.real_logic.queues.$MAIN $1
+java -server $JVM_OPTS -cp ../target/examples-1.0-SNAPSHOT.jar uk.co.real_logic.queues.$MAIN $1
