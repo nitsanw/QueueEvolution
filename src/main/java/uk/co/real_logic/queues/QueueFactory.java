@@ -11,7 +11,6 @@ import psy.lob.saw.ff.FFBufferOrderedCounterWrite;
 import psy.lob.saw.ff1.FFBufferOrdered1;
 import psy.lob.saw.ff2.FFBufferOrdered2;
 import psy.lob.saw.ff3.FFBufferOrdered3;
-import psy.lob.saw.ff4.FFBufferOrdered4;
 import psy.lob.saw.queues.offheap.P1C1OffHeapQueue;
 import psy.lob.saw.queues.offheap.P1C1Queue4CacheLinesHeapBuffer;
 import psy.lob.saw.queues.offheap.P1C1Queue4CacheLinesHeapBufferUnsafe;
@@ -95,8 +94,6 @@ public final class QueueFactory {
             return new FFBufferOrdered2<Integer>(qCapacity);
         case 96:
             return new FFBufferOrdered3<Integer>(qCapacity);
-        case 97:
-            return new FFBufferOrdered4<Integer>(qCapacity);
     
         default:
             throw new IllegalArgumentException("Invalid option: " + qId);

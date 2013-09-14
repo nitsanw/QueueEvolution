@@ -27,6 +27,10 @@ import psy.lob.saw.util.UnsafeAccess;
  * <li>Counters are padded
  * <li>Data is padded
  * <li>Class is pre-padded
+ * <li>Padding is doubled to dodge pre-fetch
+ * <li>Use Unsafe to read out of array
+ * <li>putOrdered into counter as Write Memory Barrier
+ * <li>No Read Memory Barrier
  * </ul>
  */
 class L0Pad {

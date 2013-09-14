@@ -4,12 +4,12 @@ echo summary,jvmopts,$JVM_OPTS
 echo "summary,Same Core"
 for IMPL in $IMPLS
 do
-	./repeatRunTestSC.sh $IMPL
+	./repeatRunTestSC.sh $1 $IMPL
 done
 echo "summary,Cross Core"
 for IMPL in $IMPLS
 do 
-    ./repeatRunTestCC.sh $IMPL
+    ./repeatRunTestCC.sh $1 $IMPL
 done
 echo "summary,Cross Socket"
 for IMPL in $IMPLS

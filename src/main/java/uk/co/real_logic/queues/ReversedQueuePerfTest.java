@@ -49,7 +49,7 @@ public class ReversedQueuePerfTest {
 		for(int i = 10; i < 20; i++){
 		    sum+=results[i];
 		}
-		System.out.format("summary,%s,%d\n", queue.getClass().getSimpleName(), sum/10);
+		System.out.format("summary,ReversedQueuePerfTest,%s,%d\n", queue.getClass().getSimpleName(), sum/10);
 	}
 
 	private static long performanceRun(final int runNumber,

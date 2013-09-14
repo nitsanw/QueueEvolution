@@ -68,7 +68,7 @@ public final class P1C1OffHeapQueue implements Queue<Integer> {
 		tailCacheAddress = headAddress + CACHE_LINE_SIZE;
 		tailAddress = tailCacheAddress + CACHE_LINE_SIZE;
 		headCacheAddress = tailAddress + CACHE_LINE_SIZE;
-		arrayBase = alignedAddress + 4* CACHE_LINE_SIZE;
+		arrayBase = alignedAddress + 4 * CACHE_LINE_SIZE;
 		// producer owns tail and headCache
 		if((viewMask & PRODUCER) == PRODUCER){
     		setHeadCache(0);

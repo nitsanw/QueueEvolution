@@ -17,10 +17,8 @@ package uk.co.real_logic.queues;
 
 import java.util.Queue;
 
-import psy.lob.saw.queues.spsc9.SPSCQueue9;
 
-
-public class QueueBatchPerfTest {
+public class BusyQueuePerfTest {
 	// 15 == 32 * 1024
 	public static final int QUEUE_CAPACITY = 1 << Integer.getInteger("scale", 15);
 	public static final int REPETITIONS = Integer.getInteger("reps", 50) * 1000 * 1000;
@@ -28,7 +26,7 @@ public class QueueBatchPerfTest {
 
 	public static void main(final String[] args) throws Exception {
 		System.out.println("capacity:" + QUEUE_CAPACITY + " reps:" + REPETITIONS);
-		final SPSCQueue9<Integer> queue = new SPSCQueue9<Integer>(QUEUE_CAPACITY);
+		final Queue<Integer> queue = QueueFactory.createQueue(Integer.parseInt(args[0]), Integer.getInteger("scale", 15));
 
 		final long[] results = new long[20];
 		for (int i = 0; i < 20; i++) {
@@ -40,28 +38,23 @@ public class QueueBatchPerfTest {
 		for(int i = 10; i < 20; i++){
 		    sum+=results[i];
 		}
-		System.out.format("summary,QueueBatchPerfTest,%s,%d\n", queue.getClass().getSimpleName(), sum/10);
+		System.out.format("summary,BusyQueuePerfTest,%s,%d\n", queue.getClass().getSimpleName(), sum/10);
 	}
 
-    static Integer result;
-    static SPSCQueue9.Processor<Integer> processor = new SPSCQueue9.Processor<Integer>() {
-        @Override
-        public void process(Integer e) {
-            result = e;
-        }
-    };
 
 	private static long performanceRun(final int runNumber,
-	        final SPSCQueue9<Integer> queue) throws Exception {
-	    result = null;
+	        final Queue<Integer> queue) throws Exception {
 		final long start = System.nanoTime();
         final Thread thread = new Thread(new Producer(queue));
         thread.start();
         
+		Integer result;
 		int i = REPETITIONS;
 		do {
-			i -= queue.pollBatch(processor);
-		} while (0 != i);
+			while (null == (result = queue.poll())) {
+//				Thread.yield();
+			}
+		} while (0 != --i);
 
 		thread.join();
 		
@@ -84,7 +77,7 @@ public class QueueBatchPerfTest {
 			int i = REPETITIONS;
 			do {
 				while (!queue.offer(TEST_VALUE)) {
-					Thread.yield();
+//					Thread.yield();
 				}
 			} while (0 != --i);
 		}

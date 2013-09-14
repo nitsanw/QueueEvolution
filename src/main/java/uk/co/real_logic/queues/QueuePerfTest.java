@@ -38,7 +38,7 @@ public class QueuePerfTest {
 		for(int i = 10; i < 20; i++){
 		    sum+=results[i];
 		}
-		System.out.format("summary,%s,%d\n", queue.getClass().getSimpleName(), sum/10);
+		System.out.format("summary,QueuePerfTest,%s,%d\n", queue.getClass().getSimpleName(), sum/10);
 	}
 
 
