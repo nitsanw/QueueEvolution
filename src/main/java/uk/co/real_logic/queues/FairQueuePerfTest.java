@@ -17,6 +17,7 @@ package uk.co.real_logic.queues;
 
 import java.util.Queue;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.locks.LockSupport;
 
 public class FairQueuePerfTest {
     enum MainThread {
@@ -26,7 +27,7 @@ public class FairQueuePerfTest {
     // 15 == 32 * 1024
     public static final int QUEUE_CAPACITY = 1 << Integer.getInteger("scale", 15);
     public static final int REPETITIONS = Integer.getInteger("reps", 50) * 1000 * 1000;
-    public static final boolean PRODUCER_TRIGGERS = !Boolean.getBoolean("consumer.triggers");
+    public static final boolean PRODUCER_TRIGGERS = Boolean.getBoolean("producer.triggers");
     public static final MainThread MAIN_TYPE;
     static {
         String typeName = System.getProperty("main.type");
@@ -122,6 +123,8 @@ public class FairQueuePerfTest {
                 cLatch.countDown();
                 try {
                     pLatch.await();
+                    // delay consumer start
+                    LockSupport.parkNanos(100*1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                     System.exit(-1);
@@ -172,6 +175,8 @@ public class FairQueuePerfTest {
                 pLatch.countDown();
                 try {
                     cLatch.await();
+                    // delay producer start
+                    LockSupport.parkNanos(100*1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                     System.exit(-1);
