@@ -38,7 +38,7 @@ final public class FFBufferOrderedArrayWrite<T> extends AbstractQueue<T> impleme
     private int _pad208, _pad209, _pad20a, _pad20b, _pad20c, _pad20d, _pad20e, _pad20f;
     private final int size;
     private int size0;
-    private final int POW;
+    private final int elementShift;
     private int POW0;
     private final int mask;
     private int mask0;
@@ -52,20 +52,19 @@ final public class FFBufferOrderedArrayWrite<T> extends AbstractQueue<T> impleme
     public FFBufferOrderedArrayWrite(int sizeByPowerOfTwo, int pow) {
         this.size = 1 << sizeByPowerOfTwo;
         this.mask = size - 1;
-        this.POW = pow;
-        this.data = (T[]) new Object[size << POW];
+        this.elementShift = pow + ELEMENT_SHIFT;
+        this.data = (T[]) new Object[size << pow];
     }
 
-    private int id(int n) {
-        return (n & mask) << POW;
-    }
+	private long offset(int index) {
+		return ARRAY_BASE + ((index & mask) << elementShift);
+	}
 
     public boolean offer(T obj) {
         if (null == obj)
             throw new IllegalArgumentException("elem is null");
-        int id = id(pwrite);
-        final long offset = ARRAY_BASE + (id << ELEMENT_SHIFT);
-        if (null != UnsafeAccess.UNSAFE.getObject(data, offset))
+        final long offset = offset(pwrite);
+        if (null != UnsafeAccess.UNSAFE.getObjectVolatile(data, offset))
             return false;
         //WMB(); data[id] = obj;
         UnsafeAccess.UNSAFE.putOrderedObject(data, offset, obj);
@@ -74,10 +73,9 @@ final public class FFBufferOrderedArrayWrite<T> extends AbstractQueue<T> impleme
     }
 
     public T poll() {
-        final int id = id(pread);
-        final long offset = ARRAY_BASE + (id << ELEMENT_SHIFT);
+        final long offset = offset(pread);
         @SuppressWarnings("unchecked")
-        T rc = (T) UnsafeAccess.UNSAFE.getObject(data, offset);
+        T rc = (T) UnsafeAccess.UNSAFE.getObjectVolatile(data, offset);
         if (null == rc)
             return null;
         //WMB(); data[id] = null; 
