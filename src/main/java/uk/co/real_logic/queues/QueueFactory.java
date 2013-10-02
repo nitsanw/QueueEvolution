@@ -11,6 +11,7 @@ import psy.lob.saw.ff.FFBufferOrderedCounterWrite;
 import psy.lob.saw.ff1.FFBufferOrdered1;
 import psy.lob.saw.ff2.FFBufferOrdered2;
 import psy.lob.saw.ff3.FFBufferOrdered3;
+import psy.lob.saw.ff31.FFBufferOrdered31;
 import psy.lob.saw.queues.offheap.P1C1OffHeapQueue;
 import psy.lob.saw.queues.offheap.P1C1Queue4CacheLinesHeapBuffer;
 import psy.lob.saw.queues.offheap.P1C1Queue4CacheLinesHeapBufferUnsafe;
@@ -24,6 +25,7 @@ import psy.lob.saw.queues.spsc5.SPSCQueue5;
 import psy.lob.saw.queues.spsc6.SPSCQueue6;
 import psy.lob.saw.queues.spsc7.SPSCQueue7;
 import psy.lob.saw.queues.spsc8.SPSCQueue8;
+import psy.lob.saw.queues.spsc81.SPSCQueue81;
 
 public final class QueueFactory {
 
@@ -72,6 +74,8 @@ public final class QueueFactory {
             return new SPSCQueue7<Integer>(qCapacity);
         case 48:
             return new SPSCQueue8<Integer>(qCapacity);
+        case 49:
+            return new SPSCQueue81<Integer>(qCapacity, 2);
         case 5:
             return new P1C1Queue4CacheLinesHeapBuffer<Integer>(qCapacity);
         case 6:
@@ -89,12 +93,15 @@ public final class QueueFactory {
         case 93:
             return new FFBufferOrderedArrayReadWrite<Integer>(qScale,2);
         case 94:
-            return new FFBufferOrdered1<Integer>(qCapacity);
+            return new FFBufferOrderedArrayReadWrite<Integer>(qScale,0);
         case 95:
-            return new FFBufferOrdered2<Integer>(qCapacity);
+            return new FFBufferOrdered1<Integer>(qCapacity);
         case 96:
+            return new FFBufferOrdered2<Integer>(qCapacity);
+        case 97:
             return new FFBufferOrdered3<Integer>(qCapacity);
-    
+        case 98:
+            return new FFBufferOrdered31<Integer>(qCapacity,2);   
         default:
             throw new IllegalArgumentException("Invalid option: " + qId);
         }
