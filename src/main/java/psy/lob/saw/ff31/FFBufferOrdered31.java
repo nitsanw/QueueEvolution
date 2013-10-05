@@ -38,7 +38,7 @@ class L0Pad {
     public long p30, p31, p32, p33, p34, p35, p36,p37;
 }
 class ColdFields<E> extends L0Pad {
-    protected final static int BUFFER_PAD = 16;
+    protected final static int BUFFER_PAD = 32;
     protected final static long ARRAY_BASE;
     private final static int ELEMENT_SHIFT;
     static {

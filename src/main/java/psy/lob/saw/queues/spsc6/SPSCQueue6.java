@@ -32,289 +32,295 @@ import psy.lob.saw.util.UnsafeAccess;
  * </ul>
  */
 class L0Pad {
-    public long p00, p01, p02, p03, p04, p05, p06, p07;
+	public long p00, p01, p02, p03, p04, p05, p06, p07;
 }
 
 class ColdFields<E> extends L0Pad {
-    protected static final int BUFFER_PAD = 16;
-    protected static final int SPARSE_SHIFT = 2;
-    protected final int capacity;
-    protected final long mask;
-    protected final E[] buffer;
+	protected static final int BUFFER_PAD = 16;
+	protected static final int SPARSE_SHIFT = Integer.getInteger("sparse.shift", 2);
+	protected final int capacity;
+	protected final long mask;
+	protected final E[] buffer;
 
-    @SuppressWarnings("unchecked")
-    public ColdFields(int capacity) {
-        if (Pow2.isPowerOf2(capacity)) {
-            this.capacity = capacity;
-        } else {
-            this.capacity = Pow2.findNextPositivePowerOfTwo(capacity);
-        }
-        mask = this.capacity - 1;
-        buffer = (E[]) new Object[(this.capacity << SPARSE_SHIFT) + BUFFER_PAD * 2];
-    }
+	@SuppressWarnings("unchecked")
+	public ColdFields(int capacity) {
+		if (Pow2.isPowerOf2(capacity)) {
+			this.capacity = capacity;
+		} else {
+			this.capacity = Pow2.findNextPositivePowerOfTwo(capacity);
+		}
+		mask = this.capacity - 1;
+		buffer = (E[]) new Object[(this.capacity << SPARSE_SHIFT) + BUFFER_PAD * 2];
+	}
 }
 
 class L1Pad<E> extends ColdFields<E> {
-    public long p10, p11, p12, p13, p14, p15, p16;
+	public long p10, p11, p12, p13, p14, p15, p16;
 
-    public L1Pad(int capacity) {
-        super(capacity);
-    }
+	public L1Pad(int capacity) {
+		super(capacity);
+	}
 }
 
 class TailField<E> extends L1Pad<E> {
-    protected volatile long tail;
+	protected volatile long tail;
 
-    public TailField(int capacity) {
-        super(capacity);
-    }
+	public TailField(int capacity) {
+		super(capacity);
+	}
 }
 
 class L2Pad<E> extends TailField<E> {
-    public long p20, p21, p22, p23, p24, p25, p26;
+	public long p20, p21, p22, p23, p24, p25, p26;
 
-    public L2Pad(int capacity) {
-        super(capacity);
-    }
+	public L2Pad(int capacity) {
+		super(capacity);
+	}
 }
 
 class HeadCache<E> extends L2Pad<E> {
-    protected long headCache;
+	protected long headCache;
 
-    public HeadCache(int capacity) {
-        super(capacity);
-    }
+	public HeadCache(int capacity) {
+		super(capacity);
+	}
 }
 
 class L3Pad<E> extends HeadCache<E> {
-    public long p30, p31, p32, p33, p34, p35, p36;
+	public long p30, p31, p32, p33, p34, p35, p36;
 
-    public L3Pad(int capacity) {
-        super(capacity);
-    }
+	public L3Pad(int capacity) {
+		super(capacity);
+	}
 }
 
 class HeadField<E> extends L3Pad<E> {
-    protected volatile long head;
+	protected volatile long head;
 
-    public HeadField(int capacity) {
-        super(capacity);
-    }
+	public HeadField(int capacity) {
+		super(capacity);
+	}
 }
 
 class L4Pad<E> extends HeadField<E> {
-    public long p40, p41, p42, p43, p44, p45, p46;
+	public long p40, p41, p42, p43, p44, p45, p46;
 
-    public L4Pad(int capacity) {
-        super(capacity);
-    }
+	public L4Pad(int capacity) {
+		super(capacity);
+	}
 }
 
 class TailCache<E> extends L4Pad<E> {
-    protected long tailCache;
+	protected long tailCache;
 
-    public TailCache(int capacity) {
-        super(capacity);
-    }
+	public TailCache(int capacity) {
+		super(capacity);
+	}
 
 }
 
 class L5Pad<E> extends TailCache<E> {
-    public long p50, p51, p52, p53, p54, p55, p56;
+	public long p50, p51, p52, p53, p54, p55, p56;
 
-    public L5Pad(int capacity) {
-        super(capacity);
-    }
+	public L5Pad(int capacity) {
+		super(capacity);
+	}
 }
 
 public final class SPSCQueue6<E> extends L5Pad<E> implements Queue<E> {
-    private final static long TAIL_OFFSET;
-    private final static long HEAD_OFFSET;
-    private static final long ARRAY_BASE;
-    private static final int ELEMENT_SHIFT;
-    static {
-        try {
-            TAIL_OFFSET = UnsafeAccess.UNSAFE.objectFieldOffset(TailField.class.getDeclaredField("tail"));
-            HEAD_OFFSET = UnsafeAccess.UNSAFE.objectFieldOffset(HeadField.class.getDeclaredField("head"));
-            final int scale = UnsafeAccess.UNSAFE.arrayIndexScale(Object[].class);
+	private final static long TAIL_OFFSET;
+	private final static long HEAD_OFFSET;
+	private static final long ARRAY_BASE;
+	private static final int ELEMENT_SHIFT;
+	static {
+		try {
+			TAIL_OFFSET = UnsafeAccess.UNSAFE.objectFieldOffset(TailField.class
+			        .getDeclaredField("tail"));
+			HEAD_OFFSET = UnsafeAccess.UNSAFE.objectFieldOffset(HeadField.class
+			        .getDeclaredField("head"));
+			final int scale = UnsafeAccess.UNSAFE.arrayIndexScale(Object[].class);
 
-            if (4 == scale) {
-                ELEMENT_SHIFT = 2 + SPARSE_SHIFT;
-            } else if (8 == scale) {
-                ELEMENT_SHIFT = 3 + SPARSE_SHIFT;
-            } else {
-                throw new IllegalStateException("Unknown pointer size");
-            }
-            ARRAY_BASE = UnsafeAccess.UNSAFE.arrayBaseOffset(Object[].class)
-                    + (BUFFER_PAD << (ELEMENT_SHIFT - SPARSE_SHIFT));
-        } catch (NoSuchFieldException e) {
-            throw new RuntimeException(e);
-        }
-    }
+			if (4 == scale) {
+				ELEMENT_SHIFT = 2 + SPARSE_SHIFT;
+			} else if (8 == scale) {
+				ELEMENT_SHIFT = 3 + SPARSE_SHIFT;
+			} else {
+				throw new IllegalStateException("Unknown pointer size");
+			}
+			ARRAY_BASE = UnsafeAccess.UNSAFE.arrayBaseOffset(Object[].class)
+			        + (BUFFER_PAD << (ELEMENT_SHIFT - SPARSE_SHIFT));
+		} catch (NoSuchFieldException e) {
+			throw new RuntimeException(e);
+		}
+	}
 
-    public SPSCQueue6(final int capacity) {
-        super(capacity);
-    }
+	public SPSCQueue6(final int capacity) {
+		super(capacity);
+	}
 
-    private void headLazySet(long v) {
-        UnsafeAccess.UNSAFE.putOrderedLong(this, HEAD_OFFSET, v);
-    }
+	private void headLazySet(long v) {
+		UnsafeAccess.UNSAFE.putOrderedLong(this, HEAD_OFFSET, v);
+	}
 
-    private long getHead() {
-        return head;
-    }
+	private long getHead() {
+		return head;
+	}
 
-    private void tailLazySet(long v) {
-        UnsafeAccess.UNSAFE.putOrderedLong(this, TAIL_OFFSET, v);
-    }
+	private void tailLazySet(long v) {
+		UnsafeAccess.UNSAFE.putOrderedLong(this, TAIL_OFFSET, v);
+	}
 
-    private long getTail() {
-        return tail;
-    }
+	private long getTail() {
+		return tail;
+	}
 
-    public boolean add(final E e) {
-        if (offer(e)) {
-            return true;
-        }
-        throw new IllegalStateException("Queue is full");
-    }
+	public boolean add(final E e) {
+		if (offer(e)) {
+			return true;
+		}
+		throw new IllegalStateException("Queue is full");
+	}
 
-    public boolean offer(final E e) {
-        if (null == e) {
-            throw new NullPointerException("Null is not a valid element");
-        }
+	private long elementOffsetInBuffer(long index) {
+		return ARRAY_BASE + ((index & mask) << ELEMENT_SHIFT);
+	}
 
-        final long currentTail = getTail();
-        final long wrapPoint = currentTail - capacity;
-        if (headCache <= wrapPoint) {
-            headCache = getHead();
-            if (headCache <= wrapPoint) {
-                return false;
-            }
-        }
-        UnsafeAccess.UNSAFE.putObject(buffer, ARRAY_BASE + ((currentTail & mask) << ELEMENT_SHIFT), e);
-        tailLazySet(currentTail + 1);
+	public boolean offer(final E e) {
+		if (null == e) {
+			throw new NullPointerException("Null is not a valid element");
+		}
 
-        return true;
-    }
+		final long currentTail = getTail();
+		final long wrapPoint = currentTail - capacity;
+		if (headCache <= wrapPoint) {
+			headCache = getHead();
+			if (headCache <= wrapPoint) {
+				return false;
+			}
+		}
+		UnsafeAccess.UNSAFE.putObject(buffer, elementOffsetInBuffer(currentTail), e);
+		tailLazySet(currentTail + 1);
 
-    public E poll() {
-        final long currentHead = getHead();
-        if (currentHead >= tailCache) {
-            tailCache = getTail();
-            if (currentHead >= tailCache) {
-                return null;
-            }
-        }
+		return true;
+	}
 
-        final long offset = ARRAY_BASE + ((currentHead & mask) << ELEMENT_SHIFT);
-        @SuppressWarnings("unchecked")
-        final E e = (E) UnsafeAccess.UNSAFE.getObject(buffer, offset);
-        UnsafeAccess.UNSAFE.putObject(buffer, offset, null);
+	public E poll() {
+		final long currentHead = getHead();
+		if (currentHead >= tailCache) {
+			tailCache = getTail();
+			if (currentHead >= tailCache) {
+				return null;
+			}
+		}
 
-        headLazySet(currentHead + 1);
+		final long offset = elementOffsetInBuffer(currentHead);
+		@SuppressWarnings("unchecked")
+		final E e = (E) UnsafeAccess.UNSAFE.getObject(buffer, offset);
+		UnsafeAccess.UNSAFE.putObject(buffer, offset, null);
 
-        return e;
-    }
+		headLazySet(currentHead + 1);
 
-    public E remove() {
-        final E e = poll();
-        if (null == e) {
-            throw new NoSuchElementException("Queue is empty");
-        }
+		return e;
+	}
 
-        return e;
-    }
+	public E remove() {
+		final E e = poll();
+		if (null == e) {
+			throw new NoSuchElementException("Queue is empty");
+		}
 
-    public E element() {
-        final E e = peek();
-        if (null == e) {
-            throw new NoSuchElementException("Queue is empty");
-        }
+		return e;
+	}
 
-        return e;
-    }
+	public E element() {
+		final E e = peek();
+		if (null == e) {
+			throw new NoSuchElementException("Queue is empty");
+		}
 
-    public E peek() {
-        long currentHead = getHead();
-        return getElement(currentHead);
-    }
+		return e;
+	}
 
-    @SuppressWarnings("unchecked")
-    private E getElement(long index) {
-        final long offset = ARRAY_BASE + ((index & mask) << ELEMENT_SHIFT);
-        return (E) UnsafeAccess.UNSAFE.getObject(buffer, offset);
-    }
+	public E peek() {
+		long currentHead = getHead();
+		return getElement(currentHead);
+	}
 
-    public int size() {
-        return (int) (getTail() - getHead());
-    }
+	@SuppressWarnings("unchecked")
+	private E getElement(long index) {
+		final long offset = elementOffsetInBuffer(index);
+		return (E) UnsafeAccess.UNSAFE.getObject(buffer, offset);
+	}
 
-    public boolean isEmpty() {
-        return getTail() == getHead();
-    }
+	public int size() {
+		return (int) (getTail() - getHead());
+	}
 
-    public boolean contains(final Object o) {
-        if (null == o) {
-            return false;
-        }
+	public boolean isEmpty() {
+		return getTail() == getHead();
+	}
 
-        for (long i = getHead(), limit = getTail(); i < limit; i++) {
-            final E e = getElement(i);
-            if (o.equals(e)) {
-                return true;
-            }
-        }
+	public boolean contains(final Object o) {
+		if (null == o) {
+			return false;
+		}
 
-        return false;
-    }
+		for (long i = getHead(), limit = getTail(); i < limit; i++) {
+			final E e = getElement(i);
+			if (o.equals(e)) {
+				return true;
+			}
+		}
 
-    public Iterator<E> iterator() {
-        throw new UnsupportedOperationException();
-    }
+		return false;
+	}
 
-    public Object[] toArray() {
-        throw new UnsupportedOperationException();
-    }
+	public Iterator<E> iterator() {
+		throw new UnsupportedOperationException();
+	}
 
-    public <T> T[] toArray(final T[] a) {
-        throw new UnsupportedOperationException();
-    }
+	public Object[] toArray() {
+		throw new UnsupportedOperationException();
+	}
 
-    public boolean remove(final Object o) {
-        throw new UnsupportedOperationException();
-    }
+	public <T> T[] toArray(final T[] a) {
+		throw new UnsupportedOperationException();
+	}
 
-    public boolean containsAll(final Collection<?> c) {
-        for (final Object o : c) {
-            if (!contains(o)) {
-                return false;
-            }
-        }
+	public boolean remove(final Object o) {
+		throw new UnsupportedOperationException();
+	}
 
-        return true;
-    }
+	public boolean containsAll(final Collection<?> c) {
+		for (final Object o : c) {
+			if (!contains(o)) {
+				return false;
+			}
+		}
 
-    public boolean addAll(final Collection<? extends E> c) {
-        for (final E e : c) {
-            add(e);
-        }
+		return true;
+	}
 
-        return true;
-    }
+	public boolean addAll(final Collection<? extends E> c) {
+		for (final E e : c) {
+			add(e);
+		}
 
-    public boolean removeAll(final Collection<?> c) {
-        throw new UnsupportedOperationException();
-    }
+		return true;
+	}
 
-    public boolean retainAll(final Collection<?> c) {
-        throw new UnsupportedOperationException();
-    }
+	public boolean removeAll(final Collection<?> c) {
+		throw new UnsupportedOperationException();
+	}
 
-    public void clear() {
-        Object value;
-        do {
-            value = poll();
-        } while (null != value);
-    }
+	public boolean retainAll(final Collection<?> c) {
+		throw new UnsupportedOperationException();
+	}
+
+	public void clear() {
+		Object value;
+		do {
+			value = poll();
+		} while (null != value);
+	}
 }

@@ -31,6 +31,7 @@ import psy.lob.saw.util.UnsafeAccess;
  * <li>Use Unsafe to read out of array
  * <li>putOrdered into array as Write Memory Barrier
  * <li>getVolatile from array as Read Memory Barrier
+ * <li>ELEMENT_SHIFT is a constant
  * </ul>
  */
 class L0Pad {
@@ -38,8 +39,8 @@ class L0Pad {
     public long p30, p31, p32, p33, p34, p35, p36,p37;
 }
 class ColdFields<E> extends L0Pad {
-    protected static final int BUFFER_PAD = 16;
-    protected static final int SPARSE_SHIFT = 2;
+    protected static final int BUFFER_PAD = 32;
+    protected static final int SPARSE_SHIFT = Integer.getInteger("sparse.shift", 2);
     protected final int capacity;
     protected final long mask;
     protected final E[] buffer;
@@ -121,13 +122,15 @@ public final class FFBufferOrdered3<E> extends L3Pad<E> implements Queue<E> {
         }
         throw new IllegalStateException("Queue is full");
     }
-
+    private long elementOffsetInBuffer(long index) {
+        return ARRAY_BASE + ((index & mask) << ELEMENT_SHIFT);
+    }
     public boolean offer(final E e) {
         if (null == e) {
             throw new NullPointerException("Null is not a valid element");
         }
 
-        final long offset = computeOffsetInBuffer(tail);
+        final long offset = elementOffsetInBuffer(tail);
         if (null != UnsafeAccess.UNSAFE.getObjectVolatile(buffer, offset)) {
             return false;
         }
@@ -139,7 +142,7 @@ public final class FFBufferOrdered3<E> extends L3Pad<E> implements Queue<E> {
     }
 
     public E poll() {
-        final long offset = computeOffsetInBuffer(head);
+        final long offset = elementOffsetInBuffer(head);
         @SuppressWarnings("unchecked")
         final E e = (E) UnsafeAccess.UNSAFE.getObjectVolatile(buffer, offset);
         if (null == e) {
@@ -175,11 +178,9 @@ public final class FFBufferOrdered3<E> extends L3Pad<E> implements Queue<E> {
 
     @SuppressWarnings("unchecked")
     private E getElement(long index) {
-        return (E) UnsafeAccess.UNSAFE.getObject(buffer, computeOffsetInBuffer(index));
+        return (E) UnsafeAccess.UNSAFE.getObject(buffer, elementOffsetInBuffer(index));
     }
-    private long computeOffsetInBuffer(long index) {
-        return ARRAY_BASE + ((index & mask) << ELEMENT_SHIFT);
-    }
+
 
     public int size() {
         return (int) (getTail() - getHead());

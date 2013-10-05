@@ -39,7 +39,7 @@ class L0Pad {
 
 class ColdFields<E> extends L0Pad {
     protected static final int BUFFER_PAD = 32;
-    protected static final int SPARSE_SHIFT = 2;
+    protected static final int SPARSE_SHIFT = Integer.getInteger("sparse.shift", 2);
     protected final int capacity;
     protected final long mask;
     protected final E[] buffer;
@@ -185,6 +185,10 @@ public final class SPSCQueue7<E> extends L5Pad<E> implements Queue<E> {
         }
         throw new IllegalStateException("Queue is full");
     }
+    
+	private long elementOffsetInBuffer(long index) {
+	    return ARRAY_BASE + ((index & mask) << ELEMENT_SHIFT);
+    }
 
     public boolean offer(final E e) {
         if (null == e) {
@@ -199,7 +203,7 @@ public final class SPSCQueue7<E> extends L5Pad<E> implements Queue<E> {
                 return false;
             }
         }
-        UnsafeAccess.UNSAFE.putObject(buffer, ARRAY_BASE + ((currentTail & mask) << ELEMENT_SHIFT), e);
+        UnsafeAccess.UNSAFE.putObject(buffer, elementOffsetInBuffer(currentTail), e);
         tailLazySet(currentTail + 1);
 
         return true;
@@ -214,7 +218,7 @@ public final class SPSCQueue7<E> extends L5Pad<E> implements Queue<E> {
             }
         }
 
-        final long offset = ARRAY_BASE + ((currentHead & mask) << ELEMENT_SHIFT);
+        final long offset = elementOffsetInBuffer(currentHead);
         @SuppressWarnings("unchecked")
         final E e = (E) UnsafeAccess.UNSAFE.getObject(buffer, offset);
         UnsafeAccess.UNSAFE.putObject(buffer, offset, null);
@@ -249,7 +253,7 @@ public final class SPSCQueue7<E> extends L5Pad<E> implements Queue<E> {
 
     @SuppressWarnings("unchecked")
     private E getElement(long index) {
-        final long offset = ARRAY_BASE + ((index & mask) << ELEMENT_SHIFT);
+        final long offset = elementOffsetInBuffer(index);
         return (E) UnsafeAccess.UNSAFE.getObject(buffer, offset);
     }
 

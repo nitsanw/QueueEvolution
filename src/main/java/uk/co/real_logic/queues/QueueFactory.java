@@ -12,6 +12,7 @@ import psy.lob.saw.ff1.FFBufferOrdered1;
 import psy.lob.saw.ff2.FFBufferOrdered2;
 import psy.lob.saw.ff3.FFBufferOrdered3;
 import psy.lob.saw.ff31.FFBufferOrdered31;
+import psy.lob.saw.ff32.FFBufferOrdered32;
 import psy.lob.saw.queues.offheap.P1C1OffHeapQueue;
 import psy.lob.saw.queues.offheap.P1C1Queue4CacheLinesHeapBuffer;
 import psy.lob.saw.queues.offheap.P1C1Queue4CacheLinesHeapBufferUnsafe;
@@ -26,6 +27,7 @@ import psy.lob.saw.queues.spsc6.SPSCQueue6;
 import psy.lob.saw.queues.spsc7.SPSCQueue7;
 import psy.lob.saw.queues.spsc8.SPSCQueue8;
 import psy.lob.saw.queues.spsc81.SPSCQueue81;
+import psy.lob.saw.queues.spsc82.SPSCQueue82;
 
 public final class QueueFactory {
 
@@ -74,8 +76,10 @@ public final class QueueFactory {
             return new SPSCQueue7<Integer>(qCapacity);
         case 48:
             return new SPSCQueue8<Integer>(qCapacity);
-        case 49:
-            return new SPSCQueue81<Integer>(qCapacity, 2);
+        case 481:
+            return new SPSCQueue81<Integer>(qCapacity, Integer.getInteger("sparse.shift", 2));
+        case 482:
+            return new SPSCQueue82<Integer>(qCapacity);
         case 5:
             return new P1C1Queue4CacheLinesHeapBuffer<Integer>(qCapacity);
         case 6:
@@ -85,23 +89,23 @@ public final class QueueFactory {
         case 8:
             return new P1C1QueueOriginalPrimitive(qCapacity);
         case 9:
-            return new FFBuffer<Integer>(qScale,2);
+            return new FFBuffer<Integer>(qScale,Integer.getInteger("sparse.shift", 2));
         case 91:
-            return new FFBufferOrderedCounterWrite<Integer>(qScale,2);
+            return new FFBufferOrderedCounterWrite<Integer>(qScale,Integer.getInteger("sparse.shift", 2));
         case 92:
-            return new FFBufferOrderedArrayWrite<Integer>(qScale,2);
+            return new FFBufferOrderedArrayWrite<Integer>(qScale,Integer.getInteger("sparse.shift", 2));
         case 93:
-            return new FFBufferOrderedArrayReadWrite<Integer>(qScale,2);
+            return new FFBufferOrderedArrayReadWrite<Integer>(qScale,Integer.getInteger("sparse.shift", 2));
         case 94:
-            return new FFBufferOrderedArrayReadWrite<Integer>(qScale,0);
-        case 95:
             return new FFBufferOrdered1<Integer>(qCapacity);
-        case 96:
+        case 95:
             return new FFBufferOrdered2<Integer>(qCapacity);
-        case 97:
+        case 96:
             return new FFBufferOrdered3<Integer>(qCapacity);
-        case 98:
-            return new FFBufferOrdered31<Integer>(qCapacity,2);   
+        case 961:
+            return new FFBufferOrdered31<Integer>(qCapacity,Integer.getInteger("sparse.shift", 2));   
+        case 962:
+            return new FFBufferOrdered32<Integer>(qCapacity);   
         default:
             throw new IllegalArgumentException("Invalid option: " + qId);
         }

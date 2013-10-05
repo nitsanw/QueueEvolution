@@ -11,7 +11,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package psy.lob.saw.queues.spsc81;
+package psy.lob.saw.queues.spsc82;
 
 import java.util.Collection;
 import java.util.Iterator;
@@ -37,47 +37,32 @@ class L0Pad {
 	public long p00, p01, p02, p03, p04, p05, p06, p07;
 	public long p10, p11, p12, p13, p14, p15, p16, p17;
 }
-class ColdFields<E> extends L0Pad {
-    protected static final int BUFFER_PAD = 32;
-    protected static final int ELEMENT_SHIFT;
-    static {
-        final int scale = UnsafeAccess.UNSAFE.arrayIndexScale(Object[].class);
-        if (4 == scale) {
-            ELEMENT_SHIFT = 2;
-        } else if (8 == scale) {
-            ELEMENT_SHIFT = 3;
-        } else {
-            throw new IllegalStateException("Unknown pointer size");
-        }
-    }
 
+class ColdFields<E> extends L0Pad {
+	protected static final int BUFFER_PAD = 32;
+	protected static final int SPARSE_SHIFT = Integer.getInteger("sparse.shift", 2);
 	protected final int capacity;
-	protected final int offsetShift;
-	protected final long mask;
+	protected final int mask;
 	protected final E[] buffer;
 
 	@SuppressWarnings("unchecked")
-	public ColdFields(final int capacity, final int sparseShift) {
+	public ColdFields(int capacity) {
 		if (Pow2.isPowerOf2(capacity)) {
 			this.capacity = capacity;
 		} else {
 			this.capacity = Pow2.findNextPositivePowerOfTwo(capacity);
 		}
 		mask = this.capacity - 1;
-		// offset by element + sparse data
-		offsetShift = ELEMENT_SHIFT + sparseShift;
-		// allocate with padding on either side
-		buffer = (E[]) new Object[(this.capacity << sparseShift) + BUFFER_PAD
-				* 2];
+		buffer = (E[]) new Object[(this.capacity << SPARSE_SHIFT) + BUFFER_PAD * 2];
 	}
 }
 
 class L1Pad<E> extends ColdFields<E> {
 	public long p00, p01, p02, p03, p04, p05, p06, p07;
-	public long p10, p11, p12, p13, p14, p15, p16, p17;
+	public long p10, p11, p12, p13, p14, p15, p16;
 
-	public L1Pad(final int capacity, final int sparseShift) {
-		super(capacity, sparseShift);
+	public L1Pad(int capacity) {
+		super(capacity);
 	}
 }
 
@@ -85,8 +70,8 @@ class OfferFields<E> extends L1Pad<E> {
 	protected volatile long tail;
 	protected long headCache;
 
-	public OfferFields(final int capacity, final int sparseShift) {
-		super(capacity, sparseShift);
+	public OfferFields(int capacity) {
+		super(capacity);
 	}
 }
 
@@ -94,8 +79,8 @@ class L2Pad<E> extends OfferFields<E> {
 	public long p00, p01, p02, p03, p04, p05, p06, p07;
 	public long p30, p31, p32, p33, p34, p35, p36;
 
-	public L2Pad(final int capacity, final int sparseShift) {
-		super(capacity, sparseShift);
+	public L2Pad(int capacity) {
+		super(capacity);
 	}
 }
 
@@ -103,8 +88,8 @@ class PollFields<E> extends L2Pad<E> {
 	protected volatile long head;
 	protected long tailCache;
 
-	public PollFields(final int capacity, final int sparseShift) {
-		super(capacity, sparseShift);
+	public PollFields(int capacity) {
+		super(capacity);
 	}
 }
 
@@ -112,28 +97,27 @@ class L3Pad<E> extends PollFields<E> {
 	public long p00, p01, p02, p03, p04, p05, p06, p07;
 	public long p50, p51, p52, p53, p54, p55, p56;
 
-	public L3Pad(final int capacity, final int sparseShift) {
-		super(capacity, sparseShift);
+	public L3Pad(int capacity) {
+		super(capacity);
 	}
 }
 
-public final class SPSCQueue81<E> extends L3Pad<E> implements Queue<E> {
-    private final static long TAIL_OFFSET;
-    private final static long HEAD_OFFSET;
-    private static final long ARRAY_BASE;
-    static {
-        try {
-            TAIL_OFFSET = UnsafeAccess.UNSAFE.objectFieldOffset(OfferFields.class.getDeclaredField("tail"));
-            HEAD_OFFSET = UnsafeAccess.UNSAFE.objectFieldOffset(PollFields.class.getDeclaredField("head"));
+public final class SPSCQueue82<E> extends L3Pad<E> implements Queue<E> {
+	private final static long TAIL_OFFSET;
+	private final static long HEAD_OFFSET;
+	static {
+		try {
+			TAIL_OFFSET = UnsafeAccess.UNSAFE.objectFieldOffset(OfferFields.class
+			        .getDeclaredField("tail"));
+			HEAD_OFFSET = UnsafeAccess.UNSAFE.objectFieldOffset(PollFields.class
+			        .getDeclaredField("head"));
+		} catch (NoSuchFieldException e) {
+			throw new RuntimeException(e);
+		}
+	}
 
-            ARRAY_BASE = UnsafeAccess.UNSAFE.arrayBaseOffset(Object[].class)
-                    + (BUFFER_PAD << ELEMENT_SHIFT);
-        } catch (NoSuchFieldException e) {
-            throw new RuntimeException(e);
-        }
-    }
-	public SPSCQueue81(final int capacity, final int sparseShift) {
-		super(capacity, sparseShift);
+	public SPSCQueue82(final int capacity) {
+		super(capacity);
 	}
 
 	private void headLazySet(long v) {
@@ -158,11 +142,11 @@ public final class SPSCQueue81<E> extends L3Pad<E> implements Queue<E> {
 		}
 		throw new IllegalStateException("Queue is full");
 	}
-	
-	private long elementOffsetInBuffer(long index) {
-		return ARRAY_BASE + ((index & mask) << offsetShift);
+
+	private int elementOffsetInBuffer(int index) {
+		return BUFFER_PAD + ((index & mask) << SPARSE_SHIFT);
 	}
-	
+
 	public boolean offer(final E e) {
 		if (null == e) {
 			throw new NullPointerException("Null is not a valid element");
@@ -176,7 +160,7 @@ public final class SPSCQueue81<E> extends L3Pad<E> implements Queue<E> {
 				return false;
 			}
 		}
-		UnsafeAccess.UNSAFE.putObject(buffer, elementOffsetInBuffer(currentTail), e);
+		buffer[elementOffsetInBuffer((int) currentTail)] = e;
 		tailLazySet(currentTail + 1);
 
 		return true;
@@ -191,10 +175,9 @@ public final class SPSCQueue81<E> extends L3Pad<E> implements Queue<E> {
 			}
 		}
 
-		final long offset = elementOffsetInBuffer(currentHead);
-		@SuppressWarnings("unchecked")
-		final E e = (E) UnsafeAccess.UNSAFE.getObject(buffer, offset);
-		UnsafeAccess.UNSAFE.putObject(buffer, offset, null);
+		final int offset = elementOffsetInBuffer((int) currentHead);
+		final E e = buffer[offset];
+		buffer[offset] = null;
 
 		headLazySet(currentHead + 1);
 
@@ -221,13 +204,12 @@ public final class SPSCQueue81<E> extends L3Pad<E> implements Queue<E> {
 
 	public E peek() {
 		long currentHead = getHead();
-		return getElement(currentHead);
+		return getElement((int) currentHead);
 	}
 
-	@SuppressWarnings("unchecked")
-	private E getElement(long index) {
-		final long offset = elementOffsetInBuffer(index);
-		return (E) UnsafeAccess.UNSAFE.getObject(buffer, offset);
+	private E getElement(int index) {
+		final int offset = elementOffsetInBuffer(index);
+		return buffer[offset];
 	}
 
 	public int size() {
@@ -244,7 +226,7 @@ public final class SPSCQueue81<E> extends L3Pad<E> implements Queue<E> {
 		}
 
 		for (long i = getHead(), limit = getTail(); i < limit; i++) {
-			final E e = getElement(i);
+			final E e = getElement((int) i);
 			if (o.equals(e)) {
 				return true;
 			}

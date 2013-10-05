@@ -11,7 +11,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package psy.lob.saw.queues.spsc5;
+package psy.lob.saw.ff32;
 
 import java.util.Collection;
 import java.util.Iterator;
@@ -27,7 +27,9 @@ import psy.lob.saw.util.UnsafeAccess;
  * <li>Counters are padded
  * <li>Data is padded
  * <li>Class is pre-padded
- * <li>Use Unsafe for array access
+ * <li>Use Unsafe to read out of array
+ * <li>putOrdered into array as Write Memory Barrier
+ * <li>getVolatile from array as Read Memory Barrier
  * </ul>
  */
 class L0Pad {
@@ -36,6 +38,7 @@ class L0Pad {
 
 class ColdFields<E> extends L0Pad {
 	protected static final int BUFFER_PAD = 16;
+	protected static final int SPARSE_SHIFT = Integer.getInteger("sparse.shift", 2);
 	protected final int capacity;
 	protected final long mask;
 	protected final E[] buffer;
@@ -48,7 +51,8 @@ class ColdFields<E> extends L0Pad {
 			this.capacity = Pow2.findNextPositivePowerOfTwo(capacity);
 		}
 		mask = this.capacity - 1;
-		buffer = (E[]) new Object[this.capacity + BUFFER_PAD * 2];
+		// pad data on either end with some empty slots.
+		buffer = (E[]) new Object[(this.capacity << SPARSE_SHIFT) + BUFFER_PAD * 2];
 	}
 }
 
@@ -61,7 +65,7 @@ class L1Pad<E> extends ColdFields<E> {
 }
 
 class TailField<E> extends L1Pad<E> {
-	protected volatile long tail;
+	protected long tail;
 
 	public TailField(int capacity) {
 		super(capacity);
@@ -76,56 +80,23 @@ class L2Pad<E> extends TailField<E> {
 	}
 }
 
-class HeadCache<E> extends L2Pad<E> {
-	protected long headCache;
-
-	public HeadCache(int capacity) {
-		super(capacity);
-	}
-}
-
-class L3Pad<E> extends HeadCache<E> {
-	public long p30, p31, p32, p33, p34, p35, p36;
-
-	public L3Pad(int capacity) {
-		super(capacity);
-	}
-}
-
-class HeadField<E> extends L3Pad<E> {
-	protected volatile long head;
+class HeadField<E> extends L2Pad<E> {
+	protected long head;
 
 	public HeadField(int capacity) {
 		super(capacity);
 	}
 }
 
-class L4Pad<E> extends HeadField<E> {
+class L3Pad<E> extends HeadField<E> {
 	public long p40, p41, p42, p43, p44, p45, p46;
 
-	public L4Pad(int capacity) {
+	public L3Pad(int capacity) {
 		super(capacity);
 	}
 }
 
-class TailCache<E> extends L4Pad<E> {
-	protected long tailCache;
-
-	public TailCache(int capacity) {
-		super(capacity);
-	}
-
-}
-
-class L5Pad<E> extends TailCache<E> {
-	public long p50, p51, p52, p53, p54, p55, p56;
-
-	public L5Pad(int capacity) {
-		super(capacity);
-	}
-}
-
-public final class SPSCQueue5<E> extends L5Pad<E> implements Queue<E> {
+public final class FFBufferOrdered32<E> extends L3Pad<E> implements Queue<E> {
 	private final static long TAIL_OFFSET;
 	private final static long HEAD_OFFSET;
 	private static final long ARRAY_BASE;
@@ -137,39 +108,31 @@ public final class SPSCQueue5<E> extends L5Pad<E> implements Queue<E> {
 			HEAD_OFFSET = UnsafeAccess.UNSAFE.objectFieldOffset(HeadField.class
 			        .getDeclaredField("head"));
 			final int scale = UnsafeAccess.UNSAFE.arrayIndexScale(Object[].class);
-
 			if (4 == scale) {
-				ELEMENT_SHIFT = 2;
+				ELEMENT_SHIFT = 2 + SPARSE_SHIFT;
 			} else if (8 == scale) {
-				ELEMENT_SHIFT = 3;
+				ELEMENT_SHIFT = 3 + SPARSE_SHIFT;
 			} else {
 				throw new IllegalStateException("Unknown pointer size");
 			}
+			// Including the buffer pad in the array base offset
 			ARRAY_BASE = UnsafeAccess.UNSAFE.arrayBaseOffset(Object[].class)
-			        + (BUFFER_PAD << ELEMENT_SHIFT);
+			        + (BUFFER_PAD << (ELEMENT_SHIFT - SPARSE_SHIFT));
 		} catch (NoSuchFieldException e) {
 			throw new RuntimeException(e);
 		}
 	}
 
-	public SPSCQueue5(final int capacity) {
+	public FFBufferOrdered32(final int capacity) {
 		super(capacity);
 	}
 
-	private void headLazySet(long v) {
-		UnsafeAccess.UNSAFE.putOrderedLong(this, HEAD_OFFSET, v);
-	}
-
 	private long getHead() {
-		return head;
-	}
-
-	private void tailLazySet(long v) {
-		UnsafeAccess.UNSAFE.putOrderedLong(this, TAIL_OFFSET, v);
+		return UnsafeAccess.UNSAFE.getLongVolatile(this, HEAD_OFFSET);
 	}
 
 	private long getTail() {
-		return tail;
+		return UnsafeAccess.UNSAFE.getLongVolatile(this, TAIL_OFFSET);
 	}
 
 	public boolean add(final E e) {
@@ -179,45 +142,31 @@ public final class SPSCQueue5<E> extends L5Pad<E> implements Queue<E> {
 		throw new IllegalStateException("Queue is full");
 	}
 
-	private long elementOffsetInBuffer(long index) {
-		return ARRAY_BASE + ((index & mask) << ELEMENT_SHIFT);
-	}
-
 	public boolean offer(final E e) {
 		if (null == e) {
 			throw new NullPointerException("Null is not a valid element");
 		}
 
-		final long currentTail = getTail();
-		final long wrapPoint = currentTail - capacity;
-		if (headCache <= wrapPoint) {
-			headCache = getHead();
-			if (headCache <= wrapPoint) {
-				return false;
-			}
+		final long offset = computeOffsetInBuffer(tail);
+		if (null != UnsafeAccess.UNSAFE.getObjectVolatile(buffer, offset)) {
+			return false;
 		}
-		UnsafeAccess.UNSAFE.putObject(buffer, elementOffsetInBuffer(currentTail), e);
-		tailLazySet(currentTail + 1);
-
+		// STORE/STORE barrier, anything that happens before is visible
+		// when the value in the buffer is visible
+		UnsafeAccess.UNSAFE.putOrderedObject(buffer, offset, e);
+		tail++;
 		return true;
 	}
 
 	public E poll() {
-		final long currentHead = getHead();
-		if (currentHead >= tailCache) {
-			tailCache = getTail();
-			if (currentHead >= tailCache) {
-				return null;
-			}
-		}
-
-		final long offset = elementOffsetInBuffer(currentHead);
+		final long offset = computeOffsetInBuffer(head);
 		@SuppressWarnings("unchecked")
-		final E e = (E) UnsafeAccess.UNSAFE.getObject(buffer, offset);
-		UnsafeAccess.UNSAFE.putObject(buffer, offset, null);
-
-		headLazySet(currentHead + 1);
-
+		final E e = (E) UnsafeAccess.UNSAFE.getObjectVolatile(buffer, offset);
+		if (null == e) {
+			return null;
+		}
+		UnsafeAccess.UNSAFE.putOrderedObject(buffer, offset, null);
+		head++;
 		return e;
 	}
 
@@ -246,8 +195,11 @@ public final class SPSCQueue5<E> extends L5Pad<E> implements Queue<E> {
 
 	@SuppressWarnings("unchecked")
 	private E getElement(long index) {
-		final long offset = elementOffsetInBuffer(index);
-		return (E) UnsafeAccess.UNSAFE.getObject(buffer, offset);
+		return (E) UnsafeAccess.UNSAFE.getObject(buffer, computeOffsetInBuffer(index));
+	}
+
+	private long computeOffsetInBuffer(long index) {
+		return ARRAY_BASE + ((index & mask) << ELEMENT_SHIFT);
 	}
 
 	public int size() {
