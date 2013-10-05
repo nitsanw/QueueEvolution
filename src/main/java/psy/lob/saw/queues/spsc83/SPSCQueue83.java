@@ -11,7 +11,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package psy.lob.saw.queues.spsc6;
+package psy.lob.saw.queues.spsc83;
 
 import java.util.Collection;
 import java.util.Iterator;
@@ -27,8 +27,9 @@ import psy.lob.saw.util.UnsafeAccess;
  * <li>Counters are padded
  * <li>Data is padded
  * <li>Class is pre-padded
- * <li>Use Unsafe to access array
  * <li>Data is sparse
+ * <li>Use Unsafe to access array
+ * <li>head/tail and tailCache/headCache on same line
  * </ul>
  */
 class L0Pad {
@@ -62,80 +63,49 @@ class L1Pad<E> extends ColdFields<E> {
 	}
 }
 
-class TailField<E> extends L1Pad<E> {
+class OfferFields<E> extends L1Pad<E> {
 	protected volatile long tail;
+	protected long headCache;
 
-	public TailField(int capacity) {
+	public OfferFields(int capacity) {
 		super(capacity);
 	}
 }
 
-class L2Pad<E> extends TailField<E> {
-	public long p20, p21, p22, p23, p24, p25, p26;
+class L2Pad<E> extends OfferFields<E> {
+	public long p30, p31, p32, p33, p34, p35, p36;
 
 	public L2Pad(int capacity) {
 		super(capacity);
 	}
 }
 
-class HeadCache<E> extends L2Pad<E> {
-	protected long headCache;
+class PollFields<E> extends L2Pad<E> {
+	protected volatile long head;
+	protected long tailCache;
 
-	public HeadCache(int capacity) {
+	public PollFields(int capacity) {
 		super(capacity);
 	}
 }
 
-class L3Pad<E> extends HeadCache<E> {
-	public long p30, p31, p32, p33, p34, p35, p36;
+class L3Pad<E> extends PollFields<E> {
+	public long p50, p51, p52, p53, p54, p55, p56;
 
 	public L3Pad(int capacity) {
 		super(capacity);
 	}
 }
 
-class HeadField<E> extends L3Pad<E> {
-	protected volatile long head;
-
-	public HeadField(int capacity) {
-		super(capacity);
-	}
-}
-
-class L4Pad<E> extends HeadField<E> {
-	public long p40, p41, p42, p43, p44, p45, p46;
-
-	public L4Pad(int capacity) {
-		super(capacity);
-	}
-}
-
-class TailCache<E> extends L4Pad<E> {
-	protected long tailCache;
-
-	public TailCache(int capacity) {
-		super(capacity);
-	}
-
-}
-
-class L5Pad<E> extends TailCache<E> {
-	public long p50, p51, p52, p53, p54, p55, p56;
-
-	public L5Pad(int capacity) {
-		super(capacity);
-	}
-}
-
-public final class SPSCQueue6<E> extends L5Pad<E> implements Queue<E> {
+public final class SPSCQueue83<E> extends L3Pad<E> implements Queue<E> {
 	private final static long TAIL_OFFSET;
 	private final static long HEAD_OFFSET;
 	private static final long ARRAY_BASE;
 	private static final int ELEMENT_SHIFT;
 	static {
 		try {
-            TAIL_OFFSET = UnsafeAccess.UNSAFE.objectFieldOffset(TailField.class.getDeclaredField("tail"));
-            HEAD_OFFSET = UnsafeAccess.UNSAFE.objectFieldOffset(HeadField.class.getDeclaredField("head"));
+            TAIL_OFFSET = UnsafeAccess.UNSAFE.objectFieldOffset(OfferFields.class.getDeclaredField("tail"));
+            HEAD_OFFSET = UnsafeAccess.UNSAFE.objectFieldOffset(PollFields.class.getDeclaredField("head"));
             final int scale = UnsafeAccess.UNSAFE.arrayIndexScale(Object[].class);
 
             if (4 == scale) {
@@ -152,7 +122,7 @@ public final class SPSCQueue6<E> extends L5Pad<E> implements Queue<E> {
         }
 	}
 
-	public SPSCQueue6(final int capacity) {
+	public SPSCQueue83(final int capacity) {
 		super(capacity);
 	}
 

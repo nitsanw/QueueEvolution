@@ -28,6 +28,7 @@ import psy.lob.saw.queues.spsc7.SPSCQueue7;
 import psy.lob.saw.queues.spsc8.SPSCQueue8;
 import psy.lob.saw.queues.spsc81.SPSCQueue81;
 import psy.lob.saw.queues.spsc82.SPSCQueue82;
+import psy.lob.saw.queues.spsc83.SPSCQueue83;
 
 public final class QueueFactory {
 
@@ -80,6 +81,8 @@ public final class QueueFactory {
             return new SPSCQueue81<Integer>(qCapacity, Integer.getInteger("sparse.shift", 2));
         case 482:
             return new SPSCQueue82<Integer>(qCapacity);
+        case 483:
+            return new SPSCQueue83<Integer>(qCapacity);
         case 5:
             return new P1C1Queue4CacheLinesHeapBuffer<Integer>(qCapacity);
         case 6:

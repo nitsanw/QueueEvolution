@@ -28,7 +28,6 @@ import psy.lob.saw.util.UnsafeAccess;
  * <li>Data is padded
  * <li>Class is pre-padded
  * <li>Data is sparse
- * <li>Use Unsafe to access array
  * <li>Double padding!
  * <li>head/tail and tailCache/headCache on same line
  * </ul>
@@ -107,10 +106,8 @@ public final class SPSCQueue82<E> extends L3Pad<E> implements Queue<E> {
 	private final static long HEAD_OFFSET;
 	static {
 		try {
-			TAIL_OFFSET = UnsafeAccess.UNSAFE.objectFieldOffset(OfferFields.class
-			        .getDeclaredField("tail"));
-			HEAD_OFFSET = UnsafeAccess.UNSAFE.objectFieldOffset(PollFields.class
-			        .getDeclaredField("head"));
+			TAIL_OFFSET = UnsafeAccess.UNSAFE.objectFieldOffset(OfferFields.class.getDeclaredField("tail"));
+			HEAD_OFFSET = UnsafeAccess.UNSAFE.objectFieldOffset(PollFields.class.getDeclaredField("head"));
 		} catch (NoSuchFieldException e) {
 			throw new RuntimeException(e);
 		}
