@@ -26,7 +26,7 @@ public class QueuePerfTest {
 
 	public static void main(final String[] args) throws Exception {
 		System.out.println("capacity:" + QUEUE_CAPACITY + " reps:" + REPETITIONS);
-		final Queue<Integer> queue = QueueFactory.createQueue(Integer.parseInt(args[0]), Integer.getInteger("scale", 15));
+		final Queue<Integer> queue = SPSCQueueFactory.createQueue(Integer.parseInt(args[0]), Integer.getInteger("scale", 15));
 
 		final long[] results = new long[20];
 		for (int i = 0; i < 20; i++) {

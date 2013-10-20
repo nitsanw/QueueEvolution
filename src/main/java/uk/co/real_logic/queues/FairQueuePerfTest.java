@@ -1,6 +1,4 @@
 /*
- * Copyright 2012 Real Logic Ltd.
- *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -43,7 +41,7 @@ public class FairQueuePerfTest {
 
     public static void main(final String[] args) throws Exception {
         System.out.println("type:" + MAIN_TYPE + " trigger:"+(PRODUCER_TRIGGERS?"P":"C")+" capacity:" + QUEUE_CAPACITY + " reps:" + REPETITIONS);
-        final Queue<Integer> queue = QueueFactory.createQueue(Integer.parseInt(args[0]), Integer.getInteger("scale", 15));
+        final Queue<Integer> queue = SPSCQueueFactory.createQueue(Integer.parseInt(args[0]), Integer.getInteger("scale", 15));
 
         final long[] results = new long[20];
         for (int i = 0; i < 20; i++) {

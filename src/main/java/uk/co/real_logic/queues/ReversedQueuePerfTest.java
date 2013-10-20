@@ -1,6 +1,4 @@
 /*
- * Copyright 2012 Real Logic Ltd.
- *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -16,18 +14,6 @@
 package uk.co.real_logic.queues;
 
 import java.util.Queue;
-import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.CountDownLatch;
-
-import psy.lob.saw.queues.offheap.P1C1OffHeapQueue;
-import psy.lob.saw.queues.offheap.P1C1Queue4CacheLinesHeapBuffer;
-import psy.lob.saw.queues.offheap.P1C1Queue4CacheLinesHeapBufferUnsafe;
-import psy.lob.saw.queues.spsc.fc.SPSPQueueFloatingCounters4;
-import psy.lob.saw.queues.spsc1.SPSCQueue1;
-import psy.lob.saw.queues.spsc2.SPSCQueue2;
-import psy.lob.saw.queues.spsc3.SPSCQueue3;
-import psy.lob.saw.queues.spsc4.SPSCQueue4;
-import psy.lob.saw.queues.spsc5.SPSCQueue5;
 
 public class ReversedQueuePerfTest {
 	// 15 == 32 * 1024
@@ -37,7 +23,7 @@ public class ReversedQueuePerfTest {
 
 	public static void main(final String[] args) throws Exception {
 		System.out.println("capacity:" + QUEUE_CAPACITY + " reps:" + REPETITIONS);
-		final Queue<Integer> queue = QueueFactory.createQueue(Integer.parseInt(args[0]), Integer.getInteger("scale", 15));
+		final Queue<Integer> queue = SPSCQueueFactory.createQueue(Integer.parseInt(args[0]), Integer.getInteger("scale", 15));
 
 		final long[] results = new long[20];
 		for (int i = 0; i < 20; i++) {

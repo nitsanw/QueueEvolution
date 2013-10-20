@@ -28,7 +28,7 @@ public class UnsafeDirectByteBuffer {
 	 * @param b
 	 */
 	public static void putByte(long address, int position, byte b) {
-		UnsafeAccess.UNSAFE.putByte(address + (position << 0), b);
+		UnsafeAccess.UNSAFE.putByte(address + position, b);
 	}
 
 	public static void putByte(long address, byte b) {
@@ -47,7 +47,8 @@ public class UnsafeDirectByteBuffer {
 	        ByteBuffer buffy) {
 		long address = getAddress(buffy);
 		if ((address & (align - 1)) == 0) {
-			return buffy;
+			buffy.limit(capacity);
+			return buffy.slice();
 		} else {
 			int newPosition = (int) (align - (address & (align - 1)));
 			if (newPosition + capacity > buffy.capacity()) {

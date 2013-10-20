@@ -30,7 +30,7 @@ import psy.lob.saw.queues.spsc81.SPSCQueue81;
 import psy.lob.saw.queues.spsc82.SPSCQueue82;
 import psy.lob.saw.queues.spsc83.SPSCQueue83;
 
-public final class QueueFactory {
+public final class SPSCQueueFactory {
 
     public static Queue<Integer> createQueue(int qId, int qScale) {
         int qCapacity = 1 << qScale;
