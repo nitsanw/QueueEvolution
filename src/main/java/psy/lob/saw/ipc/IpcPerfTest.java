@@ -16,7 +16,7 @@ import psy.lob.saw.util.UnsafeDirectByteBuffer;
 
 
 /**
- * @author Nitsan
+ * @author nitsanw
  *
  */
 public class IpcPerfTest {
@@ -41,7 +41,7 @@ public class IpcPerfTest {
 		} else {
 			ipcBuffer = waitForFileCreateMappedBuffer();
 		}
-		final Queue<Integer> queue = new P1C1OffHeapQueue(
+		final P1C1OffHeapQueue queue = new P1C1OffHeapQueue(
 		        ipcBuffer, QUEUE_CAPACITY, type);
 		for (int i = 0; i < 20; i++) {
 			System.gc();
@@ -61,8 +61,9 @@ public class IpcPerfTest {
 			ipcFile.delete();
 		}
 		ipcFile.deleteOnExit();
-		FileChannel channel = new RandomAccessFile(ipcFile, "rw").getChannel();
-		int minimumBuffSize = QUEUE_CAPACITY * 4 + 64 * 6;
+		@SuppressWarnings("resource")
+        FileChannel channel = new RandomAccessFile(ipcFile, "rw").getChannel();
+		int minimumBuffSize = minBufferSize();
 		if (channel.size() < minimumBuffSize) {
 			ByteBuffer temp = ByteBuffer.allocateDirect(64 * 1024);
 			while (channel.size() < minimumBuffSize) {
@@ -78,6 +79,11 @@ public class IpcPerfTest {
 		return ipcBuffer;
 	}
 
+	private static int minBufferSize() {
+	    return P1C1OffHeapQueue.getRequiredBufferSize(QUEUE_CAPACITY) + 
+	    		UnsafeDirectByteBuffer.CACHE_LINE_SIZE * 2;
+    }
+
 	private static MappedByteBuffer waitForFileCreateMappedBuffer()
 	        throws InterruptedException, FileNotFoundException, IOException {
 		File ipcFile = new File("queue.ipc");
@@ -85,8 +91,9 @@ public class IpcPerfTest {
 			Thread.sleep(1000);
 		}
 
-		FileChannel channel = new RandomAccessFile(ipcFile, "rw").getChannel();
-		int minimumBuffSize = QUEUE_CAPACITY * 4 + 64 * 6;
+		@SuppressWarnings("resource")
+        FileChannel channel = new RandomAccessFile(ipcFile, "rw").getChannel();
+		int minimumBuffSize = minBufferSize();
 		while (channel.size() < minimumBuffSize) {
 			Thread.sleep(1000);
 		}
@@ -105,7 +112,7 @@ public class IpcPerfTest {
 		int i = REPETITIONS;
 		do {
 			while (!queue.offer(TEST_VALUE)) {
-//				Thread.yield();
+				Thread.yield();
 			}
 		} while (0 != --i);
 		while(!UnsafeAccess.UNSAFE.compareAndSwapInt(null, syncAddress, 3*runNumber+1, 3*runNumber+2))
@@ -126,7 +133,10 @@ public class IpcPerfTest {
 		int i = REPETITIONS;
 		do {
 			while (null == (result = queue.poll())) {
-//				Thread.yield();
+				Thread.yield();
+			}
+			if(result == 0){
+				System.err.println(result);
 			}
 		} while (0 != --i);
 		while(!UnsafeAccess.UNSAFE.compareAndSwapInt(null, syncAddress, 3*runNumber, 3*runNumber+1))

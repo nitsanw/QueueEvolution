@@ -29,7 +29,8 @@ import psy.lob.saw.util.UnsafeDirectByteBuffer;
 public final class P1C1OffHeapQueue implements Queue<Integer> {
 	public final static byte PRODUCER = 1;
 	public final static byte CONSUMER = 2;
-	// 24b,8b,32b | 24b,8b,32b | 24b,8b,32b | 24b,8b,32b
+	public static final int INT_ELEMENT_SCALE = 2 + Integer.getInteger("sparse.shift", 3);
+	// 24b,8b,8b,24b | pad | 24b,8b,8b,24b | pad
 	private final ByteBuffer buffy;
 	private final long headAddress;
 	private final long tailCacheAddress;
@@ -39,13 +40,16 @@ public final class P1C1OffHeapQueue implements Queue<Integer> {
 	private final int capacity;
 	private final int mask;
 	private final long arrayBase;
-	private static final int INT_ELEMENT_SCALE = 2;
 
 	public P1C1OffHeapQueue(final int capacity) {
 		this(allocateAlignedByteBuffer(
-		        4 * CACHE_LINE_SIZE + (findNextPositivePowerOfTwo(capacity)<<INT_ELEMENT_SCALE), CACHE_LINE_SIZE),
+		        getRequiredBufferSize(capacity),
+		        CACHE_LINE_SIZE),
 		        findNextPositivePowerOfTwo(capacity),(byte)(PRODUCER | CONSUMER));
 	}
+	public static int getRequiredBufferSize(final int capacity) {
+	    return 4 * CACHE_LINE_SIZE + (findNextPositivePowerOfTwo(capacity) << INT_ELEMENT_SCALE);
+    }
 	/**
 	 * This is to be used for an IPC queue with the direct buffer used being a memory
 	 * mapped file.
@@ -57,15 +61,15 @@ public final class P1C1OffHeapQueue implements Queue<Integer> {
 	public P1C1OffHeapQueue(final ByteBuffer buff, 
 			final int capacity, byte viewMask) {
 		this.capacity = findNextPositivePowerOfTwo(capacity);
-		buffy = alignedSlice(4 * CACHE_LINE_SIZE + (this.capacity<<INT_ELEMENT_SCALE), 
+		buffy = alignedSlice(4 * CACHE_LINE_SIZE + (this.capacity << INT_ELEMENT_SCALE), 
 									CACHE_LINE_SIZE, buff);
 
 		long alignedAddress = UnsafeDirectByteBuffer.getAddress(buffy);
 
-		headAddress = alignedAddress + (CACHE_LINE_SIZE / 2 - 8);
-		tailCacheAddress = headAddress + CACHE_LINE_SIZE;
-		tailAddress = tailCacheAddress + CACHE_LINE_SIZE;
-		headCacheAddress = tailAddress + CACHE_LINE_SIZE;
+		headAddress = alignedAddress;
+		tailCacheAddress = headAddress + 8;
+		tailAddress = headAddress + 2 * CACHE_LINE_SIZE;
+		headCacheAddress = tailAddress + 8;
 		arrayBase = alignedAddress + 4 * CACHE_LINE_SIZE;
 		// producer owns tail and headCache
 		if((viewMask & PRODUCER) == PRODUCER){
@@ -96,7 +100,7 @@ public final class P1C1OffHeapQueue implements Queue<Integer> {
 			throw new NullPointerException("Null is not a valid element");
 		}
 
-		final long currentTail = getTail();
+		final long currentTail = getTailPlain();
 		final long wrapPoint = currentTail - capacity;
 		if (getHeadCache() <= wrapPoint) {
 			setHeadCache(getHead());
@@ -115,7 +119,7 @@ public final class P1C1OffHeapQueue implements Queue<Integer> {
 	}
 
 	public Integer poll() {
-		final long currentHead = getHead();
+		final long currentHead = getHeadPlain();
 		if (currentHead >= getTailCache()) {
 			setTailCache(getTail());
 			if (currentHead >= getTailCache()) {
@@ -125,12 +129,25 @@ public final class P1C1OffHeapQueue implements Queue<Integer> {
 
 		final long offset = arrayBase + ((currentHead & mask) << INT_ELEMENT_SCALE);
 		final int e = UnsafeAccess.UNSAFE.getInt(offset);
-//		UnsafeAccess.unsafe.putInt(null, offset, 0);
 		setHead(currentHead + 1);
 
 		return e;
 	}
+	public int pollInt() {
+		final long currentHead = getHeadPlain();
+		if (currentHead >= getTailCache()) {
+			setTailCache(getTail());
+			if (currentHead >= getTailCache()) {
+				return -1;
+			}
+		}
 
+		final long offset = arrayBase + ((currentHead & mask) << INT_ELEMENT_SCALE);
+		final int e = UnsafeAccess.UNSAFE.getInt(offset);
+		setHead(currentHead + 1);
+
+		return e;
+    }
 	public Integer remove() {
 		final Integer e = poll();
 		if (null == e) {
@@ -141,16 +158,11 @@ public final class P1C1OffHeapQueue implements Queue<Integer> {
 	}
 
 	public Integer element() {
-		final Integer e = peek();
-		if (null == e) {
-			throw new NoSuchElementException("Queue is empty");
-		}
-
-		return e;
+		throw new UnsupportedOperationException();
 	}
 
 	public Integer peek() {
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	public int size() {
@@ -214,6 +226,9 @@ public final class P1C1OffHeapQueue implements Queue<Integer> {
 		} while (null != value);
 	}
 
+	private long getHeadPlain() {
+		return UnsafeAccess.UNSAFE.getLong(null, headAddress);
+	}
 	private long getHead() {
 		return UnsafeAccess.UNSAFE.getLongVolatile(null, headAddress);
 	}
@@ -222,6 +237,9 @@ public final class P1C1OffHeapQueue implements Queue<Integer> {
 		UnsafeAccess.UNSAFE.putOrderedLong(null, headAddress, value);
 	}
 
+	private long getTailPlain() {
+		return UnsafeAccess.UNSAFE.getLong(null, tailAddress);
+	}
 	private long getTail() {
 		return UnsafeAccess.UNSAFE.getLongVolatile(null, tailAddress);
 	}
@@ -245,4 +263,5 @@ public final class P1C1OffHeapQueue implements Queue<Integer> {
 	private void setTailCache(final long value) {
 		UnsafeAccess.UNSAFE.putLong(tailCacheAddress, value);
 	}
+
 }
