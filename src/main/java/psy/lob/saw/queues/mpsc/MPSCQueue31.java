@@ -176,7 +176,23 @@ public final class MPSCQueue31<E> extends MPSCQueueL3Pad<E> implements Queue<E> 
 		UnsafeAccess.UNSAFE.putOrderedObject(buffer, elementOffsetInBuffer(currentTail), e);
 		return true;
 	}
+	public int offerStatus(final E e) {
+		if (null == e) {
+			throw new NullPointerException("Null is not a valid element");
+		}
 
+		long currentTail;
+		currentTail = getTail();
+		final long wrapPoint = currentTail - capacity;
+		if (getHeadV() <= wrapPoint) { // volatile read of head
+			return 1;
+		}
+		if(!casTail(currentTail, currentTail + 1)){
+			return -1;
+		}
+		UnsafeAccess.UNSAFE.putOrderedObject(buffer, elementOffsetInBuffer(currentTail), e);
+		return 0;
+	}
 	public E poll() {
 		final long offset = elementOffsetInBuffer(head);
 		@SuppressWarnings("unchecked")
