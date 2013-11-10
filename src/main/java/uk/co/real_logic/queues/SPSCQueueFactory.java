@@ -16,6 +16,8 @@ import psy.lob.saw.ff32.FFBufferOrdered32;
 import psy.lob.saw.queues.offheap.P1C1OffHeapQueue;
 import psy.lob.saw.queues.offheap.P1C1Queue4CacheLinesHeapBuffer;
 import psy.lob.saw.queues.offheap.P1C1Queue4CacheLinesHeapBufferUnsafe;
+import psy.lob.saw.queues.spsc.bq.BQueue;
+import psy.lob.saw.queues.spsc.bq.BQueueNoOfferProbe;
 import psy.lob.saw.queues.spsc.fc.SPSPQueueFloatingCounters3;
 import psy.lob.saw.queues.spsc.fc.SPSPQueueFloatingCounters4;
 import psy.lob.saw.queues.spsc1.SPSCQueue1;
@@ -90,7 +92,9 @@ public final class SPSCQueueFactory {
         case 7:
             return new P1C1OffHeapQueue(qCapacity);
         case 8:
-            return new P1C1QueueOriginalPrimitive(qCapacity);
+            return new BQueue<Integer>(qCapacity);
+        case 81:
+            return new BQueueNoOfferProbe<Integer>(qCapacity);
         case 9:
             return new FFBuffer<Integer>(qScale,Integer.getInteger("sparse.shift", 2));
         case 91:
