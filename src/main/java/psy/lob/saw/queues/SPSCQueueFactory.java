@@ -5,21 +5,18 @@ import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 import psy.lob.saw.queues.spsc.bq.BQueue;
+import psy.lob.saw.queues.spsc.ff.FFBuffer0;
+import psy.lob.saw.queues.spsc.ff.FFBuffer01;
 import psy.lob.saw.queues.spsc.ff.FFBuffer1;
 import psy.lob.saw.queues.spsc.ff.FFBuffer11;
 import psy.lob.saw.queues.spsc.ff.FFBuffer2;
 import psy.lob.saw.queues.spsc.ff.FFBuffer3;
-import psy.lob.saw.queues.spsc.ff.FFBufferNoBarriers;
-import psy.lob.saw.queues.spsc.ff.FFBufferWithBarriers;
 import psy.lob.saw.queues.spsc.ff.FFBuffer4;
 import psy.lob.saw.queues.spsc.lamport.LamportQueue1;
 import psy.lob.saw.queues.spsc.lamport.LamportQueue2;
 import psy.lob.saw.queues.spsc.lamport.LamportQueue3;
 import psy.lob.saw.queues.spsc.thompson.ThompsonQueue1;
 import psy.lob.saw.queues.spsc.thompson.ThompsonQueue2;
-import psy.lob.saw.queues.spsc.thompson.ThompsonQueue21;
-import psy.lob.saw.queues.spsc.thompson.ThompsonQueue22;
-import psy.lob.saw.queues.spsc.thompson.ThompsonQueue23;
 import psy.lob.saw.queues.spsc.thompson.ThompsonQueue3;
 import psy.lob.saw.queues.spsc.thompson.ThompsonQueue4;
 import psy.lob.saw.queues.spsc.thompson.ThompsonQueue5;
@@ -49,12 +46,6 @@ public final class SPSCQueueFactory {
             return new LamportQueue3<Integer>(qCapacity);
         case 21:
             return new ThompsonQueue1<Integer>(qCapacity);
-        case 221:
-            return new ThompsonQueue21<Integer>(qCapacity);
-        case 222:
-            return new ThompsonQueue22<Integer>(qCapacity);
-        case 223:
-            return new ThompsonQueue23<Integer>(qCapacity);
         case 22:
             return new ThompsonQueue2<Integer>(qCapacity);
         case 23:
@@ -80,13 +71,13 @@ public final class SPSCQueueFactory {
         case 37:
             return new YakQueue7<Integer>(qCapacity);
         case 40:
-            return new FFBufferNoBarriers<Integer>(qScale,Integer.getInteger("sparse.shift", 2));
+            return new FFBuffer0<Integer>(qScale,Integer.getInteger("sparse.shift", 0));
         case 401:
-            return new FFBufferWithBarriers<Integer>(qScale,Integer.getInteger("sparse.shift", 2));
+            return new FFBuffer01<Integer>(qScale,Integer.getInteger("sparse.shift", 0));
         case 41:
-            return new FFBuffer1<Integer>(qCapacity, Integer.getInteger("sparse.shift", 2));
+            return new FFBuffer1<Integer>(qCapacity, Integer.getInteger("sparse.shift", 0));
         case 411:
-            return new FFBuffer11<Integer>(qCapacity,Integer.getInteger("sparse.shift", 2)); 
+            return new FFBuffer11<Integer>(qCapacity,Integer.getInteger("sparse.shift", 0)); 
         case 42:
             return new FFBuffer2<Integer>(qCapacity);
         case 43:

@@ -25,7 +25,7 @@ abstract class ThompsonQueue5L0Pad<E> extends AbstractQueue<E>{
 }
 
 abstract class ThompsonQueue5Fields<E> extends ThompsonQueue5L0Pad<E> {
-    protected static final int BUFFER_PAD = 32;
+    protected static final int BUFFER_PAD = 16;
     protected static final int SPARSE_SHIFT = Integer.getInteger("sparse.shift", 0);
     protected final int capacity;
     protected final long mask;

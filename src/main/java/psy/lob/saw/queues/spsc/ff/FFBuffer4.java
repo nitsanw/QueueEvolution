@@ -42,7 +42,7 @@ abstract class FFBufferOfferBatchColdFields<E> extends FFBufferOfferBatchL0Pad<E
     protected static final int OFFER_BATCH_SIZE = Integer.getInteger("offer.batch.size", 4096);
     protected static final int BUFFER_PAD = 32;
 	protected static final long ARRAY_BASE;
-	protected static final int SPARSE_SHIFT = Integer.getInteger("sparse.shift", 2);
+	protected static final int SPARSE_SHIFT = Integer.getInteger("sparse.shift", 0);
 	protected static final int ELEMENT_SHIFT;
 	static {
 		final int scale = UNSAFE.arrayIndexScale(Object[].class);

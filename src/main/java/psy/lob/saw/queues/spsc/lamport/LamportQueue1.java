@@ -1,6 +1,4 @@
 /*
- * Copyright 2012 Real Logic Ltd.
- *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,24 +13,38 @@
  */
 package psy.lob.saw.queues.spsc.lamport;
 
-import java.util.AbstractQueue;
 import java.util.Iterator;
 import java.util.Queue;
 
+import psy.lob.saw.queues.common.CircularArrayQueue1;
+
 /**
  * <ul>
- * <li>Lock free, observing single writer principal.
+ * <li>Lock free, observing single writer principal (except for buffer).
  * </ul>
  */
-public final class LamportQueue1<E> extends AbstractQueue<E> implements Queue<E> {
-	private final E[] buffer;
 
-	private volatile long tail = 0;
-	private volatile long head = 0;
-
-	@SuppressWarnings("unchecked")
+public final class LamportQueue1<E> extends CircularArrayQueue1<E> implements Queue<E> {
+	private volatile long producerIndex = 0;
+	private volatile long consumerIndex = 0;
 	public LamportQueue1(final int capacity) {
-		buffer = (E[]) new Object[capacity];
+		super(capacity);
+	}
+	
+	private long lvProducerIndex() {
+		return producerIndex; // LoadLoad
+	}
+
+	private void svProducerIndex(long producerIndex) {
+		this.producerIndex = producerIndex; // StoreLoad
+	}
+
+	private long lvConsumerIndex() {
+		return consumerIndex; // LoadLoad
+	}
+
+	private void svConsumerIndex(long consumerIndex) {
+		this.consumerIndex = consumerIndex; // StoreLoad
 	}
 
 	@Override
@@ -41,41 +53,41 @@ public final class LamportQueue1<E> extends AbstractQueue<E> implements Queue<E>
 			throw new NullPointerException("Null is not a valid element");
 		}
 
-		final long currentTail = tail;
-		final long wrapPoint = currentTail - buffer.length;
-		if (head <= wrapPoint) {
+		final long currentProducerIndex = lvProducerIndex(); // LoadLoad
+		final long wrapPoint = currentProducerIndex - capacity();
+		if (lvConsumerIndex() <= wrapPoint) { // LoadLoad
 			return false;
 		}
 
-		buffer[(int) (currentTail % buffer.length)] = e;
-		tail = currentTail + 1;
-
+		final int offset = calcOffset(currentProducerIndex);
+		SP_element(offset, e);
+		svProducerIndex(currentProducerIndex + 1); // StoreLoad
 		return true;
 	}
 
 	@Override
 	public E poll() {
-		final long currentHead = head;
-		if (currentHead >= tail) {
+		final long currentConsumerIndex = lvConsumerIndex(); // LoadLoad
+		if (currentConsumerIndex >= lvProducerIndex()) { // LoadLoad
 			return null;
 		}
 
-		final int index = (int) (currentHead % buffer.length);
-		final E e = buffer[index];
-		buffer[index] = null;
-		head = currentHead + 1;
-
+		final int offset = calcOffset(currentConsumerIndex);
+		final E e = LP_Element(offset);
+		SP_element(offset, null);
+		svConsumerIndex(currentConsumerIndex + 1); // StoreLoad
 		return e;
 	}
 
 	@Override
 	public E peek() {
-		return buffer[(int) (head % buffer.length)];
+		final int offset = calcOffset(lvConsumerIndex());
+		return LP_Element(offset);
 	}
 
 	@Override
 	public int size() {
-		return (int) (tail - head);
+		return (int) (lvProducerIndex() - lvConsumerIndex());
 	}
 
 	@Override

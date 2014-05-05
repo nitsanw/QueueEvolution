@@ -20,6 +20,7 @@ import java.util.Iterator;
 import java.util.Queue;
 import java.util.concurrent.atomic.AtomicLong;
 
+import psy.lob.saw.queues.common.CircularArrayQueue2;
 import psy.lob.saw.util.Pow2;
 
 /**
@@ -33,69 +34,94 @@ import psy.lob.saw.util.Pow2;
  * <li>Padding head/tail cache fields. Avoiding false sharing.
  * </ul>
  */
-public final class ThompsonQueue2<E> extends AbstractQueue<E> implements Queue<E> {
-	private final int capacity;
-	private final int mask;
-	private final E[] buffer;
-
-	private final AtomicLong tail = new PaddedAtomicLong(0);
-	private final AtomicLong head = new PaddedAtomicLong(0);
-
-	private final PaddedLong tailCache = new PaddedLong();
-	private final PaddedLong headCache = new PaddedLong();
-
-	@SuppressWarnings("unchecked")
+public final class ThompsonQueue2<E> extends CircularArrayQueue2<E>{
+	private final AtomicLong producerIndex = new PaddedAtomicLong();
+	private final AtomicLong consumerIndex = new PaddedAtomicLong();
+	private final PaddedLong producerIndexCache = new PaddedLong();
+	private final PaddedLong consumerIndexCache = new PaddedLong();
 	public ThompsonQueue2(final int capacity) {
-		this.capacity = Pow2.findNextPositivePowerOfTwo(capacity);
-		mask = this.capacity - 1;
-		buffer = (E[]) new Object[this.capacity];
+		super(capacity);
 	}
 
+	private long lvProducerIndex() {
+		return producerIndex.get();
+	}
+
+	private void soProducerIndex(long index) {
+		producerIndex.lazySet(index);
+	}
+
+	private long lvConsumerIndex() {
+		return consumerIndex.get();
+	}
+
+	private void soConsumerIndex(long index) {
+		consumerIndex.lazySet(index);
+	}
+	
+	private long lpConsumerIndexCache() {
+	    return consumerIndexCache.value;
+    }
+	private void spConsumerIndexCache(long index) {
+		consumerIndexCache.value = index;
+	}
+	private long lpProducerIndexCache() {
+	    return producerIndexCache.value;
+    }
+	private void spProducerIndexCache(long index) {
+		producerIndexCache.value = index;
+	}
+	@Override
 	public boolean offer(final E e) {
 		if (null == e) {
 			throw new NullPointerException("Null is not a valid element");
 		}
 
-		final long currentTail = tail.get();
-		final long wrapPoint = currentTail - capacity;
-		if (headCache.value <= wrapPoint) {
-			headCache.value = head.get();
-			if (headCache.value <= wrapPoint) {
+		final long currentProducerIndex = lvProducerIndex();
+		final long wrapPoint = currentProducerIndex - capacity();
+		if (lpConsumerIndexCache() <= wrapPoint) {
+			spConsumerIndexCache(lvConsumerIndex());
+			if (lpConsumerIndexCache() <= wrapPoint) {
 				return false;
 			}
 		}
 
-		buffer[(int) currentTail & mask] = e;
-		tail.lazySet(currentTail + 1);
-
+		final int offset = calcOffset(currentProducerIndex);
+		SP_element(offset, e);
+		soProducerIndex(currentProducerIndex + 1);
 		return true;
 	}
 
+
+	@Override
 	public E poll() {
-		final long currentHead = head.get();
-		if (currentHead >= tailCache.value) {
-			tailCache.value = tail.get();
-			if (currentHead >= tailCache.value) {
+		final long currentConsumerIndex = lvConsumerIndex();
+		if (currentConsumerIndex >= lpProducerIndexCache()) {
+			spProducerIndexCache(lvProducerIndex());
+			if (currentConsumerIndex >= lpProducerIndexCache()) {
 				return null;
 			}
 		}
 
-		final int index = (int) currentHead & mask;
-		final E e = buffer[index];
-		buffer[index] = null;
-		head.lazySet(currentHead + 1);
-
+		final int offset = calcOffset(currentConsumerIndex);
+		final E e = LP_element(offset);
+		SP_element(offset, null);
+		soConsumerIndex(currentConsumerIndex + 1);
 		return e;
 	}
 
+	@Override
 	public E peek() {
-		return buffer[(int) head.get() & mask];
+		final int offset = calcOffset(lvConsumerIndex());
+		return LP_element(offset);
 	}
 
+	@Override
 	public int size() {
-		return (int) (tail.get() - head.get());
+		return (int) (lvProducerIndex() - lvConsumerIndex());
 	}
 
+	@Override
 	public Iterator<E> iterator() {
 		throw new UnsupportedOperationException();
 	}

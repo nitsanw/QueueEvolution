@@ -13,11 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package psy.lob.saw.queues;
+package psy.lob.saw.queues.handrolled.benchmarks;
 
 import java.util.Queue;
 
-public class QueuePerfTest1 {
+import psy.lob.saw.queues.SPSCQueueFactory;
+
+public class QueueThroughputBusy {
     // 15 == 32 * 1024
     public static final int QUEUE_CAPACITY = 1 << Integer.getInteger("scale", 15);
     public static final int REPETITIONS = Integer.getInteger("reps", 50) * 1000 * 1000;
@@ -37,7 +39,7 @@ public class QueuePerfTest1 {
         for (int i = 10; i < 20; i++) {
             sum += results[i];
         }
-        System.out.format("summary,QueuePerfTest1,%s,%d\n", queue.getClass().getSimpleName(), sum / 10);
+        System.out.format("summary,QueuePerfTest3,%s,%d\n", queue.getClass().getSimpleName(), sum / 10);
     }
 
     private static long performanceRun(int runNumber, Queue<Integer> queue) throws Exception {
@@ -47,9 +49,10 @@ public class QueuePerfTest1 {
 
         Integer result;
         int i = REPETITIONS;
+        int queueEmpty = 0;
         do {
             while (null == (result = queue.poll())) {
-                Thread.yield();
+                queueEmpty++;
             }
         } while (0 != --i);
         long end = System.nanoTime();
@@ -58,14 +61,15 @@ public class QueuePerfTest1 {
         long duration = end - p.start;
         long ops = (REPETITIONS * 1000L * 1000L * 1000L) / duration;
         String qName = queue.getClass().getSimpleName();
-        System.out.format("%d - ops/sec=%,d - %s result=%d\n", runNumber, ops,
-                qName, result);
+        System.out.format("%d - ops/sec=%,d - %s result=%d failed.poll=%d failed.offer=%d\n", runNumber, ops,
+                qName, result, queueEmpty, p.queueFull);
         return ops;
     }
 
     public static class Producer implements Runnable {
         private final Queue<Integer> queue;
-        long start = 0;
+        int queueFull = 0;
+        volatile long start = 0;
 
         public Producer(Queue<Integer> queue) {
             this.queue = queue;
@@ -73,12 +77,17 @@ public class QueuePerfTest1 {
 
         public void run() {
             int i = REPETITIONS;
-            start = System.nanoTime();
+            int f = 0;
+            Queue<Integer> q = queue;
+            long s = System.nanoTime();
             do {
-                while (!queue.offer(TEST_VALUE)) {
-                    Thread.yield();
+                while (!q.offer(TEST_VALUE)) {
+                    f++;
                 }
             } while (0 != --i);
+            
+            queueFull = f;
+            start = s;
         }
     }
 }

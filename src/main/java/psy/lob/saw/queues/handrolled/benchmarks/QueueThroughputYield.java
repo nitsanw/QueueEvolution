@@ -13,11 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package psy.lob.saw.queues;
+package psy.lob.saw.queues.handrolled.benchmarks;
 
 import java.util.Queue;
 
-public class QueuePerfTest2 {
+import psy.lob.saw.queues.SPSCQueueFactory;
+
+public class QueueThroughputYield {
     // 15 == 32 * 1024
     public static final int QUEUE_CAPACITY = 1 << Integer.getInteger("scale", 15);
     public static final int REPETITIONS = Integer.getInteger("reps", 50) * 1000 * 1000;
@@ -68,7 +70,7 @@ public class QueuePerfTest2 {
     public static class Producer implements Runnable {
         private final Queue<Integer> queue;
         int queueFull = 0;
-        long start = 0;
+        volatile long start = 0;
 
         public Producer(Queue<Integer> queue) {
             this.queue = queue;

@@ -41,7 +41,7 @@ abstract class FFBuffer3L0Pad<E> extends AbstractQueue<E> {
 abstract class FFBuffer3ColdFields<E> extends FFBuffer3L0Pad<E> {
 	protected static final int BUFFER_PAD = 32;
 	protected static final long ARRAY_BASE;
-	protected static final int SPARSE_SHIFT = Integer.getInteger("sparse.shift", 2);
+	protected static final int SPARSE_SHIFT = Integer.getInteger("sparse.shift", 0);
 	protected static final int ELEMENT_SHIFT;
 	static {
 		final int scale = UNSAFE.arrayIndexScale(Object[].class);

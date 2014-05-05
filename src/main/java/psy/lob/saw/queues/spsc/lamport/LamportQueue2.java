@@ -20,21 +20,37 @@ import java.util.Iterator;
 import java.util.Queue;
 import java.util.concurrent.atomic.AtomicLong;
 
+import psy.lob.saw.queues.common.CircularArrayQueue1;
+
 /**
  * <ul>
- * <li>Lock free, observing single writer principal.
+ * <li>Lock free, observing single writer principal (except for buffer).
  * <li>Replacing the long fields with AtomicLong and using lazySet instead of
  * volatile assignment.
  * </ul>
  */
-public final class LamportQueue2<E> extends AbstractQueue<E> implements Queue<E> {
-	private final E[] buffer;
-	private final AtomicLong tail = new AtomicLong(0);
-	private final AtomicLong head = new AtomicLong(0);
+public final class LamportQueue2<E> extends CircularArrayQueue1<E> implements Queue<E> {
+	private final AtomicLong producerIndex = new AtomicLong();
+	private final AtomicLong consumerIndex = new AtomicLong();
+	public LamportQueue2(final int capacity) {
+		super(capacity);
+	}
+	
 
-	@SuppressWarnings("unchecked")
-	public LamportQueue2(int capacity) {
-		buffer = (E[]) new Object[capacity];
+	private long lvProducerIndex() {
+		return producerIndex.get();
+	}
+
+	private void soProducerIndex(long index) {
+		producerIndex.lazySet(index);
+	}
+
+	private long lvConsumerIndex() {
+		return consumerIndex.get();
+	}
+
+	private void soConsumerIndex(long index) {
+		consumerIndex.lazySet(index);
 	}
 
 	@Override
@@ -43,46 +59,45 @@ public final class LamportQueue2<E> extends AbstractQueue<E> implements Queue<E>
 			throw new NullPointerException("Null is not a valid element");
 		}
 
-		final long currentTail = tail.get();
-		final long wrapPoint = currentTail - buffer.length;
-		if (head.get() <= wrapPoint) {
+		final long currentProducerIndex = lvProducerIndex();
+		final long wrapPoint = currentProducerIndex - capacity();
+		if (lvConsumerIndex() <= wrapPoint) {
 			return false;
 		}
 
-		buffer[(int) currentTail % buffer.length] = e;
-		tail.lazySet(currentTail + 1);
-
+		final int offset = calcOffset(currentProducerIndex);
+		SP_element(offset, e);
+		soProducerIndex(currentProducerIndex + 1);
 		return true;
 	}
 
 	@Override
 	public E poll() {
-		final long currentHead = head.get();
-		if (currentHead >= tail.get()) {
+		final long currentConsumerIndex = lvConsumerIndex();
+		if (currentConsumerIndex >= lvProducerIndex()) {
 			return null;
 		}
 
-		final int index = (int) currentHead % buffer.length;
-		final E e = buffer[index];
-		buffer[index] = null;
-		head.lazySet(currentHead + 1);
-
+		final int offset = calcOffset(currentConsumerIndex);
+		final E e = LP_Element(offset);
+		SP_element(offset, null);
+		soConsumerIndex(currentConsumerIndex + 1);
 		return e;
 	}
 
 	@Override
 	public E peek() {
-		return buffer[(int) (head.get() % buffer.length)];
+		final int offset = calcOffset(lvConsumerIndex());
+		return LP_Element(offset);
 	}
 
 	@Override
 	public int size() {
-		return (int) (tail.get() - head.get());
+		return (int) (lvProducerIndex() - lvConsumerIndex());
 	}
 
 	@Override
 	public Iterator<E> iterator() {
 		throw new UnsupportedOperationException();
 	}
-
 }

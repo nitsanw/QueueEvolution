@@ -34,7 +34,7 @@ abstract class YakQueue7L0Pad<E> extends AbstractQueue<E> {
 }
 
 abstract class YakQueue7ColdFields<E> extends YakQueue7L0Pad<E> {
-	protected static final int SPARSE_SHIFT = Integer.getInteger("sparse.shift", 2);
+	protected static final int SPARSE_SHIFT = Integer.getInteger("sparse.shift", 0);
 	protected static final int BUFFER_PAD = 32;
 	protected final int capacity;
 	protected final long mask;

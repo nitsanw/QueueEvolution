@@ -20,28 +20,38 @@ import java.util.Iterator;
 import java.util.Queue;
 import java.util.concurrent.atomic.AtomicLong;
 
+import psy.lob.saw.queues.common.CircularArrayQueue2;
 import psy.lob.saw.util.Pow2;
 
 /**
  * <ul>
- * <li>Lock free, observing single writer principal.
+ * <li>Lock free, observing single writer principal (except for buffer).
  * <li>Replacing the long fields with AtomicLong and using lazySet instead of
  * volatile assignment.
  * <li>Using the power of 2 mask, forcing the capacity to next power of 2.
  * </ul>
  */
-public final class LamportQueue3<E> extends AbstractQueue<E> implements Queue<E> {
-	private final int mask;
-	private final E[] buffer;
+public final class LamportQueue3<E> extends CircularArrayQueue2<E> implements Queue<E> {
+	private final AtomicLong producerIndex = new AtomicLong();
+	private final AtomicLong consumerIndex = new AtomicLong();
+	public LamportQueue3(final int capacity) {
+		super(capacity);
+	}
 
-	private final AtomicLong tail = new AtomicLong(0);
-	private final AtomicLong head = new AtomicLong(0);
+	private long lvProducerIndex() {
+		return producerIndex.get();
+	}
 
-	@SuppressWarnings("unchecked")
-	public LamportQueue3(int capacity) {
-		capacity = Pow2.findNextPositivePowerOfTwo(capacity);
-		mask = capacity - 1;
-		buffer = (E[]) new Object[capacity];
+	private void soProducerIndex(long index) {
+		producerIndex.lazySet(index);
+	}
+
+	private long lvConsumerIndex() {
+		return consumerIndex.get();
+	}
+
+	private void soConsumerIndex(long index) {
+		consumerIndex.lazySet(index);
 	}
 
 	@Override
@@ -50,41 +60,41 @@ public final class LamportQueue3<E> extends AbstractQueue<E> implements Queue<E>
 			throw new NullPointerException("Null is not a valid element");
 		}
 
-		final long currentTail = tail.get();
-		final long wrapPoint = currentTail - buffer.length;
-		if (head.get() <= wrapPoint) {
+		final long currentProducerIndex = lvProducerIndex();
+		final long wrapPoint = currentProducerIndex - capacity();
+		if (lvConsumerIndex() <= wrapPoint) {
 			return false;
 		}
 
-		buffer[(int) currentTail & mask] = e;
-		tail.lazySet(currentTail + 1);
-
+		final int offset = calcOffset(currentProducerIndex);
+		SP_element(offset, e);
+		soProducerIndex(currentProducerIndex + 1);
 		return true;
 	}
 
 	@Override
 	public E poll() {
-		final long currentHead = head.get();
-		if (currentHead >= tail.get()) {
+		final long currentConsumerIndex = lvConsumerIndex();
+		if (currentConsumerIndex >= lvProducerIndex()) {
 			return null;
 		}
 
-		final int index = (int) currentHead & mask;
-		final E e = buffer[index];
-		buffer[index] = null;
-		head.lazySet(currentHead + 1);
-
+		final int offset = calcOffset(currentConsumerIndex);
+		final E e = LP_element(offset);
+		SP_element(offset, null);
+		soConsumerIndex(currentConsumerIndex + 1);
 		return e;
 	}
 
 	@Override
 	public E peek() {
-		return buffer[(int) head.get() & mask];
+		final int offset = calcOffset(lvConsumerIndex());
+		return LP_element(offset);
 	}
 
 	@Override
 	public int size() {
-		return (int) (tail.get() - head.get());
+		return (int) (lvProducerIndex() - lvConsumerIndex());
 	}
 
 	@Override
