@@ -1,0 +1,146 @@
+/*
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package psy.lob.saw.queues.lamport;
+
+import static psy.lob.saw.queues.common.UnsafeAccess.UNSAFE;
+
+import java.util.Iterator;
+
+import psy.lob.saw.queues.common.CircularArrayQueue4;
+import psy.lob.saw.queues.common.UnsafeAccess;
+
+/**
+ * <ul>
+ * <li>Inlined counters
+ * <li>Counters are padded
+ * <li>Data is padded
+ * <li>Class is pre-padded
+ * <li>Use Unsafe for array access
+ * </ul>
+ */
+abstract class LamportQueueInlinedL1Pad<E> extends CircularArrayQueue4<E> {
+	protected long p00, p01, p02, p03, p04, p05, p06, p07;
+	protected long p10, p11, p12, p13, p14, p15, p16, p17;
+
+	public LamportQueueInlinedL1Pad(int capacity) {
+		super(capacity);
+	}
+}
+
+abstract class LamportQueueInlinedConsumerIndex<E> extends LamportQueueInlinedL1Pad<E> {
+	protected volatile long consumerIndex;
+
+	public LamportQueueInlinedConsumerIndex(int capacity) {
+		super(capacity);
+	}
+}
+
+abstract class LamportQueueInlinedL3Pad<E> extends LamportQueueInlinedConsumerIndex<E> {
+	protected long p00, p01, p02, p03, p04, p05, p06, p07;
+	protected long p10, p11, p12, p13, p14, p15, p16, p17;
+
+	public LamportQueueInlinedL3Pad(int capacity) {
+		super(capacity);
+	}
+}
+
+abstract class LamportQueueInlinedProducerIndex<E> extends LamportQueueInlinedL3Pad<E> {
+	protected volatile long producerIndex;
+
+	public LamportQueueInlinedProducerIndex(int capacity) {
+		super(capacity);
+	}
+}
+
+public final class LamportQueueInlined<E> extends LamportQueueInlinedProducerIndex<E> {
+	protected long p00, p01, p02, p03, p04, p05, p06, p07;
+	protected long p10, p11, p12, p13, p14, p15, p16, p17;
+	private final static long CONSUMER_INDEX_OFFSET;
+	private final static long PRODUCER_INDEX_OFFSET;
+	static {
+		try {
+			CONSUMER_INDEX_OFFSET = UnsafeAccess.UNSAFE.objectFieldOffset(LamportQueueInlinedConsumerIndex.class.getDeclaredField("consumerIndex"));
+			PRODUCER_INDEX_OFFSET = UnsafeAccess.UNSAFE.objectFieldOffset(LamportQueueInlinedProducerIndex.class.getDeclaredField("producerIndex"));
+		} catch (NoSuchFieldException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	public LamportQueueInlined(int capacity) {
+	    super(capacity);
+    }
+
+	private long lvProducerIndex() {
+		return producerIndex;
+	}
+
+	private void soProducerIndex(long index) {
+		UNSAFE.putOrderedLong(this, PRODUCER_INDEX_OFFSET, index);
+	}
+
+	private long lvConsumerIndex() {
+		return consumerIndex;
+	}
+
+	private void soConsumerIndex(long index) {
+		UNSAFE.putOrderedLong(this, CONSUMER_INDEX_OFFSET, index);
+	}
+
+	@Override
+	public boolean offer(final E e) {
+		if (null == e) {
+			throw new NullPointerException("Null is not a valid element");
+		}
+
+		final long currentProducerIndex = lvProducerIndex(); // LoadLoad
+		final long wrapPoint = currentProducerIndex - capacity();
+		if (lvConsumerIndex() <= wrapPoint) { // LoadLoad
+			return false;
+		}
+
+		final long offset = calcOffset(currentProducerIndex);
+		spElement(offset, e);
+		soProducerIndex(currentProducerIndex + 1); // StoreStore
+		return true;
+	}
+
+	@Override
+	public E poll() {
+		final long currentConsumerIndex = lvConsumerIndex(); // LoadLoad
+		if (currentConsumerIndex >= lvProducerIndex()) { // LoadLoad
+			return null;
+		}
+
+		final long offset = calcOffset(currentConsumerIndex);
+		final E e = lpElement(offset);
+		spElement(offset, null);
+		soConsumerIndex(currentConsumerIndex + 1); // StoreStore
+		return e;
+	}
+
+	@Override
+	public E peek() {
+		final long offset = calcOffset(lvConsumerIndex());
+		return lpElement(offset);
+	}
+
+	@Override
+	public int size() {
+		return (int) (lvProducerIndex() - lvConsumerIndex());
+	}
+
+	@Override
+	public Iterator<E> iterator() {
+		throw new UnsupportedOperationException();
+	}
+}

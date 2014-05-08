@@ -12,8 +12,8 @@ import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
 
-@OutputTimeUnit(TimeUnit.NANOSECONDS)
-@BenchmarkMode({ Mode.AverageTime })
+@OutputTimeUnit(TimeUnit.MICROSECONDS)
+@BenchmarkMode({ Mode.Throughput })
 @Warmup(iterations = 3, time = 1, timeUnit = TimeUnit.SECONDS)
 @Measurement(iterations = 5, time = 1, timeUnit = TimeUnit.SECONDS)
 @State(Scope.Thread)
@@ -53,13 +53,13 @@ public class CircularArrayQueue2ReadWrite {
 	@GenerateMicroBenchmark
 	public void offer() {
 		int offset = caq.calcOffset(index++);
-		caq.SP_element(offset, TOKEN);
+		caq.spElement(offset, TOKEN);
 	}
 
 	@GenerateMicroBenchmark
 	public void poll() {
 		int offset = caq.calcOffset(index++);
-		if (caq.LP_element(offset) != null) {
+		if (caq.lpElement(offset) != null) {
 			index--;
 		}
 	}

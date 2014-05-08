@@ -10,11 +10,11 @@ public abstract class CircularArrayQueue1<E> extends AbstractQueue<E> {
 		buffer = (E[]) new Object[capacity];
 	}
 
-	protected final void SP_element(int offset, final E e) {
+	protected final void spElement(int offset, final E e) {
 		buffer[offset] = e;
 	}
 
-	protected final E LP_Element(final int offset) {
+	protected final E lpElement(final int offset) {
 		return buffer[offset];
 	}
 

@@ -17,15 +17,11 @@ import org.openjdk.jmh.annotations.Warmup;
 @Warmup(iterations = 3, time = 1, timeUnit = TimeUnit.SECONDS)
 @Measurement(iterations = 5, time = 1, timeUnit = TimeUnit.SECONDS)
 @State(Scope.Thread)
-public class CircularArrayQueue1ReadWrite {
+public class CircularArrayQueue4ReadWrite {
 	public static final int CAPACITY = 1 << 15;
 	public static final Integer TOKEN = 1;
 
-	private CircularArrayQueue1<Integer> caq = new CircularArrayQueue1<Integer>(CAPACITY) {
-		@Override
-		public boolean offer(Integer e) {
-			return false;
-		}
+	private CircularArrayQueue4<Integer> caq = new CircularArrayQueue4<Integer>(CAPACITY) {
 
 		@Override
 		public Integer poll() {
@@ -38,13 +34,18 @@ public class CircularArrayQueue1ReadWrite {
 		}
 
 		@Override
-		public Iterator<Integer> iterator() {
-			return null;
+		public boolean offer(Integer e) {
+			return false;
 		}
 
 		@Override
 		public int size() {
 			return 0;
+		}
+
+		@Override
+		public Iterator<Integer> iterator() {
+			return null;
 		}
 	};
 
@@ -52,13 +53,13 @@ public class CircularArrayQueue1ReadWrite {
 
 	@GenerateMicroBenchmark
 	public void offer() {
-		int offset = caq.calcOffset(index++);
+		long offset = caq.calcOffset(index++);
 		caq.spElement(offset, TOKEN);
 	}
 
 	@GenerateMicroBenchmark
 	public void poll() {
-		int offset = caq.calcOffset(index++);
+		long offset = caq.calcOffset(index++);
 		if (caq.lpElement(offset) != null) {
 			index--;
 		}

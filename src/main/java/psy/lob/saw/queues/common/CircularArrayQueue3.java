@@ -1,29 +1,14 @@
 package psy.lob.saw.queues.common;
 
-import static psy.lob.saw.util.UnsafeAccess.UNSAFE;
-
 import java.util.AbstractQueue;
+abstract class CircularArrayQueue3PrePad<E> extends AbstractQueue<E> {
+    protected long p00, p01, p02, p03, p04, p05, p06, p07;
+	protected long p10, p11, p12, p13, p14, p15, p16, p17;
+}
 
-import psy.lob.saw.util.Pow2;
-import psy.lob.saw.util.UnsafeAccess;
-
-public abstract class CircularArrayQueue3<E> extends AbstractQueue<E> {
-	private static final long ARRAY_BASE;
-	private static final int ELEMENT_SHIFT;
-	static {
-		final int scale = UnsafeAccess.UNSAFE.arrayIndexScale(Object[].class);
-
-		if (4 == scale) {
-			ELEMENT_SHIFT = 2;
-		} else if (8 == scale) {
-			ELEMENT_SHIFT = 3;
-		} else {
-			throw new IllegalStateException("Unknown pointer size");
-		}
-		ARRAY_BASE = UnsafeAccess.UNSAFE.arrayBaseOffset(Object[].class);
-	}
+public abstract class CircularArrayQueue3<E> extends CircularArrayQueue3PrePad<E> {
 	private final int capacity;
-	private final long mask;
+	private final int mask;
 	private final E[] buffer;
 
 	@SuppressWarnings("unchecked")
@@ -33,20 +18,20 @@ public abstract class CircularArrayQueue3<E> extends AbstractQueue<E> {
 		buffer = (E[]) new Object[capacity];
 	}
 
-	protected final void SP_element(final long offset, final E e) {
-		UNSAFE.putObject(buffer, offset, e);
+	protected final void spElement(int offset, final E e) {
+		buffer[offset] = e;
 	}
 
-	@SuppressWarnings("unchecked")
-	protected final E LP_element(final long offset) {
-		return (E) UNSAFE.getObject(buffer, offset);
+	protected final E lpElement(final int offset) {
+		return buffer[offset];
 	}
 
-	protected final long calcOffset(final long index) {
-		return ARRAY_BASE + ((index & mask) << ELEMENT_SHIFT);
+	protected final int calcOffset(final long index) {
+		return ((int) index) & mask;
 	}
 
 	protected final int capacity() {
 		return capacity;
 	}
+
 }
