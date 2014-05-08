@@ -40,7 +40,7 @@ import psy.lob.saw.queues.common.SPSCQueueFactory;
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
 @Warmup(iterations = 10, time = 1, timeUnit = TimeUnit.SECONDS)
 @Measurement(iterations = 10, time = 1, timeUnit = TimeUnit.SECONDS)
-public class QueueRingRoundTripLatency {
+public class QueueRoundTripLatency {
     private static final Integer DUMMY_MESSAGE = 1;
 	@Param(value={"11","12","21","22","23","24","25","31","32","33","41","42"})
 	protected int queueType;

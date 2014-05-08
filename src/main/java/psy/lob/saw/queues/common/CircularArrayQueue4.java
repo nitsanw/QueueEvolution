@@ -10,32 +10,31 @@ abstract class CircularArrayQueue4PrePad<E> extends AbstractQueue<E> {
 }
 public abstract class CircularArrayQueue4<E> extends AbstractQueue<E> {
 	private static final int BUFFER_PAD = 32;
-	private static final int SPARSE_SHIFT = Integer.getInteger("sparse.shift", 0);
 	protected static final long ARRAY_BASE;
 	protected static final int ELEMENT_SHIFT;
 	static {
         final int scale = UnsafeAccess.UNSAFE.arrayIndexScale(Object[].class);
 
         if (4 == scale) {
-            ELEMENT_SHIFT = 2 + SPARSE_SHIFT;
+            ELEMENT_SHIFT = 2;
         } else if (8 == scale) {
-            ELEMENT_SHIFT = 3 + SPARSE_SHIFT;
+            ELEMENT_SHIFT = 3;
         } else {
             throw new IllegalStateException("Unknown pointer size");
         }
         ARRAY_BASE = UnsafeAccess.UNSAFE.arrayBaseOffset(Object[].class)
-                + (BUFFER_PAD << (ELEMENT_SHIFT - SPARSE_SHIFT));
+                + (BUFFER_PAD << ELEMENT_SHIFT);
 	}
 	private final int capacity;
-	protected final long mask;
-	protected final E[] buffer;
+	private final long mask;
+	private final E[] buffer;
 
 	@SuppressWarnings("unchecked")
 	public CircularArrayQueue4(int capacity) {
 		this.capacity = Pow2.findNextPositivePowerOfTwo(capacity);
 		mask = capacity() - 1;
-		// padding + (size * slots per element) + padding
-        buffer = (E[]) new Object[(this.capacity << SPARSE_SHIFT) + BUFFER_PAD * 2];
+		// padding + size + padding
+        buffer = (E[]) new Object[this.capacity + BUFFER_PAD * 2];
 	}
 
 	protected final void spElement(final long offset, final E e) {
@@ -57,15 +56,12 @@ public abstract class CircularArrayQueue4<E> extends AbstractQueue<E> {
 	protected final E lvElement(final long offset) {
 		return (E) UNSAFE.getObjectVolatile(buffer, offset);
 	}
-	protected final E lvElement(final E[] buffer, final long offset) {
-		return (E) UNSAFE.getObjectVolatile(buffer, offset);
-	}
 	protected final long calcOffset(final long index) {
 		// inclusive of padding:
-		// array base + (padding * slot size) + ((index % capacity) * (slot size * slots per element)) =
-		// ARRAY_BASE pre-calculated: ARRAY_BASE + ((index % capacity) * (slot size * slots per element)) =
-		// capacity is power of 2: ARRAY_BASE + ((index & mask) * (slot size * slots per element)) =
-		// slot size and slots per element are powers of 2, replace with a shift of pre-calculated ELEMENT_SHIFT
+		// array base + (padding * slot size) + ((index % capacity) * (slot size)) =
+		// ARRAY_BASE pre-calculated: ARRAY_BASE + ((index % capacity) * (slot size)) =
+		// capacity is power of 2: ARRAY_BASE + ((index & mask) * (slot size)) =
+		// slot size is a power of 2, replace with a shift of pre-calculated ELEMENT_SHIFT
 		return ARRAY_BASE + ((index & mask) << ELEMENT_SHIFT);
 	}
 
