@@ -22,8 +22,7 @@ public abstract class CircularArrayQueue4<E> extends AbstractQueue<E> {
         } else {
             throw new IllegalStateException("Unknown pointer size");
         }
-        ARRAY_BASE = UnsafeAccess.UNSAFE.arrayBaseOffset(Object[].class)
-                + (BUFFER_PAD << ELEMENT_SHIFT);
+        ARRAY_BASE = UnsafeAccess.UNSAFE.arrayBaseOffset(Object[].class) + (BUFFER_PAD << ELEMENT_SHIFT);
 	}
 	private final int capacity;
 	private final long mask;

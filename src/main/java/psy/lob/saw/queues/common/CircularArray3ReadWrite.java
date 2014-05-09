@@ -17,7 +17,7 @@ import org.openjdk.jmh.annotations.Warmup;
 @Warmup(iterations = 3, time = 1, timeUnit = TimeUnit.SECONDS)
 @Measurement(iterations = 5, time = 1, timeUnit = TimeUnit.SECONDS)
 @State(Scope.Thread)
-public class CircularArrayQueue2ReadWrite {
+public class CircularArray3ReadWrite {
 	public static final int CAPACITY = 1 << 15;
 	public static final Integer TOKEN = 1;
 
