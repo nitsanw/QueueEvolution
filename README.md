@@ -1,19 +1,18 @@
 examples- Queue Evolution
 ========
 This repository has been setup as supporting collateral for my Queue Evolution talk.
-This is a trimmed down and tidied up version of the revisited branch. The queues are
+This is a trimmed down and tidied up version of the revisited branch of my examples repository. The queues are
 grouped to 4 groups:
-- Lamport : The Lamport concurrent queue algorithm, some initial optimizations. Original implementations from
-  Martin Thompson Lock Free Programming talk, tidied up. Intermediate steps split to different implementations.
+- Lamport : The Lamport concurrent queue algorithm.
+- Thompson : Martin Thompson's refinement of the Lamport algorithm to prevent read misses by introducing index chahe fields
   See talk [here](http://www.infoq.com/presentations/Lock-Free-Algorithms) and original code [here](https://github.com/mjpt777/examples).
-- Thompson : Martin's changes to memory layout and reducing cache coherence traffic. Original implementations from 
-  tidied up. Intermediate steps split to different implementations. Further improvements to counters padding are made.
-  Use unsafe to access array. Added class fields padding and data padding.
-  Added sparse data support.
-- Yak : Same algorithm as Thompson but counters are inlined.
-- FF : Fast Flow SPSC algorithm. Corrections to original. Padding everywhere, sparse data support. BQueue implementation
-  and combined FFBuffer with BQueue offer method.
-There are 3 performance tests:
-...
+- FF : Fast Flow SPSC algorithm. 
+There are some benchmarks included:
+- JMH Busy/Yield all out throughput
+- Handrolled Yield/Busy throughput
+- JMH RTT for a given burst size
+- Single threaded offer/poll
+- CirularArray read/write
+
 In the data folder you'll find the data from which the slides were derived.
 Finally in the presentation folder is the presentation itself.
