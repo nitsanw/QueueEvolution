@@ -1,0 +1,4477 @@
+# Run progress: 0.00% complete, ETA 00:20:00
+# VM invoker: /home/yak/Work/jdks/jdk1.7.0_51/jre/bin/java
+# VM options: -Dburst.size=10 -XX:+UseCondCardMark
+# Fork: 1 of 5
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 2 threads, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: psy.lob.saw.queues.benchmarks.jmh.QueueRoundTripLatency.ring
+# Parameters: (queueScale = 17, queueType = 11)
+# Warmup Iteration   1: 537.674 ns/op
+# Warmup Iteration   2: 706.818 ns/op
+# Warmup Iteration   3: 717.730 ns/op
+# Warmup Iteration   4: 686.572 ns/op
+# Warmup Iteration   5: 728.154 ns/op
+# Warmup Iteration   6: 948.771 ns/op
+# Warmup Iteration   7: 971.132 ns/op
+# Warmup Iteration   8: 864.850 ns/op
+# Warmup Iteration   9: 940.059 ns/op
+# Warmup Iteration  10: 991.222 ns/op
+Iteration   1: 982.613 ns/op
+                 "loop": 524.752 ns/op (1 threads)
+                 "ping": 7708.901 ns/op (1 threads)
+
+Iteration   2: 991.758 ns/op
+                 "loop": 529.826 ns/op (1 threads)
+                 "ping": 7739.898 ns/op (1 threads)
+
+Iteration   3: 965.036 ns/op
+                 "loop": 514.949 ns/op (1 threads)
+                 "ping": 7661.571 ns/op (1 threads)
+
+Iteration   4: 981.350 ns/op
+                 "loop": 524.191 ns/op (1 threads)
+                 "ping": 7673.592 ns/op (1 threads)
+
+Iteration   5: 980.201 ns/op
+                 "loop": 523.192 ns/op (1 threads)
+                 "ping": 7748.046 ns/op (1 threads)
+
+Iteration   6: 768.590 ns/op
+                 "loop": 403.986 ns/op (1 threads)
+                 "ping": 7883.457 ns/op (1 threads)
+
+Iteration   7: 794.090 ns/op
+                 "loop": 415.512 ns/op (1 threads)
+                 "ping": 7925.470 ns/op (1 threads)
+
+Iteration   8: 1002.333 ns/op
+                 "loop": 535.504 ns/op (1 threads)
+                 "ping": 7816.409 ns/op (1 threads)
+
+Iteration   9: 962.218 ns/op
+                 "loop": 513.211 ns/op (1 threads)
+                 "ping": 7691.586 ns/op (1 threads)
+
+Iteration  10: 757.724 ns/op
+                 "loop": 399.545 ns/op (1 threads)
+                 "ping": 7319.137 ns/op (1 threads)
+
+
+Result : 918.591 ±(99.9%) 152.972 ns/op
+  Statistics: (min, avg, max) = (757.724, 918.591, 1002.333), stdev = 101.181
+  Confidence interval (99.9%): [765.620, 1071.563]
+
+Result "loop": 488.467 ±(99.9%) 86.412 ns/op
+  Statistics: (min, avg, max) = (399.545, 488.467, 535.504), stdev = 57.156
+  Confidence interval (99.9%): [402.054, 574.879]
+
+Result "ping": 7716.807 ±(99.9%) 250.206 ns/op
+  Statistics: (min, avg, max) = (7319.137, 7716.807, 7925.470), stdev = 165.496
+  Confidence interval (99.9%): [7466.600, 7967.013]
+
+
+# Run progress: 1.67% complete, ETA 00:20:06
+# VM invoker: /home/yak/Work/jdks/jdk1.7.0_51/jre/bin/java
+# VM options: -Dburst.size=10 -XX:+UseCondCardMark
+# Fork: 2 of 5
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 2 threads, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: psy.lob.saw.queues.benchmarks.jmh.QueueRoundTripLatency.ring
+# Parameters: (queueScale = 17, queueType = 11)
+# Warmup Iteration   1: 619.923 ns/op
+# Warmup Iteration   2: 749.874 ns/op
+# Warmup Iteration   3: 826.592 ns/op
+# Warmup Iteration   4: 906.420 ns/op
+# Warmup Iteration   5: 826.530 ns/op
+# Warmup Iteration   6: 778.660 ns/op
+# Warmup Iteration   7: 671.511 ns/op
+# Warmup Iteration   8: 612.271 ns/op
+# Warmup Iteration   9: 659.425 ns/op
+# Warmup Iteration  10: 710.713 ns/op
+Iteration   1: 680.311 ns/op
+                 "loop": 357.222 ns/op (1 threads)
+                 "ping": 6930.526 ns/op (1 threads)
+
+Iteration   2: 738.227 ns/op
+                 "loop": 389.511 ns/op (1 threads)
+                 "ping": 7049.077 ns/op (1 threads)
+
+Iteration   3: 742.605 ns/op
+                 "loop": 391.898 ns/op (1 threads)
+                 "ping": 7064.688 ns/op (1 threads)
+
+Iteration   4: 739.273 ns/op
+                 "loop": 390.107 ns/op (1 threads)
+                 "ping": 7043.564 ns/op (1 threads)
+
+Iteration   5: 712.705 ns/op
+                 "loop": 375.642 ns/op (1 threads)
+                 "ping": 6939.509 ns/op (1 threads)
+
+Iteration   6: 713.354 ns/op
+                 "loop": 375.706 ns/op (1 threads)
+                 "ping": 7041.664 ns/op (1 threads)
+
+Iteration   7: 726.016 ns/op
+                 "loop": 382.824 ns/op (1 threads)
+                 "ping": 7011.837 ns/op (1 threads)
+
+Iteration   8: 710.074 ns/op
+                 "loop": 374.163 ns/op (1 threads)
+                 "ping": 6946.162 ns/op (1 threads)
+
+Iteration   9: 740.807 ns/op
+                 "loop": 390.911 ns/op (1 threads)
+                 "ping": 7061.449 ns/op (1 threads)
+
+Iteration  10: 742.710 ns/op
+                 "loop": 391.907 ns/op (1 threads)
+                 "ping": 7082.160 ns/op (1 threads)
+
+
+Result : 724.608 ±(99.9%) 30.895 ns/op
+  Statistics: (min, avg, max) = (680.311, 724.608, 742.710), stdev = 20.435
+  Confidence interval (99.9%): [693.714, 755.503]
+
+Result "loop": 381.989 ±(99.9%) 17.118 ns/op
+  Statistics: (min, avg, max) = (357.222, 381.989, 391.907), stdev = 11.322
+  Confidence interval (99.9%): [364.871, 399.107]
+
+Result "ping": 7017.064 ±(99.9%) 86.360 ns/op
+  Statistics: (min, avg, max) = (6930.526, 7017.064, 7082.160), stdev = 57.122
+  Confidence interval (99.9%): [6930.704, 7103.423]
+
+
+# Run progress: 3.33% complete, ETA 00:19:43
+# VM invoker: /home/yak/Work/jdks/jdk1.7.0_51/jre/bin/java
+# VM options: -Dburst.size=10 -XX:+UseCondCardMark
+# Fork: 3 of 5
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 2 threads, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: psy.lob.saw.queues.benchmarks.jmh.QueueRoundTripLatency.ring
+# Parameters: (queueScale = 17, queueType = 11)
+# Warmup Iteration   1: 639.886 ns/op
+# Warmup Iteration   2: 754.099 ns/op
+# Warmup Iteration   3: 905.196 ns/op
+# Warmup Iteration   4: 890.670 ns/op
+# Warmup Iteration   5: 869.994 ns/op
+# Warmup Iteration   6: 791.220 ns/op
+# Warmup Iteration   7: 791.992 ns/op
+# Warmup Iteration   8: 699.278 ns/op
+# Warmup Iteration   9: 708.610 ns/op
+# Warmup Iteration  10: 688.608 ns/op
+Iteration   1: 685.301 ns/op
+                 "loop": 361.326 ns/op (1 threads)
+                 "ping": 6630.031 ns/op (1 threads)
+
+Iteration   2: 692.633 ns/op
+                 "loop": 365.297 ns/op (1 threads)
+                 "ping": 6664.718 ns/op (1 threads)
+
+Iteration   3: 704.202 ns/op
+                 "loop": 371.534 ns/op (1 threads)
+                 "ping": 6730.968 ns/op (1 threads)
+
+Iteration   4: 685.876 ns/op
+                 "loop": 361.457 ns/op (1 threads)
+                 "ping": 6693.836 ns/op (1 threads)
+
+Iteration   5: 673.128 ns/op
+                 "loop": 354.688 ns/op (1 threads)
+                 "ping": 6587.008 ns/op (1 threads)
+
+Iteration   6: 687.303 ns/op
+                 "loop": 362.314 ns/op (1 threads)
+                 "ping": 6672.061 ns/op (1 threads)
+
+Iteration   7: 704.193 ns/op
+                 "loop": 371.701 ns/op (1 threads)
+                 "ping": 6675.717 ns/op (1 threads)
+
+Iteration   8: 711.591 ns/op
+                 "loop": 375.518 ns/op (1 threads)
+                 "ping": 6774.610 ns/op (1 threads)
+
+Iteration   9: 707.053 ns/op
+                 "loop": 373.077 ns/op (1 threads)
+                 "ping": 6747.023 ns/op (1 threads)
+
+Iteration  10: 707.674 ns/op
+                 "loop": 373.597 ns/op (1 threads)
+                 "ping": 6690.362 ns/op (1 threads)
+
+
+Result : 695.895 ±(99.9%) 19.275 ns/op
+  Statistics: (min, avg, max) = (673.128, 695.895, 711.591), stdev = 12.749
+  Confidence interval (99.9%): [676.621, 715.170]
+
+Result "loop": 367.051 ±(99.9%) 10.511 ns/op
+  Statistics: (min, avg, max) = (354.688, 367.051, 375.518), stdev = 6.952
+  Confidence interval (99.9%): [356.540, 377.562]
+
+Result "ping": 6686.633 ±(99.9%) 83.357 ns/op
+  Statistics: (min, avg, max) = (6587.008, 6686.633, 6774.610), stdev = 55.135
+  Confidence interval (99.9%): [6603.277, 6769.990]
+
+
+# Run progress: 5.00% complete, ETA 00:19:22
+# VM invoker: /home/yak/Work/jdks/jdk1.7.0_51/jre/bin/java
+# VM options: -Dburst.size=10 -XX:+UseCondCardMark
+# Fork: 4 of 5
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 2 threads, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: psy.lob.saw.queues.benchmarks.jmh.QueueRoundTripLatency.ring
+# Parameters: (queueScale = 17, queueType = 11)
+# Warmup Iteration   1: 742.110 ns/op
+# Warmup Iteration   2: 860.627 ns/op
+# Warmup Iteration   3: 530.134 ns/op
+# Warmup Iteration   4: 848.573 ns/op
+# Warmup Iteration   5: 763.196 ns/op
+# Warmup Iteration   6: 785.706 ns/op
+# Warmup Iteration   7: 799.371 ns/op
+# Warmup Iteration   8: 790.481 ns/op
+# Warmup Iteration   9: 690.956 ns/op
+# Warmup Iteration  10: 770.481 ns/op
+Iteration   1: 800.103 ns/op
+                 "loop": 423.776 ns/op (1 threads)
+                 "ping": 7146.610 ns/op (1 threads)
+
+Iteration   2: 829.108 ns/op
+                 "loop": 439.744 ns/op (1 threads)
+                 "ping": 7237.214 ns/op (1 threads)
+
+Iteration   3: 821.284 ns/op
+                 "loop": 435.236 ns/op (1 threads)
+                 "ping": 7266.785 ns/op (1 threads)
+
+Iteration   4: 786.547 ns/op
+                 "loop": 416.080 ns/op (1 threads)
+                 "ping": 7176.013 ns/op (1 threads)
+
+Iteration   5: 796.332 ns/op
+                 "loop": 421.553 ns/op (1 threads)
+                 "ping": 7177.472 ns/op (1 threads)
+
+Iteration   6: 823.704 ns/op
+                 "loop": 436.821 ns/op (1 threads)
+                 "ping": 7205.494 ns/op (1 threads)
+
+Iteration   7: 687.902 ns/op
+                 "loop": 360.404 ns/op (1 threads)
+                 "ping": 7535.036 ns/op (1 threads)
+
+Iteration   8: 800.390 ns/op
+                 "loop": 423.810 ns/op (1 threads)
+                 "ping": 7181.595 ns/op (1 threads)
+
+Iteration   9: 813.861 ns/op
+                 "loop": 431.192 ns/op (1 threads)
+                 "ping": 7232.786 ns/op (1 threads)
+
+Iteration  10: 710.434 ns/op
+                 "loop": 373.428 ns/op (1 threads)
+                 "ping": 7283.591 ns/op (1 threads)
+
+
+Result : 786.967 ±(99.9%) 73.269 ns/op
+  Statistics: (min, avg, max) = (687.902, 786.967, 829.108), stdev = 48.463
+  Confidence interval (99.9%): [713.697, 860.236]
+
+Result "loop": 416.204 ±(99.9%) 41.106 ns/op
+  Statistics: (min, avg, max) = (360.404, 416.204, 439.744), stdev = 27.189
+  Confidence interval (99.9%): [375.098, 457.311]
+
+Result "ping": 7244.260 ±(99.9%) 167.802 ns/op
+  Statistics: (min, avg, max) = (7146.610, 7244.260, 7535.036), stdev = 110.990
+  Confidence interval (99.9%): [7076.458, 7412.061]
+
+
+# Run progress: 6.67% complete, ETA 00:19:02
+# VM invoker: /home/yak/Work/jdks/jdk1.7.0_51/jre/bin/java
+# VM options: -Dburst.size=10 -XX:+UseCondCardMark
+# Fork: 5 of 5
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 2 threads, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: psy.lob.saw.queues.benchmarks.jmh.QueueRoundTripLatency.ring
+# Parameters: (queueScale = 17, queueType = 11)
+# Warmup Iteration   1: 735.552 ns/op
+# Warmup Iteration   2: 770.668 ns/op
+# Warmup Iteration   3: 806.039 ns/op
+# Warmup Iteration   4: 926.561 ns/op
+# Warmup Iteration   5: 888.901 ns/op
+# Warmup Iteration   6: 1053.326 ns/op
+# Warmup Iteration   7: 1049.015 ns/op
+# Warmup Iteration   8: 1013.439 ns/op
+# Warmup Iteration   9: 813.657 ns/op
+# Warmup Iteration  10: 936.174 ns/op
+Iteration   1: 855.846 ns/op
+                 "loop": 454.193 ns/op (1 threads)
+                 "ping": 7398.658 ns/op (1 threads)
+
+Iteration   2: 851.331 ns/op
+                 "loop": 451.770 ns/op (1 threads)
+                 "ping": 7366.097 ns/op (1 threads)
+
+Iteration   3: 844.229 ns/op
+                 "loop": 446.701 ns/op (1 threads)
+                 "ping": 7669.491 ns/op (1 threads)
+
+Iteration   4: 934.699 ns/op
+                 "loop": 497.909 ns/op (1 threads)
+                 "ping": 7615.004 ns/op (1 threads)
+
+Iteration   5: 939.924 ns/op
+                 "loop": 500.744 ns/op (1 threads)
+                 "ping": 7644.236 ns/op (1 threads)
+
+Iteration   6: 765.467 ns/op
+                 "loop": 402.495 ns/op (1 threads)
+                 "ping": 7795.637 ns/op (1 threads)
+
+Iteration   7: 919.879 ns/op
+                 "loop": 489.626 ns/op (1 threads)
+                 "ping": 7585.130 ns/op (1 threads)
+
+Iteration   8: 786.890 ns/op
+                 "loop": 415.703 ns/op (1 threads)
+                 "ping": 7347.327 ns/op (1 threads)
+
+Iteration   9: 843.038 ns/op
+                 "loop": 446.028 ns/op (1 threads)
+                 "ping": 7670.978 ns/op (1 threads)
+
+Iteration  10: 864.659 ns/op
+                 "loop": 459.049 ns/op (1 threads)
+                 "ping": 7426.936 ns/op (1 threads)
+
+
+Result : 860.596 ±(99.9%) 87.986 ns/op
+  Statistics: (min, avg, max) = (765.467, 860.596, 939.924), stdev = 58.197
+  Confidence interval (99.9%): [772.610, 948.582]
+
+Result "loop": 456.422 ±(99.9%) 49.352 ns/op
+  Statistics: (min, avg, max) = (402.495, 456.422, 500.744), stdev = 32.643
+  Confidence interval (99.9%): [407.070, 505.774]
+
+Result "ping": 7551.949 ±(99.9%) 234.486 ns/op
+  Statistics: (min, avg, max) = (7347.327, 7551.949, 7795.637), stdev = 155.098
+  Confidence interval (99.9%): [7317.463, 7786.435]
+
+
+# Run progress: 8.33% complete, ETA 00:18:41
+# VM invoker: /home/yak/Work/jdks/jdk1.7.0_51/jre/bin/java
+# VM options: -Dburst.size=10 -XX:+UseCondCardMark
+# Fork: 1 of 5
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 2 threads, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: psy.lob.saw.queues.benchmarks.jmh.QueueRoundTripLatency.ring
+# Parameters: (queueScale = 17, queueType = 12)
+# Warmup Iteration   1: 70.940 ns/op
+# Warmup Iteration   2: 140.475 ns/op
+# Warmup Iteration   3: 197.919 ns/op
+# Warmup Iteration   4: 160.762 ns/op
+# Warmup Iteration   5: 255.670 ns/op
+# Warmup Iteration   6: 186.172 ns/op
+# Warmup Iteration   7: 220.113 ns/op
+# Warmup Iteration   8: 232.273 ns/op
+# Warmup Iteration   9: 238.400 ns/op
+# Warmup Iteration  10: 245.633 ns/op
+Iteration   1: 240.131 ns/op
+                 "loop": 126.324 ns/op (1 threads)
+                 "ping": 2422.918 ns/op (1 threads)
+
+Iteration   2: 244.261 ns/op
+                 "loop": 128.574 ns/op (1 threads)
+                 "ping": 2437.167 ns/op (1 threads)
+
+Iteration   3: 242.868 ns/op
+                 "loop": 127.783 ns/op (1 threads)
+                 "ping": 2443.749 ns/op (1 threads)
+
+Iteration   4: 225.214 ns/op
+                 "loop": 117.907 ns/op (1 threads)
+                 "ping": 2504.543 ns/op (1 threads)
+
+Iteration   5: 222.172 ns/op
+                 "loop": 116.390 ns/op (1 threads)
+                 "ping": 2437.454 ns/op (1 threads)
+
+Iteration   6: 200.624 ns/op
+                 "loop": 104.569 ns/op (1 threads)
+                 "ping": 2464.226 ns/op (1 threads)
+
+Iteration   7: 235.785 ns/op
+                 "loop": 123.918 ns/op (1 threads)
+                 "ping": 2424.756 ns/op (1 threads)
+
+Iteration   8: 222.477 ns/op
+                 "loop": 116.497 ns/op (1 threads)
+                 "ping": 2464.363 ns/op (1 threads)
+
+Iteration   9: 242.553 ns/op
+                 "loop": 127.598 ns/op (1 threads)
+                 "ping": 2447.977 ns/op (1 threads)
+
+Iteration  10: 240.165 ns/op
+                 "loop": 126.262 ns/op (1 threads)
+                 "ping": 2453.404 ns/op (1 threads)
+
+
+Result : 231.625 ±(99.9%) 21.041 ns/op
+  Statistics: (min, avg, max) = (200.624, 231.625, 244.261), stdev = 13.917
+  Confidence interval (99.9%): [210.584, 252.666]
+
+Result "loop": 121.582 ±(99.9%) 11.592 ns/op
+  Statistics: (min, avg, max) = (104.569, 121.582, 128.574), stdev = 7.668
+  Confidence interval (99.9%): [109.990, 133.175]
+
+Result "ping": 2450.056 ±(99.9%) 36.099 ns/op
+  Statistics: (min, avg, max) = (2422.918, 2450.056, 2504.543), stdev = 23.877
+  Confidence interval (99.9%): [2413.957, 2486.155]
+
+
+# Run progress: 10.00% complete, ETA 00:18:21
+# VM invoker: /home/yak/Work/jdks/jdk1.7.0_51/jre/bin/java
+# VM options: -Dburst.size=10 -XX:+UseCondCardMark
+# Fork: 2 of 5
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 2 threads, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: psy.lob.saw.queues.benchmarks.jmh.QueueRoundTripLatency.ring
+# Parameters: (queueScale = 17, queueType = 12)
+# Warmup Iteration   1: 78.104 ns/op
+# Warmup Iteration   2: 72.898 ns/op
+# Warmup Iteration   3: 48.165 ns/op
+# Warmup Iteration   4: 42.254 ns/op
+# Warmup Iteration   5: 48.273 ns/op
+# Warmup Iteration   6: 50.997 ns/op
+# Warmup Iteration   7: 47.101 ns/op
+# Warmup Iteration   8: 50.177 ns/op
+# Warmup Iteration   9: 54.881 ns/op
+# Warmup Iteration  10: 52.326 ns/op
+Iteration   1: 51.368 ns/op
+                 "loop": 26.017 ns/op (1 threads)
+                 "ping": 2002.393 ns/op (1 threads)
+
+Iteration   2: 47.615 ns/op
+                 "loop": 24.094 ns/op (1 threads)
+                 "ping": 2001.278 ns/op (1 threads)
+
+Iteration   3: 51.460 ns/op
+                 "loop": 26.064 ns/op (1 threads)
+                 "ping": 2008.123 ns/op (1 threads)
+
+Iteration   4: 50.994 ns/op
+                 "loop": 25.799 ns/op (1 threads)
+                 "ping": 2009.956 ns/op (1 threads)
+
+Iteration   5: 54.300 ns/op
+                 "loop": 27.520 ns/op (1 threads)
+                 "ping": 2019.317 ns/op (1 threads)
+
+Iteration   6: 53.017 ns/op
+                 "loop": 26.855 ns/op (1 threads)
+                 "ping": 2053.568 ns/op (1 threads)
+
+Iteration   7: 53.372 ns/op
+                 "loop": 27.040 ns/op (1 threads)
+                 "ping": 2037.065 ns/op (1 threads)
+
+Iteration   8: 50.529 ns/op
+                 "loop": 25.582 ns/op (1 threads)
+                 "ping": 2032.612 ns/op (1 threads)
+
+Iteration   9: 51.687 ns/op
+                 "loop": 26.180 ns/op (1 threads)
+                 "ping": 2009.541 ns/op (1 threads)
+
+Iteration  10: 52.678 ns/op
+                 "loop": 26.678 ns/op (1 threads)
+                 "ping": 2070.994 ns/op (1 threads)
+
+
+Result : 51.702 ±(99.9%) 2.805 ns/op
+  Statistics: (min, avg, max) = (47.615, 51.702, 54.300), stdev = 1.855
+  Confidence interval (99.9%): [48.897, 54.507]
+
+Result "loop": 26.183 ±(99.9%) 1.437 ns/op
+  Statistics: (min, avg, max) = (24.094, 26.183, 27.520), stdev = 0.951
+  Confidence interval (99.9%): [24.746, 27.620]
+
+Result "ping": 2024.485 ±(99.9%) 35.595 ns/op
+  Statistics: (min, avg, max) = (2001.278, 2024.485, 2070.994), stdev = 23.544
+  Confidence interval (99.9%): [1988.890, 2060.079]
+
+
+# Run progress: 11.67% complete, ETA 00:18:00
+# VM invoker: /home/yak/Work/jdks/jdk1.7.0_51/jre/bin/java
+# VM options: -Dburst.size=10 -XX:+UseCondCardMark
+# Fork: 3 of 5
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 2 threads, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: psy.lob.saw.queues.benchmarks.jmh.QueueRoundTripLatency.ring
+# Parameters: (queueScale = 17, queueType = 12)
+# Warmup Iteration   1: 76.562 ns/op
+# Warmup Iteration   2: 104.612 ns/op
+# Warmup Iteration   3: 81.835 ns/op
+# Warmup Iteration   4: 88.218 ns/op
+# Warmup Iteration   5: 85.096 ns/op
+# Warmup Iteration   6: 92.379 ns/op
+# Warmup Iteration   7: 94.080 ns/op
+# Warmup Iteration   8: 88.677 ns/op
+# Warmup Iteration   9: 89.450 ns/op
+# Warmup Iteration  10: 89.836 ns/op
+Iteration   1: 91.386 ns/op
+                 "loop": 46.729 ns/op (1 threads)
+                 "ping": 2061.343 ns/op (1 threads)
+
+Iteration   2: 91.507 ns/op
+                 "loop": 46.788 ns/op (1 threads)
+                 "ping": 2069.867 ns/op (1 threads)
+
+Iteration   3: 90.540 ns/op
+                 "loop": 46.280 ns/op (1 threads)
+                 "ping": 2075.106 ns/op (1 threads)
+
+Iteration   4: 82.330 ns/op
+                 "loop": 41.912 ns/op (1 threads)
+                 "ping": 2114.536 ns/op (1 threads)
+
+Iteration   5: 79.353 ns/op
+                 "loop": 40.272 ns/op (1 threads)
+                 "ping": 2120.414 ns/op (1 threads)
+
+Iteration   6: 92.877 ns/op
+                 "loop": 47.486 ns/op (1 threads)
+                 "ping": 2106.426 ns/op (1 threads)
+
+Iteration   7: 82.095 ns/op
+                 "loop": 41.878 ns/op (1 threads)
+                 "ping": 2068.552 ns/op (1 threads)
+
+Iteration   8: 85.858 ns/op
+                 "loop": 43.846 ns/op (1 threads)
+                 "ping": 2052.060 ns/op (1 threads)
+
+Iteration   9: 80.934 ns/op
+                 "loop": 41.359 ns/op (1 threads)
+                 "ping": 2059.329 ns/op (1 threads)
+
+Iteration  10: 81.956 ns/op
+                 "loop": 41.746 ns/op (1 threads)
+                 "ping": 2125.945 ns/op (1 threads)
+
+
+Result : 85.884 ±(99.9%) 7.840 ns/op
+  Statistics: (min, avg, max) = (79.353, 85.884, 92.877), stdev = 5.186
+  Confidence interval (99.9%): [78.043, 93.724]
+
+Result "loop": 43.830 ±(99.9%) 4.129 ns/op
+  Statistics: (min, avg, max) = (40.272, 43.830, 47.486), stdev = 2.731
+  Confidence interval (99.9%): [39.701, 47.958]
+
+Result "ping": 2085.358 ±(99.9%) 42.649 ns/op
+  Statistics: (min, avg, max) = (2052.060, 2085.358, 2125.945), stdev = 28.209
+  Confidence interval (99.9%): [2042.709, 2128.006]
+
+
+# Run progress: 13.33% complete, ETA 00:17:40
+# VM invoker: /home/yak/Work/jdks/jdk1.7.0_51/jre/bin/java
+# VM options: -Dburst.size=10 -XX:+UseCondCardMark
+# Fork: 4 of 5
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 2 threads, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: psy.lob.saw.queues.benchmarks.jmh.QueueRoundTripLatency.ring
+# Parameters: (queueScale = 17, queueType = 12)
+# Warmup Iteration   1: 73.499 ns/op
+# Warmup Iteration   2: 83.530 ns/op
+# Warmup Iteration   3: 132.491 ns/op
+# Warmup Iteration   4: 208.136 ns/op
+# Warmup Iteration   5: 199.397 ns/op
+# Warmup Iteration   6: 208.603 ns/op
+# Warmup Iteration   7: 210.267 ns/op
+# Warmup Iteration   8: 210.975 ns/op
+# Warmup Iteration   9: 216.741 ns/op
+# Warmup Iteration  10: 158.290 ns/op
+Iteration   1: 213.506 ns/op
+                 "loop": 111.805 ns/op (1 threads)
+                 "ping": 2362.244 ns/op (1 threads)
+
+Iteration   2: 215.870 ns/op
+                 "loop": 113.011 ns/op (1 threads)
+                 "ping": 2402.719 ns/op (1 threads)
+
+Iteration   3: 145.912 ns/op
+                 "loop": 75.222 ns/op (1 threads)
+                 "ping": 2421.566 ns/op (1 threads)
+
+Iteration   4: 216.086 ns/op
+                 "loop": 113.167 ns/op (1 threads)
+                 "ping": 2385.765 ns/op (1 threads)
+
+Iteration   5: 212.693 ns/op
+                 "loop": 111.307 ns/op (1 threads)
+                 "ping": 2385.685 ns/op (1 threads)
+
+Iteration   6: 174.260 ns/op
+                 "loop": 90.421 ns/op (1 threads)
+                 "ping": 2393.596 ns/op (1 threads)
+
+Iteration   7: 171.642 ns/op
+                 "loop": 88.939 ns/op (1 threads)
+                 "ping": 2447.601 ns/op (1 threads)
+
+Iteration   8: 206.602 ns/op
+                 "loop": 108.026 ns/op (1 threads)
+                 "ping": 2361.280 ns/op (1 threads)
+
+Iteration   9: 141.109 ns/op
+                 "loop": 72.794 ns/op (1 threads)
+                 "ping": 2442.689 ns/op (1 threads)
+
+Iteration  10: 193.084 ns/op
+                 "loop": 100.602 ns/op (1 threads)
+                 "ping": 2391.622 ns/op (1 threads)
+
+
+Result : 189.076 ±(99.9%) 43.970 ns/op
+  Statistics: (min, avg, max) = (141.109, 189.076, 216.086), stdev = 29.084
+  Confidence interval (99.9%): [145.106, 233.046]
+
+Result "loop": 98.529 ±(99.9%) 23.751 ns/op
+  Statistics: (min, avg, max) = (72.794, 98.529, 113.167), stdev = 15.710
+  Confidence interval (99.9%): [74.778, 122.281]
+
+Result "ping": 2399.477 ±(99.9%) 45.079 ns/op
+  Statistics: (min, avg, max) = (2361.280, 2399.477, 2447.601), stdev = 29.817
+  Confidence interval (99.9%): [2354.398, 2444.556]
+
+
+# Run progress: 15.00% complete, ETA 00:17:19
+# VM invoker: /home/yak/Work/jdks/jdk1.7.0_51/jre/bin/java
+# VM options: -Dburst.size=10 -XX:+UseCondCardMark
+# Fork: 5 of 5
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 2 threads, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: psy.lob.saw.queues.benchmarks.jmh.QueueRoundTripLatency.ring
+# Parameters: (queueScale = 17, queueType = 12)
+# Warmup Iteration   1: 66.391 ns/op
+# Warmup Iteration   2: 63.259 ns/op
+# Warmup Iteration   3: 67.398 ns/op
+# Warmup Iteration   4: 73.642 ns/op
+# Warmup Iteration   5: 76.759 ns/op
+# Warmup Iteration   6: 74.546 ns/op
+# Warmup Iteration   7: 75.937 ns/op
+# Warmup Iteration   8: 79.016 ns/op
+# Warmup Iteration   9: 73.128 ns/op
+# Warmup Iteration  10: 77.497 ns/op
+Iteration   1: 81.236 ns/op
+                 "loop": 41.472 ns/op (1 threads)
+                 "ping": 1973.702 ns/op (1 threads)
+
+Iteration   2: 77.903 ns/op
+                 "loop": 39.745 ns/op (1 threads)
+                 "ping": 1952.386 ns/op (1 threads)
+
+Iteration   3: 77.926 ns/op
+                 "loop": 39.691 ns/op (1 threads)
+                 "ping": 2030.368 ns/op (1 threads)
+
+Iteration   4: 70.524 ns/op
+                 "loop": 35.886 ns/op (1 threads)
+                 "ping": 2028.596 ns/op (1 threads)
+
+Iteration   5: 73.528 ns/op
+                 "loop": 37.470 ns/op (1 threads)
+                 "ping": 1948.722 ns/op (1 threads)
+
+Iteration   6: 72.024 ns/op
+                 "loop": 36.676 ns/op (1 threads)
+                 "ping": 1988.024 ns/op (1 threads)
+
+Iteration   7: 64.871 ns/op
+                 "loop": 32.758 ns/op (1 threads)
+                 "ping": 2076.251 ns/op (1 threads)
+
+Iteration   8: 74.247 ns/op
+                 "loop": 37.833 ns/op (1 threads)
+                 "ping": 1978.650 ns/op (1 threads)
+
+Iteration   9: 77.869 ns/op
+                 "loop": 39.712 ns/op (1 threads)
+                 "ping": 1990.025 ns/op (1 threads)
+
+Iteration  10: 76.500 ns/op
+                 "loop": 38.990 ns/op (1 threads)
+                 "ping": 2014.517 ns/op (1 threads)
+
+
+Result : 74.663 ±(99.9%) 7.117 ns/op
+  Statistics: (min, avg, max) = (64.871, 74.663, 81.236), stdev = 4.708
+  Confidence interval (99.9%): [67.546, 81.780]
+
+Result "loop": 38.023 ±(99.9%) 3.767 ns/op
+  Statistics: (min, avg, max) = (32.758, 38.023, 41.472), stdev = 2.492
+  Confidence interval (99.9%): [34.256, 41.790]
+
+Result "ping": 1998.124 ±(99.9%) 59.664 ns/op
+  Statistics: (min, avg, max) = (1948.722, 1998.124, 2076.251), stdev = 39.464
+  Confidence interval (99.9%): [1938.460, 2057.788]
+
+
+# Run progress: 16.67% complete, ETA 00:16:59
+# VM invoker: /home/yak/Work/jdks/jdk1.7.0_51/jre/bin/java
+# VM options: -Dburst.size=10 -XX:+UseCondCardMark
+# Fork: 1 of 5
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 2 threads, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: psy.lob.saw.queues.benchmarks.jmh.QueueRoundTripLatency.ring
+# Parameters: (queueScale = 17, queueType = 21)
+# Warmup Iteration   1: 21.597 ns/op
+# Warmup Iteration   2: 22.115 ns/op
+# Warmup Iteration   3: 22.187 ns/op
+# Warmup Iteration   4: 17.302 ns/op
+# Warmup Iteration   5: 23.282 ns/op
+# Warmup Iteration   6: 23.256 ns/op
+# Warmup Iteration   7: 22.075 ns/op
+# Warmup Iteration   8: 23.038 ns/op
+# Warmup Iteration   9: 23.017 ns/op
+# Warmup Iteration  10: 22.816 ns/op
+Iteration   1: 22.807 ns/op
+                 "loop": 11.475 ns/op (1 threads)
+                 "ping": 1821.474 ns/op (1 threads)
+
+Iteration   2: 22.205 ns/op
+                 "loop": 11.031 ns/op (1 threads)
+                 "ping": 1880.208 ns/op (1 threads)
+
+Iteration   3: 22.744 ns/op
+                 "loop": 11.443 ns/op (1 threads)
+                 "ping": 1820.109 ns/op (1 threads)
+
+Iteration   4: 22.876 ns/op
+                 "loop": 11.510 ns/op (1 threads)
+                 "ping": 1822.635 ns/op (1 threads)
+
+Iteration   5: 22.795 ns/op
+                 "loop": 11.469 ns/op (1 threads)
+                 "ping": 1820.539 ns/op (1 threads)
+
+Iteration   6: 22.782 ns/op
+                 "loop": 11.463 ns/op (1 threads)
+                 "ping": 1820.509 ns/op (1 threads)
+
+Iteration   7: 22.734 ns/op
+                 "loop": 11.438 ns/op (1 threads)
+                 "ping": 1820.571 ns/op (1 threads)
+
+Iteration   8: 22.845 ns/op
+                 "loop": 11.494 ns/op (1 threads)
+                 "ping": 1822.717 ns/op (1 threads)
+
+Iteration   9: 22.808 ns/op
+                 "loop": 11.476 ns/op (1 threads)
+                 "ping": 1820.435 ns/op (1 threads)
+
+Iteration  10: 22.783 ns/op
+                 "loop": 11.463 ns/op (1 threads)
+                 "ping": 1820.941 ns/op (1 threads)
+
+
+Result : 22.738 ±(99.9%) 0.290 ns/op
+  Statistics: (min, avg, max) = (22.205, 22.738, 22.876), stdev = 0.192
+  Confidence interval (99.9%): [22.447, 23.028]
+
+Result "loop": 11.426 ±(99.9%) 0.212 ns/op
+  Statistics: (min, avg, max) = (11.031, 11.426, 11.510), stdev = 0.140
+  Confidence interval (99.9%): [11.214, 11.639]
+
+Result "ping": 1827.014 ±(99.9%) 28.291 ns/op
+  Statistics: (min, avg, max) = (1820.109, 1827.014, 1880.208), stdev = 18.713
+  Confidence interval (99.9%): [1798.723, 1855.305]
+
+
+# Run progress: 18.33% complete, ETA 00:16:39
+# VM invoker: /home/yak/Work/jdks/jdk1.7.0_51/jre/bin/java
+# VM options: -Dburst.size=10 -XX:+UseCondCardMark
+# Fork: 2 of 5
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 2 threads, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: psy.lob.saw.queues.benchmarks.jmh.QueueRoundTripLatency.ring
+# Parameters: (queueScale = 17, queueType = 21)
+# Warmup Iteration   1: 21.610 ns/op
+# Warmup Iteration   2: 23.464 ns/op
+# Warmup Iteration   3: 21.880 ns/op
+# Warmup Iteration   4: 18.723 ns/op
+# Warmup Iteration   5: 24.849 ns/op
+# Warmup Iteration   6: 24.752 ns/op
+# Warmup Iteration   7: 24.712 ns/op
+# Warmup Iteration   8: 24.744 ns/op
+# Warmup Iteration   9: 24.736 ns/op
+# Warmup Iteration  10: 24.762 ns/op
+Iteration   1: 24.739 ns/op
+                 "loop": 12.451 ns/op (1 threads)
+                 "ping": 1882.667 ns/op (1 threads)
+
+Iteration   2: 24.776 ns/op
+                 "loop": 12.470 ns/op (1 threads)
+                 "ping": 1885.063 ns/op (1 threads)
+
+Iteration   3: 24.717 ns/op
+                 "loop": 12.440 ns/op (1 threads)
+                 "ping": 1882.481 ns/op (1 threads)
+
+Iteration   4: 24.727 ns/op
+                 "loop": 12.445 ns/op (1 threads)
+                 "ping": 1883.177 ns/op (1 threads)
+
+Iteration   5: 24.649 ns/op
+                 "loop": 12.406 ns/op (1 threads)
+                 "ping": 1880.217 ns/op (1 threads)
+
+Iteration   6: 24.744 ns/op
+                 "loop": 12.454 ns/op (1 threads)
+                 "ping": 1884.666 ns/op (1 threads)
+
+Iteration   7: 24.634 ns/op
+                 "loop": 12.398 ns/op (1 threads)
+                 "ping": 1883.928 ns/op (1 threads)
+
+Iteration   8: 24.670 ns/op
+                 "loop": 12.417 ns/op (1 threads)
+                 "ping": 1878.529 ns/op (1 threads)
+
+Iteration   9: 24.737 ns/op
+                 "loop": 12.450 ns/op (1 threads)
+                 "ping": 1884.957 ns/op (1 threads)
+
+Iteration  10: 24.698 ns/op
+                 "loop": 12.431 ns/op (1 threads)
+                 "ping": 1882.970 ns/op (1 threads)
+
+
+Result : 24.709 ±(99.9%) 0.069 ns/op
+  Statistics: (min, avg, max) = (24.634, 24.709, 24.776), stdev = 0.046
+  Confidence interval (99.9%): [24.640, 24.778]
+
+Result "loop": 12.436 ±(99.9%) 0.035 ns/op
+  Statistics: (min, avg, max) = (12.398, 12.436, 12.470), stdev = 0.023
+  Confidence interval (99.9%): [12.401, 12.471]
+
+Result "ping": 1882.865 ±(99.9%) 3.175 ns/op
+  Statistics: (min, avg, max) = (1878.529, 1882.865, 1885.063), stdev = 2.100
+  Confidence interval (99.9%): [1879.691, 1886.040]
+
+
+# Run progress: 20.00% complete, ETA 00:16:18
+# VM invoker: /home/yak/Work/jdks/jdk1.7.0_51/jre/bin/java
+# VM options: -Dburst.size=10 -XX:+UseCondCardMark
+# Fork: 3 of 5
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 2 threads, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: psy.lob.saw.queues.benchmarks.jmh.QueueRoundTripLatency.ring
+# Parameters: (queueScale = 17, queueType = 21)
+# Warmup Iteration   1: 19.697 ns/op
+# Warmup Iteration   2: 22.666 ns/op
+# Warmup Iteration   3: 16.488 ns/op
+# Warmup Iteration   4: 22.767 ns/op
+# Warmup Iteration   5: 22.780 ns/op
+# Warmup Iteration   6: 22.746 ns/op
+# Warmup Iteration   7: 22.670 ns/op
+# Warmup Iteration   8: 22.489 ns/op
+# Warmup Iteration   9: 22.506 ns/op
+# Warmup Iteration  10: 22.494 ns/op
+Iteration   1: 22.475 ns/op
+                 "loop": 11.307 ns/op (1 threads)
+                 "ping": 1812.756 ns/op (1 threads)
+
+Iteration   2: 22.431 ns/op
+                 "loop": 11.285 ns/op (1 threads)
+                 "ping": 1810.959 ns/op (1 threads)
+
+Iteration   3: 22.423 ns/op
+                 "loop": 11.282 ns/op (1 threads)
+                 "ping": 1809.547 ns/op (1 threads)
+
+Iteration   4: 22.468 ns/op
+                 "loop": 11.304 ns/op (1 threads)
+                 "ping": 1812.122 ns/op (1 threads)
+
+Iteration   5: 22.515 ns/op
+                 "loop": 11.328 ns/op (1 threads)
+                 "ping": 1814.390 ns/op (1 threads)
+
+Iteration   6: 22.436 ns/op
+                 "loop": 11.288 ns/op (1 threads)
+                 "ping": 1810.803 ns/op (1 threads)
+
+Iteration   7: 22.433 ns/op
+                 "loop": 11.286 ns/op (1 threads)
+                 "ping": 1811.161 ns/op (1 threads)
+
+Iteration   8: 22.488 ns/op
+                 "loop": 11.314 ns/op (1 threads)
+                 "ping": 1812.640 ns/op (1 threads)
+
+Iteration   9: 22.579 ns/op
+                 "loop": 11.361 ns/op (1 threads)
+                 "ping": 1799.818 ns/op (1 threads)
+
+Iteration  10: 24.869 ns/op
+                 "loop": 12.529 ns/op (1 threads)
+                 "ping": 1651.800 ns/op (1 threads)
+
+
+Result : 22.712 ±(99.9%) 1.148 ns/op
+  Statistics: (min, avg, max) = (22.423, 22.712, 24.869), stdev = 0.759
+  Confidence interval (99.9%): [21.564, 23.860]
+
+Result "loop": 11.428 ±(99.9%) 0.586 ns/op
+  Statistics: (min, avg, max) = (11.282, 11.428, 12.529), stdev = 0.387
+  Confidence interval (99.9%): [10.843, 12.014]
+
+Result "ping": 1794.600 ±(99.9%) 76.096 ns/op
+  Statistics: (min, avg, max) = (1651.800, 1794.600, 1814.390), stdev = 50.333
+  Confidence interval (99.9%): [1718.503, 1870.696]
+
+
+# Run progress: 21.67% complete, ETA 00:15:58
+# VM invoker: /home/yak/Work/jdks/jdk1.7.0_51/jre/bin/java
+# VM options: -Dburst.size=10 -XX:+UseCondCardMark
+# Fork: 4 of 5
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 2 threads, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: psy.lob.saw.queues.benchmarks.jmh.QueueRoundTripLatency.ring
+# Parameters: (queueScale = 17, queueType = 21)
+# Warmup Iteration   1: 17.379 ns/op
+# Warmup Iteration   2: 20.982 ns/op
+# Warmup Iteration   3: 23.552 ns/op
+# Warmup Iteration   4: 23.191 ns/op
+# Warmup Iteration   5: 23.499 ns/op
+# Warmup Iteration   6: 22.427 ns/op
+# Warmup Iteration   7: 22.482 ns/op
+# Warmup Iteration   8: 22.503 ns/op
+# Warmup Iteration   9: 22.494 ns/op
+# Warmup Iteration  10: 23.374 ns/op
+Iteration   1: 23.442 ns/op
+                 "loop": 11.795 ns/op (1 threads)
+                 "ping": 1876.341 ns/op (1 threads)
+
+Iteration   2: 20.834 ns/op
+                 "loop": 10.395 ns/op (1 threads)
+                 "ping": 1916.384 ns/op (1 threads)
+
+Iteration   3: 24.028 ns/op
+                 "loop": 12.088 ns/op (1 threads)
+                 "ping": 1972.182 ns/op (1 threads)
+
+Iteration   4: 23.495 ns/op
+                 "loop": 11.811 ns/op (1 threads)
+                 "ping": 1874.259 ns/op (1 threads)
+
+Iteration   5: 23.408 ns/op
+                 "loop": 11.778 ns/op (1 threads)
+                 "ping": 1871.229 ns/op (1 threads)
+
+Iteration   6: 23.366 ns/op
+                 "loop": 11.756 ns/op (1 threads)
+                 "ping": 1871.319 ns/op (1 threads)
+
+Iteration   7: 23.394 ns/op
+                 "loop": 11.770 ns/op (1 threads)
+                 "ping": 1871.374 ns/op (1 threads)
+
+Iteration   8: 23.064 ns/op
+                 "loop": 11.605 ns/op (1 threads)
+                 "ping": 1845.872 ns/op (1 threads)
+
+Iteration   9: 23.366 ns/op
+                 "loop": 11.756 ns/op (1 threads)
+                 "ping": 1870.644 ns/op (1 threads)
+
+Iteration  10: 22.413 ns/op
+                 "loop": 11.269 ns/op (1 threads)
+                 "ping": 1849.345 ns/op (1 threads)
+
+
+Result : 23.081 ±(99.9%) 1.339 ns/op
+  Statistics: (min, avg, max) = (20.834, 23.081, 24.028), stdev = 0.886
+  Confidence interval (99.9%): [21.742, 24.420]
+
+Result "loop": 11.602 ±(99.9%) 0.711 ns/op
+  Statistics: (min, avg, max) = (10.395, 11.602, 12.088), stdev = 0.470
+  Confidence interval (99.9%): [10.891, 12.313]
+
+Result "ping": 1881.895 ±(99.9%) 55.779 ns/op
+  Statistics: (min, avg, max) = (1845.872, 1881.895, 1972.182), stdev = 36.894
+  Confidence interval (99.9%): [1826.116, 1937.673]
+
+
+# Run progress: 23.33% complete, ETA 00:15:37
+# VM invoker: /home/yak/Work/jdks/jdk1.7.0_51/jre/bin/java
+# VM options: -Dburst.size=10 -XX:+UseCondCardMark
+# Fork: 5 of 5
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 2 threads, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: psy.lob.saw.queues.benchmarks.jmh.QueueRoundTripLatency.ring
+# Parameters: (queueScale = 17, queueType = 21)
+# Warmup Iteration   1: 19.543 ns/op
+# Warmup Iteration   2: 20.173 ns/op
+# Warmup Iteration   3: 17.599 ns/op
+# Warmup Iteration   4: 22.897 ns/op
+# Warmup Iteration   5: 22.995 ns/op
+# Warmup Iteration   6: 23.099 ns/op
+# Warmup Iteration   7: 23.062 ns/op
+# Warmup Iteration   8: 23.062 ns/op
+# Warmup Iteration   9: 23.118 ns/op
+# Warmup Iteration  10: 22.932 ns/op
+Iteration   1: 22.976 ns/op
+                 "loop": 11.562 ns/op (1 threads)
+                 "ping": 1801.522 ns/op (1 threads)
+
+Iteration   2: 23.063 ns/op
+                 "loop": 11.605 ns/op (1 threads)
+                 "ping": 1806.614 ns/op (1 threads)
+
+Iteration   3: 22.957 ns/op
+                 "loop": 11.552 ns/op (1 threads)
+                 "ping": 1801.251 ns/op (1 threads)
+
+Iteration   4: 22.984 ns/op
+                 "loop": 11.566 ns/op (1 threads)
+                 "ping": 1807.355 ns/op (1 threads)
+
+Iteration   5: 22.648 ns/op
+                 "loop": 11.395 ns/op (1 threads)
+                 "ping": 1810.866 ns/op (1 threads)
+
+Iteration   6: 23.143 ns/op
+                 "loop": 11.646 ns/op (1 threads)
+                 "ping": 1807.530 ns/op (1 threads)
+
+Iteration   7: 23.120 ns/op
+                 "loop": 11.634 ns/op (1 threads)
+                 "ping": 1807.487 ns/op (1 threads)
+
+Iteration   8: 22.996 ns/op
+                 "loop": 11.572 ns/op (1 threads)
+                 "ping": 1806.825 ns/op (1 threads)
+
+Iteration   9: 23.040 ns/op
+                 "loop": 11.594 ns/op (1 threads)
+                 "ping": 1807.179 ns/op (1 threads)
+
+Iteration  10: 23.084 ns/op
+                 "loop": 11.616 ns/op (1 threads)
+                 "ping": 1807.958 ns/op (1 threads)
+
+
+Result : 23.001 ±(99.9%) 0.210 ns/op
+  Statistics: (min, avg, max) = (22.648, 23.001, 23.143), stdev = 0.139
+  Confidence interval (99.9%): [22.791, 23.211]
+
+Result "loop": 11.574 ±(99.9%) 0.106 ns/op
+  Statistics: (min, avg, max) = (11.395, 11.574, 11.646), stdev = 0.070
+  Confidence interval (99.9%): [11.468, 11.681]
+
+Result "ping": 1806.459 ±(99.9%) 4.418 ns/op
+  Statistics: (min, avg, max) = (1801.251, 1806.459, 1810.866), stdev = 2.922
+  Confidence interval (99.9%): [1802.041, 1810.877]
+
+
+# Run progress: 25.00% complete, ETA 00:15:17
+# VM invoker: /home/yak/Work/jdks/jdk1.7.0_51/jre/bin/java
+# VM options: -Dburst.size=10 -XX:+UseCondCardMark
+# Fork: 1 of 5
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 2 threads, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: psy.lob.saw.queues.benchmarks.jmh.QueueRoundTripLatency.ring
+# Parameters: (queueScale = 17, queueType = 22)
+# Warmup Iteration   1: 13.598 ns/op
+# Warmup Iteration   2: 13.599 ns/op
+# Warmup Iteration   3: 13.905 ns/op
+# Warmup Iteration   4: 13.215 ns/op
+# Warmup Iteration   5: 14.172 ns/op
+# Warmup Iteration   6: 14.204 ns/op
+# Warmup Iteration   7: 14.212 ns/op
+# Warmup Iteration   8: 14.210 ns/op
+# Warmup Iteration   9: 14.205 ns/op
+# Warmup Iteration  10: 14.207 ns/op
+Iteration   1: 14.221 ns/op
+                 "loop": 7.165 ns/op (1 threads)
+                 "ping": 929.264 ns/op (1 threads)
+
+Iteration   2: 14.189 ns/op
+                 "loop": 7.149 ns/op (1 threads)
+                 "ping": 927.196 ns/op (1 threads)
+
+Iteration   3: 14.036 ns/op
+                 "loop": 7.017 ns/op (1 threads)
+                 "ping": 947.952 ns/op (1 threads)
+
+Iteration   4: 13.313 ns/op
+                 "loop": 6.701 ns/op (1 threads)
+                 "ping": 995.369 ns/op (1 threads)
+
+Iteration   5: 13.060 ns/op
+                 "loop": 6.573 ns/op (1 threads)
+                 "ping": 1008.499 ns/op (1 threads)
+
+Iteration   6: 16.816 ns/op
+                 "loop": 8.472 ns/op (1 threads)
+                 "ping": 986.224 ns/op (1 threads)
+
+Iteration   7: 14.207 ns/op
+                 "loop": 7.158 ns/op (1 threads)
+                 "ping": 928.080 ns/op (1 threads)
+
+Iteration   8: 16.080 ns/op
+                 "loop": 8.092 ns/op (1 threads)
+                 "ping": 976.904 ns/op (1 threads)
+
+Iteration   9: 31.094 ns/op
+                 "loop": 15.737 ns/op (1 threads)
+                 "ping": 1167.047 ns/op (1 threads)
+
+Iteration  10: 31.166 ns/op
+                 "loop": 15.782 ns/op (1 threads)
+                 "ping": 1165.482 ns/op (1 threads)
+
+
+Result : 17.818 ±(99.9%) 10.748 ns/op
+  Statistics: (min, avg, max) = (13.060, 17.818, 31.166), stdev = 7.109
+  Confidence interval (99.9%): [7.070, 28.566]
+
+Result "loop": 8.985 ±(99.9%) 5.469 ns/op
+  Statistics: (min, avg, max) = (6.573, 8.985, 15.782), stdev = 3.617
+  Confidence interval (99.9%): [3.515, 14.454]
+
+Result "ping": 1003.202 ±(99.9%) 137.265 ns/op
+  Statistics: (min, avg, max) = (927.196, 1003.202, 1167.047), stdev = 90.792
+  Confidence interval (99.9%): [865.937, 1140.467]
+
+
+# Run progress: 26.67% complete, ETA 00:14:57
+# VM invoker: /home/yak/Work/jdks/jdk1.7.0_51/jre/bin/java
+# VM options: -Dburst.size=10 -XX:+UseCondCardMark
+# Fork: 2 of 5
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 2 threads, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: psy.lob.saw.queues.benchmarks.jmh.QueueRoundTripLatency.ring
+# Parameters: (queueScale = 17, queueType = 22)
+# Warmup Iteration   1: 15.973 ns/op
+# Warmup Iteration   2: 20.591 ns/op
+# Warmup Iteration   3: 12.363 ns/op
+# Warmup Iteration   4: 12.635 ns/op
+# Warmup Iteration   5: 14.041 ns/op
+# Warmup Iteration   6: 13.912 ns/op
+# Warmup Iteration   7: 13.984 ns/op
+# Warmup Iteration   8: 14.089 ns/op
+# Warmup Iteration   9: 13.940 ns/op
+# Warmup Iteration  10: 14.124 ns/op
+Iteration   1: 12.552 ns/op
+                 "loop": 6.318 ns/op (1 threads)
+                 "ping": 956.654 ns/op (1 threads)
+
+Iteration   2: 12.530 ns/op
+                 "loop": 6.306 ns/op (1 threads)
+                 "ping": 955.145 ns/op (1 threads)
+
+Iteration   3: 14.063 ns/op
+                 "loop": 7.081 ns/op (1 threads)
+                 "ping": 1017.655 ns/op (1 threads)
+
+Iteration   4: 14.018 ns/op
+                 "loop": 7.058 ns/op (1 threads)
+                 "ping": 1016.383 ns/op (1 threads)
+
+Iteration   5: 12.605 ns/op
+                 "loop": 6.344 ns/op (1 threads)
+                 "ping": 956.844 ns/op (1 threads)
+
+Iteration   6: 13.947 ns/op
+                 "loop": 7.021 ns/op (1 threads)
+                 "ping": 1020.305 ns/op (1 threads)
+
+Iteration   7: 14.083 ns/op
+                 "loop": 7.090 ns/op (1 threads)
+                 "ping": 1022.278 ns/op (1 threads)
+
+Iteration   8: 14.122 ns/op
+                 "loop": 7.110 ns/op (1 threads)
+                 "ping": 1018.626 ns/op (1 threads)
+
+Iteration   9: 14.103 ns/op
+                 "loop": 7.069 ns/op (1 threads)
+                 "ping": 1041.133 ns/op (1 threads)
+
+Iteration  10: 13.773 ns/op
+                 "loop": 6.904 ns/op (1 threads)
+                 "ping": 1061.806 ns/op (1 threads)
+
+
+Result : 13.580 ±(99.9%) 1.072 ns/op
+  Statistics: (min, avg, max) = (12.530, 13.580, 14.122), stdev = 0.709
+  Confidence interval (99.9%): [12.508, 14.652]
+
+Result "loop": 6.830 ±(99.9%) 0.536 ns/op
+  Statistics: (min, avg, max) = (6.306, 6.830, 7.110), stdev = 0.355
+  Confidence interval (99.9%): [6.294, 7.366]
+
+Result "ping": 1006.683 ±(99.9%) 56.690 ns/op
+  Statistics: (min, avg, max) = (955.145, 1006.683, 1061.806), stdev = 37.497
+  Confidence interval (99.9%): [949.993, 1063.373]
+
+
+# Run progress: 28.33% complete, ETA 00:14:36
+# VM invoker: /home/yak/Work/jdks/jdk1.7.0_51/jre/bin/java
+# VM options: -Dburst.size=10 -XX:+UseCondCardMark
+# Fork: 3 of 5
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 2 threads, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: psy.lob.saw.queues.benchmarks.jmh.QueueRoundTripLatency.ring
+# Parameters: (queueScale = 17, queueType = 22)
+# Warmup Iteration   1: 14.461 ns/op
+# Warmup Iteration   2: 14.140 ns/op
+# Warmup Iteration   3: 13.554 ns/op
+# Warmup Iteration   4: 13.981 ns/op
+# Warmup Iteration   5: 13.905 ns/op
+# Warmup Iteration   6: 13.917 ns/op
+# Warmup Iteration   7: 13.915 ns/op
+# Warmup Iteration   8: 13.918 ns/op
+# Warmup Iteration   9: 13.926 ns/op
+# Warmup Iteration  10: 13.917 ns/op
+Iteration   1: 13.932 ns/op
+                 "loop": 7.018 ns/op (1 threads)
+                 "ping": 932.960 ns/op (1 threads)
+
+Iteration   2: 13.950 ns/op
+                 "loop": 7.027 ns/op (1 threads)
+                 "ping": 932.956 ns/op (1 threads)
+
+Iteration   3: 13.924 ns/op
+                 "loop": 7.014 ns/op (1 threads)
+                 "ping": 932.636 ns/op (1 threads)
+
+Iteration   4: 13.951 ns/op
+                 "loop": 7.028 ns/op (1 threads)
+                 "ping": 932.897 ns/op (1 threads)
+
+Iteration   5: 14.474 ns/op
+                 "loop": 7.279 ns/op (1 threads)
+                 "ping": 936.533 ns/op (1 threads)
+
+Iteration   6: 14.451 ns/op
+                 "loop": 7.282 ns/op (1 threads)
+                 "ping": 932.544 ns/op (1 threads)
+
+Iteration   7: 14.419 ns/op
+                 "loop": 7.266 ns/op (1 threads)
+                 "ping": 930.732 ns/op (1 threads)
+
+Iteration   8: 14.474 ns/op
+                 "loop": 7.293 ns/op (1 threads)
+                 "ping": 932.636 ns/op (1 threads)
+
+Iteration   9: 14.440 ns/op
+                 "loop": 7.276 ns/op (1 threads)
+                 "ping": 931.968 ns/op (1 threads)
+
+Iteration  10: 14.428 ns/op
+                 "loop": 7.270 ns/op (1 threads)
+                 "ping": 931.172 ns/op (1 threads)
+
+
+Result : 14.244 ±(99.9%) 0.398 ns/op
+  Statistics: (min, avg, max) = (13.924, 14.244, 14.474), stdev = 0.263
+  Confidence interval (99.9%): [13.846, 14.642]
+
+Result "loop": 7.175 ±(99.9%) 0.200 ns/op
+  Statistics: (min, avg, max) = (7.014, 7.175, 7.293), stdev = 0.132
+  Confidence interval (99.9%): [6.975, 7.375]
+
+Result "ping": 932.704 ±(99.9%) 2.344 ns/op
+  Statistics: (min, avg, max) = (930.732, 932.704, 936.533), stdev = 1.551
+  Confidence interval (99.9%): [930.359, 935.048]
+
+
+# Run progress: 30.00% complete, ETA 00:14:16
+# VM invoker: /home/yak/Work/jdks/jdk1.7.0_51/jre/bin/java
+# VM options: -Dburst.size=10 -XX:+UseCondCardMark
+# Fork: 4 of 5
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 2 threads, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: psy.lob.saw.queues.benchmarks.jmh.QueueRoundTripLatency.ring
+# Parameters: (queueScale = 17, queueType = 22)
+# Warmup Iteration   1: 13.846 ns/op
+# Warmup Iteration   2: 15.149 ns/op
+# Warmup Iteration   3: 13.773 ns/op
+# Warmup Iteration   4: 14.246 ns/op
+# Warmup Iteration   5: 15.310 ns/op
+# Warmup Iteration   6: 13.787 ns/op
+# Warmup Iteration   7: 13.760 ns/op
+# Warmup Iteration   8: 13.780 ns/op
+# Warmup Iteration   9: 13.778 ns/op
+# Warmup Iteration  10: 13.781 ns/op
+Iteration   1: 13.749 ns/op
+                 "loop": 6.924 ns/op (1 threads)
+                 "ping": 961.055 ns/op (1 threads)
+
+Iteration   2: 13.748 ns/op
+                 "loop": 6.923 ns/op (1 threads)
+                 "ping": 961.296 ns/op (1 threads)
+
+Iteration   3: 13.772 ns/op
+                 "loop": 6.936 ns/op (1 threads)
+                 "ping": 962.504 ns/op (1 threads)
+
+Iteration   4: 13.745 ns/op
+                 "loop": 6.922 ns/op (1 threads)
+                 "ping": 961.607 ns/op (1 threads)
+
+Iteration   5: 13.742 ns/op
+                 "loop": 6.921 ns/op (1 threads)
+                 "ping": 961.916 ns/op (1 threads)
+
+Iteration   6: 13.784 ns/op
+                 "loop": 6.942 ns/op (1 threads)
+                 "ping": 962.584 ns/op (1 threads)
+
+Iteration   7: 13.451 ns/op
+                 "loop": 6.772 ns/op (1 threads)
+                 "ping": 986.082 ns/op (1 threads)
+
+Iteration   8: 12.919 ns/op
+                 "loop": 6.500 ns/op (1 threads)
+                 "ping": 1037.470 ns/op (1 threads)
+
+Iteration   9: 12.919 ns/op
+                 "loop": 6.500 ns/op (1 threads)
+                 "ping": 1037.536 ns/op (1 threads)
+
+Iteration  10: 13.411 ns/op
+                 "loop": 6.751 ns/op (1 threads)
+                 "ping": 991.891 ns/op (1 threads)
+
+
+Result : 13.524 ±(99.9%) 0.523 ns/op
+  Statistics: (min, avg, max) = (12.919, 13.524, 13.784), stdev = 0.346
+  Confidence interval (99.9%): [13.001, 14.047]
+
+Result "loop": 6.809 ±(99.9%) 0.267 ns/op
+  Statistics: (min, avg, max) = (6.500, 6.809, 6.942), stdev = 0.177
+  Confidence interval (99.9%): [6.542, 7.076]
+
+Result "ping": 982.394 ±(99.9%) 47.053 ns/op
+  Statistics: (min, avg, max) = (961.055, 982.394, 1037.536), stdev = 31.123
+  Confidence interval (99.9%): [935.341, 1029.447]
+
+
+# Run progress: 31.67% complete, ETA 00:13:55
+# VM invoker: /home/yak/Work/jdks/jdk1.7.0_51/jre/bin/java
+# VM options: -Dburst.size=10 -XX:+UseCondCardMark
+# Fork: 5 of 5
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 2 threads, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: psy.lob.saw.queues.benchmarks.jmh.QueueRoundTripLatency.ring
+# Parameters: (queueScale = 17, queueType = 22)
+# Warmup Iteration   1: 19.562 ns/op
+# Warmup Iteration   2: 18.944 ns/op
+# Warmup Iteration   3: 18.708 ns/op
+# Warmup Iteration   4: 19.949 ns/op
+# Warmup Iteration   5: 19.538 ns/op
+# Warmup Iteration   6: 19.869 ns/op
+# Warmup Iteration   7: 19.869 ns/op
+# Warmup Iteration   8: 19.564 ns/op
+# Warmup Iteration   9: 19.571 ns/op
+# Warmup Iteration  10: 19.583 ns/op
+Iteration   1: 19.568 ns/op
+                 "loop": 9.888 ns/op (1 threads)
+                 "ping": 929.143 ns/op (1 threads)
+
+Iteration   2: 19.590 ns/op
+                 "loop": 9.899 ns/op (1 threads)
+                 "ping": 929.130 ns/op (1 threads)
+
+Iteration   3: 19.879 ns/op
+                 "loop": 10.047 ns/op (1 threads)
+                 "ping": 930.472 ns/op (1 threads)
+
+Iteration   4: 19.868 ns/op
+                 "loop": 10.041 ns/op (1 threads)
+                 "ping": 930.290 ns/op (1 threads)
+
+Iteration   5: 20.152 ns/op
+                 "loop": 10.186 ns/op (1 threads)
+                 "ping": 931.062 ns/op (1 threads)
+
+Iteration   6: 19.886 ns/op
+                 "loop": 10.050 ns/op (1 threads)
+                 "ping": 930.385 ns/op (1 threads)
+
+Iteration   7: 19.849 ns/op
+                 "loop": 10.032 ns/op (1 threads)
+                 "ping": 930.584 ns/op (1 threads)
+
+Iteration   8: 19.862 ns/op
+                 "loop": 10.038 ns/op (1 threads)
+                 "ping": 930.265 ns/op (1 threads)
+
+Iteration   9: 19.818 ns/op
+                 "loop": 10.016 ns/op (1 threads)
+                 "ping": 930.309 ns/op (1 threads)
+
+Iteration  10: 19.876 ns/op
+                 "loop": 10.045 ns/op (1 threads)
+                 "ping": 931.025 ns/op (1 threads)
+
+
+Result : 19.835 ±(99.9%) 0.247 ns/op
+  Statistics: (min, avg, max) = (19.568, 19.835, 20.152), stdev = 0.163
+  Confidence interval (99.9%): [19.588, 20.082]
+
+Result "loop": 10.024 ±(99.9%) 0.126 ns/op
+  Statistics: (min, avg, max) = (9.888, 10.024, 10.186), stdev = 0.083
+  Confidence interval (99.9%): [9.898, 10.150]
+
+Result "ping": 930.266 ±(99.9%) 0.998 ns/op
+  Statistics: (min, avg, max) = (929.130, 930.266, 931.062), stdev = 0.660
+  Confidence interval (99.9%): [929.268, 931.265]
+
+
+# Run progress: 33.33% complete, ETA 00:13:35
+# VM invoker: /home/yak/Work/jdks/jdk1.7.0_51/jre/bin/java
+# VM options: -Dburst.size=10 -XX:+UseCondCardMark
+# Fork: 1 of 5
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 2 threads, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: psy.lob.saw.queues.benchmarks.jmh.QueueRoundTripLatency.ring
+# Parameters: (queueScale = 17, queueType = 23)
+# Warmup Iteration   1: 6.469 ns/op
+# Warmup Iteration   2: 6.383 ns/op
+# Warmup Iteration   3: 6.541 ns/op
+# Warmup Iteration   4: 6.528 ns/op
+# Warmup Iteration   5: 6.466 ns/op
+# Warmup Iteration   6: 6.404 ns/op
+# Warmup Iteration   7: 6.408 ns/op
+# Warmup Iteration   8: 6.403 ns/op
+# Warmup Iteration   9: 6.415 ns/op
+# Warmup Iteration  10: 6.377 ns/op
+Iteration   1: 6.480 ns/op
+                 "loop": 3.280 ns/op (1 threads)
+                 "ping": 893.525 ns/op (1 threads)
+
+Iteration   2: 6.565 ns/op
+                 "loop": 3.295 ns/op (1 threads)
+                 "ping": 868.679 ns/op (1 threads)
+
+Iteration   3: 6.328 ns/op
+                 "loop": 3.176 ns/op (1 threads)
+                 "ping": 861.436 ns/op (1 threads)
+
+Iteration   4: 6.336 ns/op
+                 "loop": 3.180 ns/op (1 threads)
+                 "ping": 861.591 ns/op (1 threads)
+
+Iteration   5: 6.341 ns/op
+                 "loop": 3.182 ns/op (1 threads)
+                 "ping": 861.611 ns/op (1 threads)
+
+Iteration   6: 6.402 ns/op
+                 "loop": 3.213 ns/op (1 threads)
+                 "ping": 861.234 ns/op (1 threads)
+
+Iteration   7: 6.399 ns/op
+                 "loop": 3.212 ns/op (1 threads)
+                 "ping": 861.516 ns/op (1 threads)
+
+Iteration   8: 6.337 ns/op
+                 "loop": 3.180 ns/op (1 threads)
+                 "ping": 861.800 ns/op (1 threads)
+
+Iteration   9: 6.335 ns/op
+                 "loop": 3.179 ns/op (1 threads)
+                 "ping": 861.695 ns/op (1 threads)
+
+Iteration  10: 6.338 ns/op
+                 "loop": 3.181 ns/op (1 threads)
+                 "ping": 861.645 ns/op (1 threads)
+
+
+Result : 6.386 ±(99.9%) 0.120 ns/op
+  Statistics: (min, avg, max) = (6.328, 6.386, 6.565), stdev = 0.079
+  Confidence interval (99.9%): [6.266, 6.506]
+
+Result "loop": 3.208 ±(99.9%) 0.067 ns/op
+  Statistics: (min, avg, max) = (3.176, 3.208, 3.295), stdev = 0.044
+  Confidence interval (99.9%): [3.141, 3.275]
+
+Result "ping": 865.473 ±(99.9%) 15.282 ns/op
+  Statistics: (min, avg, max) = (861.234, 865.473, 893.525), stdev = 10.108
+  Confidence interval (99.9%): [850.191, 880.755]
+
+
+# Run progress: 35.00% complete, ETA 00:13:15
+# VM invoker: /home/yak/Work/jdks/jdk1.7.0_51/jre/bin/java
+# VM options: -Dburst.size=10 -XX:+UseCondCardMark
+# Fork: 2 of 5
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 2 threads, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: psy.lob.saw.queues.benchmarks.jmh.QueueRoundTripLatency.ring
+# Parameters: (queueScale = 17, queueType = 23)
+# Warmup Iteration   1: 9.764 ns/op
+# Warmup Iteration   2: 8.483 ns/op
+# Warmup Iteration   3: 8.943 ns/op
+# Warmup Iteration   4: 9.168 ns/op
+# Warmup Iteration   5: 8.454 ns/op
+# Warmup Iteration   6: 8.447 ns/op
+# Warmup Iteration   7: 8.449 ns/op
+# Warmup Iteration   8: 9.385 ns/op
+# Warmup Iteration   9: 9.401 ns/op
+# Warmup Iteration  10: 9.402 ns/op
+Iteration   1: 8.454 ns/op
+                 "loop": 4.256 ns/op (1 threads)
+                 "ping": 616.089 ns/op (1 threads)
+
+Iteration   2: 8.427 ns/op
+                 "loop": 4.243 ns/op (1 threads)
+                 "ping": 615.928 ns/op (1 threads)
+
+Iteration   3: 8.433 ns/op
+                 "loop": 4.245 ns/op (1 threads)
+                 "ping": 615.829 ns/op (1 threads)
+
+Iteration   4: 8.444 ns/op
+                 "loop": 4.251 ns/op (1 threads)
+                 "ping": 615.508 ns/op (1 threads)
+
+Iteration   5: 8.455 ns/op
+                 "loop": 4.257 ns/op (1 threads)
+                 "ping": 615.433 ns/op (1 threads)
+
+Iteration   6: 8.437 ns/op
+                 "loop": 4.247 ns/op (1 threads)
+                 "ping": 615.038 ns/op (1 threads)
+
+Iteration   7: 8.486 ns/op
+                 "loop": 4.219 ns/op (1 threads)
+                 "ping": 649.262 ns/op (1 threads)
+
+Iteration   8: 8.432 ns/op
+                 "loop": 4.245 ns/op (1 threads)
+                 "ping": 615.554 ns/op (1 threads)
+
+Iteration   9: 8.434 ns/op
+                 "loop": 4.246 ns/op (1 threads)
+                 "ping": 615.503 ns/op (1 threads)
+
+Iteration  10: 8.427 ns/op
+                 "loop": 4.243 ns/op (1 threads)
+                 "ping": 615.585 ns/op (1 threads)
+
+
+Result : 8.443 ±(99.9%) 0.027 ns/op
+  Statistics: (min, avg, max) = (8.427, 8.443, 8.486), stdev = 0.018
+  Confidence interval (99.9%): [8.416, 8.470]
+
+Result "loop": 4.245 ±(99.9%) 0.016 ns/op
+  Statistics: (min, avg, max) = (4.219, 4.245, 4.257), stdev = 0.011
+  Confidence interval (99.9%): [4.229, 4.261]
+
+Result "ping": 618.973 ±(99.9%) 16.096 ns/op
+  Statistics: (min, avg, max) = (615.038, 618.973, 649.262), stdev = 10.647
+  Confidence interval (99.9%): [602.877, 635.069]
+
+
+# Run progress: 36.67% complete, ETA 00:12:54
+# VM invoker: /home/yak/Work/jdks/jdk1.7.0_51/jre/bin/java
+# VM options: -Dburst.size=10 -XX:+UseCondCardMark
+# Fork: 3 of 5
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 2 threads, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: psy.lob.saw.queues.benchmarks.jmh.QueueRoundTripLatency.ring
+# Parameters: (queueScale = 17, queueType = 23)
+# Warmup Iteration   1: 8.599 ns/op
+# Warmup Iteration   2: 8.473 ns/op
+# Warmup Iteration   3: 8.468 ns/op
+# Warmup Iteration   4: 8.652 ns/op
+# Warmup Iteration   5: 8.581 ns/op
+# Warmup Iteration   6: 8.574 ns/op
+# Warmup Iteration   7: 8.578 ns/op
+# Warmup Iteration   8: 8.646 ns/op
+# Warmup Iteration   9: 8.568 ns/op
+# Warmup Iteration  10: 8.479 ns/op
+Iteration   1: 8.489 ns/op
+                 "loop": 4.268 ns/op (1 threads)
+                 "ping": 767.829 ns/op (1 threads)
+
+Iteration   2: 8.485 ns/op
+                 "loop": 4.266 ns/op (1 threads)
+                 "ping": 767.728 ns/op (1 threads)
+
+Iteration   3: 8.488 ns/op
+                 "loop": 4.267 ns/op (1 threads)
+                 "ping": 768.200 ns/op (1 threads)
+
+Iteration   4: 8.488 ns/op
+                 "loop": 4.267 ns/op (1 threads)
+                 "ping": 768.403 ns/op (1 threads)
+
+Iteration   5: 8.498 ns/op
+                 "loop": 4.273 ns/op (1 threads)
+                 "ping": 768.401 ns/op (1 threads)
+
+Iteration   6: 8.489 ns/op
+                 "loop": 4.268 ns/op (1 threads)
+                 "ping": 768.202 ns/op (1 threads)
+
+Iteration   7: 8.490 ns/op
+                 "loop": 4.269 ns/op (1 threads)
+                 "ping": 768.269 ns/op (1 threads)
+
+Iteration   8: 8.488 ns/op
+                 "loop": 4.268 ns/op (1 threads)
+                 "ping": 768.291 ns/op (1 threads)
+
+Iteration   9: 8.566 ns/op
+                 "loop": 4.307 ns/op (1 threads)
+                 "ping": 773.468 ns/op (1 threads)
+
+Iteration  10: 8.573 ns/op
+                 "loop": 4.310 ns/op (1 threads)
+                 "ping": 773.925 ns/op (1 threads)
+
+
+Result : 8.505 ±(99.9%) 0.052 ns/op
+  Statistics: (min, avg, max) = (8.485, 8.505, 8.573), stdev = 0.034
+  Confidence interval (99.9%): [8.454, 8.557]
+
+Result "loop": 4.276 ±(99.9%) 0.026 ns/op
+  Statistics: (min, avg, max) = (4.266, 4.276, 4.310), stdev = 0.017
+  Confidence interval (99.9%): [4.250, 4.302]
+
+Result "ping": 769.272 ±(99.9%) 3.546 ns/op
+  Statistics: (min, avg, max) = (767.728, 769.272, 773.925), stdev = 2.345
+  Confidence interval (99.9%): [765.726, 772.817]
+
+
+# Run progress: 38.33% complete, ETA 00:12:34
+# VM invoker: /home/yak/Work/jdks/jdk1.7.0_51/jre/bin/java
+# VM options: -Dburst.size=10 -XX:+UseCondCardMark
+# Fork: 4 of 5
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 2 threads, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: psy.lob.saw.queues.benchmarks.jmh.QueueRoundTripLatency.ring
+# Parameters: (queueScale = 17, queueType = 23)
+# Warmup Iteration   1: 9.056 ns/op
+# Warmup Iteration   2: 8.791 ns/op
+# Warmup Iteration   3: 9.064 ns/op
+# Warmup Iteration   4: 9.057 ns/op
+# Warmup Iteration   5: 8.925 ns/op
+# Warmup Iteration   6: 8.922 ns/op
+# Warmup Iteration   7: 8.928 ns/op
+# Warmup Iteration   8: 9.116 ns/op
+# Warmup Iteration   9: 9.025 ns/op
+# Warmup Iteration  10: 9.027 ns/op
+Iteration   1: 8.942 ns/op
+                 "loop": 4.495 ns/op (1 threads)
+                 "ping": 852.046 ns/op (1 threads)
+
+Iteration   2: 8.952 ns/op
+                 "loop": 4.499 ns/op (1 threads)
+                 "ping": 857.260 ns/op (1 threads)
+
+Iteration   3: 8.925 ns/op
+                 "loop": 4.486 ns/op (1 threads)
+                 "ping": 848.858 ns/op (1 threads)
+
+Iteration   4: 8.933 ns/op
+                 "loop": 4.490 ns/op (1 threads)
+                 "ping": 850.893 ns/op (1 threads)
+
+Iteration   5: 8.930 ns/op
+                 "loop": 4.488 ns/op (1 threads)
+                 "ping": 850.780 ns/op (1 threads)
+
+Iteration   6: 9.005 ns/op
+                 "loop": 4.527 ns/op (1 threads)
+                 "ping": 845.931 ns/op (1 threads)
+
+Iteration   7: 9.005 ns/op
+                 "loop": 4.527 ns/op (1 threads)
+                 "ping": 845.236 ns/op (1 threads)
+
+Iteration   8: 9.010 ns/op
+                 "loop": 4.529 ns/op (1 threads)
+                 "ping": 846.147 ns/op (1 threads)
+
+Iteration   9: 9.000 ns/op
+                 "loop": 4.524 ns/op (1 threads)
+                 "ping": 845.150 ns/op (1 threads)
+
+Iteration  10: 8.927 ns/op
+                 "loop": 4.487 ns/op (1 threads)
+                 "ping": 853.551 ns/op (1 threads)
+
+
+Result : 8.963 ±(99.9%) 0.056 ns/op
+  Statistics: (min, avg, max) = (8.925, 8.963, 9.010), stdev = 0.037
+  Confidence interval (99.9%): [8.906, 9.019]
+
+Result "loop": 4.505 ±(99.9%) 0.029 ns/op
+  Statistics: (min, avg, max) = (4.486, 4.505, 4.529), stdev = 0.019
+  Confidence interval (99.9%): [4.477, 4.534]
+
+Result "ping": 849.585 ±(99.9%) 6.133 ns/op
+  Statistics: (min, avg, max) = (845.150, 849.585, 857.260), stdev = 4.057
+  Confidence interval (99.9%): [843.452, 855.719]
+
+
+# Run progress: 40.00% complete, ETA 00:12:13
+# VM invoker: /home/yak/Work/jdks/jdk1.7.0_51/jre/bin/java
+# VM options: -Dburst.size=10 -XX:+UseCondCardMark
+# Fork: 5 of 5
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 2 threads, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: psy.lob.saw.queues.benchmarks.jmh.QueueRoundTripLatency.ring
+# Parameters: (queueScale = 17, queueType = 23)
+# Warmup Iteration   1: 8.724 ns/op
+# Warmup Iteration   2: 8.704 ns/op
+# Warmup Iteration   3: 8.909 ns/op
+# Warmup Iteration   4: 8.998 ns/op
+# Warmup Iteration   5: 8.838 ns/op
+# Warmup Iteration   6: 8.537 ns/op
+# Warmup Iteration   7: 8.760 ns/op
+# Warmup Iteration   8: 8.763 ns/op
+# Warmup Iteration   9: 8.758 ns/op
+# Warmup Iteration  10: 8.759 ns/op
+Iteration   1: 8.760 ns/op
+                 "loop": 4.401 ns/op (1 threads)
+                 "ping": 923.611 ns/op (1 threads)
+
+Iteration   2: 8.759 ns/op
+                 "loop": 4.400 ns/op (1 threads)
+                 "ping": 923.623 ns/op (1 threads)
+
+Iteration   3: 8.757 ns/op
+                 "loop": 4.399 ns/op (1 threads)
+                 "ping": 923.577 ns/op (1 threads)
+
+Iteration   4: 8.797 ns/op
+                 "loop": 4.420 ns/op (1 threads)
+                 "ping": 921.611 ns/op (1 threads)
+
+Iteration   5: 11.576 ns/op
+                 "loop": 5.824 ns/op (1 threads)
+                 "ping": 924.883 ns/op (1 threads)
+
+Iteration   6: 15.407 ns/op
+                 "loop": 7.768 ns/op (1 threads)
+                 "ping": 928.405 ns/op (1 threads)
+
+Iteration   7: 9.295 ns/op
+                 "loop": 4.694 ns/op (1 threads)
+                 "ping": 922.480 ns/op (1 threads)
+
+Iteration   8: 8.846 ns/op
+                 "loop": 4.445 ns/op (1 threads)
+                 "ping": 918.978 ns/op (1 threads)
+
+Iteration   9: 8.802 ns/op
+                 "loop": 4.404 ns/op (1 threads)
+                 "ping": 931.071 ns/op (1 threads)
+
+Iteration  10: 8.764 ns/op
+                 "loop": 4.403 ns/op (1 threads)
+                 "ping": 923.153 ns/op (1 threads)
+
+
+Result : 9.776 ±(99.9%) 3.269 ns/op
+  Statistics: (min, avg, max) = (8.757, 9.776, 15.407), stdev = 2.162
+  Confidence interval (99.9%): [6.507, 13.045]
+
+Result "loop": 4.916 ±(99.9%) 1.656 ns/op
+  Statistics: (min, avg, max) = (4.399, 4.916, 7.768), stdev = 1.095
+  Confidence interval (99.9%): [3.260, 6.572]
+
+Result "ping": 924.139 ±(99.9%) 5.150 ns/op
+  Statistics: (min, avg, max) = (918.978, 924.139, 931.071), stdev = 3.406
+  Confidence interval (99.9%): [918.989, 929.289]
+
+
+# Run progress: 41.67% complete, ETA 00:11:53
+# VM invoker: /home/yak/Work/jdks/jdk1.7.0_51/jre/bin/java
+# VM options: -Dburst.size=10 -XX:+UseCondCardMark
+# Fork: 1 of 5
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 2 threads, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: psy.lob.saw.queues.benchmarks.jmh.QueueRoundTripLatency.ring
+# Parameters: (queueScale = 17, queueType = 24)
+# Warmup Iteration   1: 6.890 ns/op
+# Warmup Iteration   2: 6.659 ns/op
+# Warmup Iteration   3: 7.194 ns/op
+# Warmup Iteration   4: 7.215 ns/op
+# Warmup Iteration   5: 7.225 ns/op
+# Warmup Iteration   6: 7.117 ns/op
+# Warmup Iteration   7: 7.128 ns/op
+# Warmup Iteration   8: 7.102 ns/op
+# Warmup Iteration   9: 7.131 ns/op
+# Warmup Iteration  10: 7.107 ns/op
+Iteration   1: 7.105 ns/op
+                 "loop": 3.570 ns/op (1 threads)
+                 "ping": 707.743 ns/op (1 threads)
+
+Iteration   2: 7.107 ns/op
+                 "loop": 3.571 ns/op (1 threads)
+                 "ping": 707.618 ns/op (1 threads)
+
+Iteration   3: 7.124 ns/op
+                 "loop": 3.580 ns/op (1 threads)
+                 "ping": 708.430 ns/op (1 threads)
+
+Iteration   4: 7.117 ns/op
+                 "loop": 3.576 ns/op (1 threads)
+                 "ping": 708.575 ns/op (1 threads)
+
+Iteration   5: 7.118 ns/op
+                 "loop": 3.577 ns/op (1 threads)
+                 "ping": 708.228 ns/op (1 threads)
+
+Iteration   6: 7.206 ns/op
+                 "loop": 3.621 ns/op (1 threads)
+                 "ping": 717.404 ns/op (1 threads)
+
+Iteration   7: 7.244 ns/op
+                 "loop": 3.640 ns/op (1 threads)
+                 "ping": 718.374 ns/op (1 threads)
+
+Iteration   8: 7.153 ns/op
+                 "loop": 3.594 ns/op (1 threads)
+                 "ping": 718.501 ns/op (1 threads)
+
+Iteration   9: 7.055 ns/op
+                 "loop": 3.554 ns/op (1 threads)
+                 "ping": 706.504 ns/op (1 threads)
+
+Iteration  10: 7.117 ns/op
+                 "loop": 3.577 ns/op (1 threads)
+                 "ping": 707.600 ns/op (1 threads)
+
+
+Result : 7.135 ±(99.9%) 0.082 ns/op
+  Statistics: (min, avg, max) = (7.055, 7.135, 7.244), stdev = 0.054
+  Confidence interval (99.9%): [7.053, 7.216]
+
+Result "loop": 3.586 ±(99.9%) 0.039 ns/op
+  Statistics: (min, avg, max) = (3.554, 3.586, 3.640), stdev = 0.026
+  Confidence interval (99.9%): [3.547, 3.625]
+
+Result "ping": 710.898 ±(99.9%) 7.568 ns/op
+  Statistics: (min, avg, max) = (706.504, 710.898, 718.501), stdev = 5.006
+  Confidence interval (99.9%): [703.330, 718.466]
+
+
+# Run progress: 43.33% complete, ETA 00:11:32
+# VM invoker: /home/yak/Work/jdks/jdk1.7.0_51/jre/bin/java
+# VM options: -Dburst.size=10 -XX:+UseCondCardMark
+# Fork: 2 of 5
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 2 threads, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: psy.lob.saw.queues.benchmarks.jmh.QueueRoundTripLatency.ring
+# Parameters: (queueScale = 17, queueType = 24)
+# Warmup Iteration   1: 6.788 ns/op
+# Warmup Iteration   2: 6.811 ns/op
+# Warmup Iteration   3: 7.326 ns/op
+# Warmup Iteration   4: 7.159 ns/op
+# Warmup Iteration   5: 6.821 ns/op
+# Warmup Iteration   6: 6.735 ns/op
+# Warmup Iteration   7: 6.742 ns/op
+# Warmup Iteration   8: 7.331 ns/op
+# Warmup Iteration   9: 7.325 ns/op
+# Warmup Iteration  10: 6.751 ns/op
+Iteration   1: 6.732 ns/op
+                 "loop": 3.386 ns/op (1 threads)
+                 "ping": 577.781 ns/op (1 threads)
+
+Iteration   2: 6.736 ns/op
+                 "loop": 3.388 ns/op (1 threads)
+                 "ping": 578.744 ns/op (1 threads)
+
+Iteration   3: 7.329 ns/op
+                 "loop": 3.687 ns/op (1 threads)
+                 "ping": 592.338 ns/op (1 threads)
+
+Iteration   4: 7.326 ns/op
+                 "loop": 3.686 ns/op (1 threads)
+                 "ping": 591.314 ns/op (1 threads)
+
+Iteration   5: 7.335 ns/op
+                 "loop": 3.690 ns/op (1 threads)
+                 "ping": 592.081 ns/op (1 threads)
+
+Iteration   6: 7.338 ns/op
+                 "loop": 3.692 ns/op (1 threads)
+                 "ping": 591.414 ns/op (1 threads)
+
+Iteration   7: 7.417 ns/op
+                 "loop": 3.732 ns/op (1 threads)
+                 "ping": 591.499 ns/op (1 threads)
+
+Iteration   8: 7.329 ns/op
+                 "loop": 3.687 ns/op (1 threads)
+                 "ping": 591.250 ns/op (1 threads)
+
+Iteration   9: 7.334 ns/op
+                 "loop": 3.690 ns/op (1 threads)
+                 "ping": 590.869 ns/op (1 threads)
+
+Iteration  10: 7.334 ns/op
+                 "loop": 3.690 ns/op (1 threads)
+                 "ping": 590.963 ns/op (1 threads)
+
+
+Result : 7.221 ±(99.9%) 0.390 ns/op
+  Statistics: (min, avg, max) = (6.732, 7.221, 7.417), stdev = 0.258
+  Confidence interval (99.9%): [6.831, 7.611]
+
+Result "loop": 3.633 ±(99.9%) 0.197 ns/op
+  Statistics: (min, avg, max) = (3.386, 3.633, 3.732), stdev = 0.130
+  Confidence interval (99.9%): [3.436, 3.830]
+
+Result "ping": 588.825 ±(99.9%) 8.451 ns/op
+  Statistics: (min, avg, max) = (577.781, 588.825, 592.338), stdev = 5.590
+  Confidence interval (99.9%): [580.374, 597.276]
+
+
+# Run progress: 45.00% complete, ETA 00:11:12
+# VM invoker: /home/yak/Work/jdks/jdk1.7.0_51/jre/bin/java
+# VM options: -Dburst.size=10 -XX:+UseCondCardMark
+# Fork: 3 of 5
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 2 threads, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: psy.lob.saw.queues.benchmarks.jmh.QueueRoundTripLatency.ring
+# Parameters: (queueScale = 17, queueType = 24)
+# Warmup Iteration   1: 7.250 ns/op
+# Warmup Iteration   2: 6.963 ns/op
+# Warmup Iteration   3: 7.430 ns/op
+# Warmup Iteration   4: 6.952 ns/op
+# Warmup Iteration   5: 7.240 ns/op
+# Warmup Iteration   6: 7.233 ns/op
+# Warmup Iteration   7: 7.237 ns/op
+# Warmup Iteration   8: 6.840 ns/op
+# Warmup Iteration   9: 6.840 ns/op
+# Warmup Iteration  10: 6.909 ns/op
+Iteration   1: 6.848 ns/op
+                 "loop": 3.445 ns/op (1 threads)
+                 "ping": 566.328 ns/op (1 threads)
+
+Iteration   2: 6.845 ns/op
+                 "loop": 3.443 ns/op (1 threads)
+                 "ping": 566.586 ns/op (1 threads)
+
+Iteration   3: 6.851 ns/op
+                 "loop": 3.446 ns/op (1 threads)
+                 "ping": 567.294 ns/op (1 threads)
+
+Iteration   4: 6.840 ns/op
+                 "loop": 3.441 ns/op (1 threads)
+                 "ping": 566.287 ns/op (1 threads)
+
+Iteration   5: 6.843 ns/op
+                 "loop": 3.442 ns/op (1 threads)
+                 "ping": 567.050 ns/op (1 threads)
+
+Iteration   6: 6.841 ns/op
+                 "loop": 3.441 ns/op (1 threads)
+                 "ping": 566.226 ns/op (1 threads)
+
+Iteration   7: 6.838 ns/op
+                 "loop": 3.440 ns/op (1 threads)
+                 "ping": 567.424 ns/op (1 threads)
+
+Iteration   8: 6.835 ns/op
+                 "loop": 3.438 ns/op (1 threads)
+                 "ping": 567.796 ns/op (1 threads)
+
+Iteration   9: 6.844 ns/op
+                 "loop": 3.443 ns/op (1 threads)
+                 "ping": 567.934 ns/op (1 threads)
+
+Iteration  10: 6.843 ns/op
+                 "loop": 3.442 ns/op (1 threads)
+                 "ping": 567.899 ns/op (1 threads)
+
+
+Result : 6.843 ±(99.9%) 0.007 ns/op
+  Statistics: (min, avg, max) = (6.835, 6.843, 6.851), stdev = 0.005
+  Confidence interval (99.9%): [6.836, 6.850]
+
+Result "loop": 3.442 ±(99.9%) 0.004 ns/op
+  Statistics: (min, avg, max) = (3.438, 3.442, 3.446), stdev = 0.002
+  Confidence interval (99.9%): [3.439, 3.446]
+
+Result "ping": 567.082 ±(99.9%) 1.039 ns/op
+  Statistics: (min, avg, max) = (566.226, 567.082, 567.934), stdev = 0.687
+  Confidence interval (99.9%): [566.044, 568.121]
+
+
+# Run progress: 46.67% complete, ETA 00:10:52
+# VM invoker: /home/yak/Work/jdks/jdk1.7.0_51/jre/bin/java
+# VM options: -Dburst.size=10 -XX:+UseCondCardMark
+# Fork: 4 of 5
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 2 threads, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: psy.lob.saw.queues.benchmarks.jmh.QueueRoundTripLatency.ring
+# Parameters: (queueScale = 17, queueType = 24)
+# Warmup Iteration   1: 7.846 ns/op
+# Warmup Iteration   2: 6.914 ns/op
+# Warmup Iteration   3: 6.904 ns/op
+# Warmup Iteration   4: 7.584 ns/op
+# Warmup Iteration   5: 7.552 ns/op
+# Warmup Iteration   6: 7.553 ns/op
+# Warmup Iteration   7: 6.805 ns/op
+# Warmup Iteration   8: 6.798 ns/op
+# Warmup Iteration   9: 6.805 ns/op
+# Warmup Iteration  10: 6.824 ns/op
+Iteration   1: 6.820 ns/op
+                 "loop": 3.430 ns/op (1 threads)
+                 "ping": 592.677 ns/op (1 threads)
+
+Iteration   2: 6.813 ns/op
+                 "loop": 3.426 ns/op (1 threads)
+                 "ping": 593.075 ns/op (1 threads)
+
+Iteration   3: 6.805 ns/op
+                 "loop": 3.422 ns/op (1 threads)
+                 "ping": 593.559 ns/op (1 threads)
+
+Iteration   4: 6.812 ns/op
+                 "loop": 3.426 ns/op (1 threads)
+                 "ping": 592.917 ns/op (1 threads)
+
+Iteration   5: 6.810 ns/op
+                 "loop": 3.425 ns/op (1 threads)
+                 "ping": 592.532 ns/op (1 threads)
+
+Iteration   6: 6.803 ns/op
+                 "loop": 3.421 ns/op (1 threads)
+                 "ping": 591.541 ns/op (1 threads)
+
+Iteration   7: 6.814 ns/op
+                 "loop": 3.426 ns/op (1 threads)
+                 "ping": 592.628 ns/op (1 threads)
+
+Iteration   8: 6.809 ns/op
+                 "loop": 3.424 ns/op (1 threads)
+                 "ping": 592.873 ns/op (1 threads)
+
+Iteration   9: 6.805 ns/op
+                 "loop": 3.422 ns/op (1 threads)
+                 "ping": 593.053 ns/op (1 threads)
+
+Iteration  10: 7.555 ns/op
+                 "loop": 3.799 ns/op (1 threads)
+                 "ping": 592.432 ns/op (1 threads)
+
+
+Result : 6.885 ±(99.9%) 0.356 ns/op
+  Statistics: (min, avg, max) = (6.803, 6.885, 7.555), stdev = 0.236
+  Confidence interval (99.9%): [6.528, 7.241]
+
+Result "loop": 3.462 ±(99.9%) 0.179 ns/op
+  Statistics: (min, avg, max) = (3.421, 3.462, 3.799), stdev = 0.118
+  Confidence interval (99.9%): [3.283, 3.641]
+
+Result "ping": 592.729 ±(99.9%) 0.800 ns/op
+  Statistics: (min, avg, max) = (591.541, 592.729, 593.559), stdev = 0.529
+  Confidence interval (99.9%): [591.929, 593.529]
+
+
+# Run progress: 48.33% complete, ETA 00:10:31
+# VM invoker: /home/yak/Work/jdks/jdk1.7.0_51/jre/bin/java
+# VM options: -Dburst.size=10 -XX:+UseCondCardMark
+# Fork: 5 of 5
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 2 threads, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: psy.lob.saw.queues.benchmarks.jmh.QueueRoundTripLatency.ring
+# Parameters: (queueScale = 17, queueType = 24)
+# Warmup Iteration   1: 6.783 ns/op
+# Warmup Iteration   2: 7.593 ns/op
+# Warmup Iteration   3: 7.560 ns/op
+# Warmup Iteration   4: 7.378 ns/op
+# Warmup Iteration   5: 6.720 ns/op
+# Warmup Iteration   6: 6.773 ns/op
+# Warmup Iteration   7: 7.614 ns/op
+# Warmup Iteration   8: 7.616 ns/op
+# Warmup Iteration   9: 7.615 ns/op
+# Warmup Iteration  10: 7.616 ns/op
+Iteration   1: 7.626 ns/op
+                 "loop": 3.838 ns/op (1 threads)
+                 "ping": 584.388 ns/op (1 threads)
+
+Iteration   2: 7.656 ns/op
+                 "loop": 3.853 ns/op (1 threads)
+                 "ping": 584.353 ns/op (1 threads)
+
+Iteration   3: 6.833 ns/op
+                 "loop": 3.437 ns/op (1 threads)
+                 "ping": 573.712 ns/op (1 threads)
+
+Iteration   4: 6.846 ns/op
+                 "loop": 3.443 ns/op (1 threads)
+                 "ping": 574.208 ns/op (1 threads)
+
+Iteration   5: 7.618 ns/op
+                 "loop": 3.834 ns/op (1 threads)
+                 "ping": 584.048 ns/op (1 threads)
+
+Iteration   6: 6.835 ns/op
+                 "loop": 3.438 ns/op (1 threads)
+                 "ping": 573.457 ns/op (1 threads)
+
+Iteration   7: 6.816 ns/op
+                 "loop": 3.428 ns/op (1 threads)
+                 "ping": 582.690 ns/op (1 threads)
+
+Iteration   8: 7.564 ns/op
+                 "loop": 3.806 ns/op (1 threads)
+                 "ping": 586.223 ns/op (1 threads)
+
+Iteration   9: 7.518 ns/op
+                 "loop": 3.783 ns/op (1 threads)
+                 "ping": 586.470 ns/op (1 threads)
+
+Iteration  10: 7.552 ns/op
+                 "loop": 3.800 ns/op (1 threads)
+                 "ping": 586.109 ns/op (1 threads)
+
+
+Result : 7.286 ±(99.9%) 0.594 ns/op
+  Statistics: (min, avg, max) = (6.816, 7.286, 7.656), stdev = 0.393
+  Confidence interval (99.9%): [6.693, 7.880]
+
+Result "loop": 3.666 ±(99.9%) 0.300 ns/op
+  Statistics: (min, avg, max) = (3.428, 3.666, 3.853), stdev = 0.199
+  Confidence interval (99.9%): [3.366, 3.967]
+
+Result "ping": 581.566 ±(99.9%) 8.298 ns/op
+  Statistics: (min, avg, max) = (573.457, 581.566, 586.470), stdev = 5.488
+  Confidence interval (99.9%): [573.268, 589.863]
+
+
+# Run progress: 50.00% complete, ETA 00:10:11
+# VM invoker: /home/yak/Work/jdks/jdk1.7.0_51/jre/bin/java
+# VM options: -Dburst.size=10 -XX:+UseCondCardMark
+# Fork: 1 of 5
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 2 threads, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: psy.lob.saw.queues.benchmarks.jmh.QueueRoundTripLatency.ring
+# Parameters: (queueScale = 17, queueType = 25)
+# Warmup Iteration   1: 5.381 ns/op
+# Warmup Iteration   2: 5.698 ns/op
+# Warmup Iteration   3: 5.692 ns/op
+# Warmup Iteration   4: 5.586 ns/op
+# Warmup Iteration   5: 5.678 ns/op
+# Warmup Iteration   6: 5.506 ns/op
+# Warmup Iteration   7: 5.288 ns/op
+# Warmup Iteration   8: 5.260 ns/op
+# Warmup Iteration   9: 9.627 ns/op
+# Warmup Iteration  10: 5.155 ns/op
+Iteration   1: 5.681 ns/op
+                 "loop": 2.840 ns/op (1 threads)
+                 "ping": 627.631 ns/op (1 threads)
+
+Iteration   2: 5.672 ns/op
+                 "loop": 2.849 ns/op (1 threads)
+                 "ping": 621.988 ns/op (1 threads)
+
+Iteration   3: 7.545 ns/op
+                 "loop": 3.774 ns/op (1 threads)
+                 "ping": 610.221 ns/op (1 threads)
+
+Iteration   4: 5.721 ns/op
+                 "loop": 2.855 ns/op (1 threads)
+                 "ping": 629.198 ns/op (1 threads)
+
+Iteration   5: 5.222 ns/op
+                 "loop": 2.635 ns/op (1 threads)
+                 "ping": 587.577 ns/op (1 threads)
+
+Iteration   6: 5.886 ns/op
+                 "loop": 2.957 ns/op (1 threads)
+                 "ping": 623.375 ns/op (1 threads)
+
+Iteration   7: 5.304 ns/op
+                 "loop": 2.664 ns/op (1 threads)
+                 "ping": 586.462 ns/op (1 threads)
+
+Iteration   8: 5.635 ns/op
+                 "loop": 2.830 ns/op (1 threads)
+                 "ping": 621.335 ns/op (1 threads)
+
+Iteration   9: 5.299 ns/op
+                 "loop": 2.662 ns/op (1 threads)
+                 "ping": 586.680 ns/op (1 threads)
+
+Iteration  10: 5.280 ns/op
+                 "loop": 2.652 ns/op (1 threads)
+                 "ping": 586.378 ns/op (1 threads)
+
+
+Result : 5.725 ±(99.9%) 1.028 ns/op
+  Statistics: (min, avg, max) = (5.222, 5.725, 7.545), stdev = 0.680
+  Confidence interval (99.9%): [4.697, 6.752]
+
+Result "loop": 2.872 ±(99.9%) 0.508 ns/op
+  Statistics: (min, avg, max) = (2.635, 2.872, 3.774), stdev = 0.336
+  Confidence interval (99.9%): [2.364, 3.380]
+
+Result "ping": 608.084 ±(99.9%) 28.741 ns/op
+  Statistics: (min, avg, max) = (586.378, 608.084, 629.198), stdev = 19.010
+  Confidence interval (99.9%): [579.344, 636.825]
+
+
+# Run progress: 51.67% complete, ETA 00:09:51
+# VM invoker: /home/yak/Work/jdks/jdk1.7.0_51/jre/bin/java
+# VM options: -Dburst.size=10 -XX:+UseCondCardMark
+# Fork: 2 of 5
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 2 threads, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: psy.lob.saw.queues.benchmarks.jmh.QueueRoundTripLatency.ring
+# Parameters: (queueScale = 17, queueType = 25)
+# Warmup Iteration   1: 4.761 ns/op
+# Warmup Iteration   2: 4.560 ns/op
+# Warmup Iteration   3: 4.473 ns/op
+# Warmup Iteration   4: 4.947 ns/op
+# Warmup Iteration   5: 5.049 ns/op
+# Warmup Iteration   6: 4.595 ns/op
+# Warmup Iteration   7: 4.596 ns/op
+# Warmup Iteration   8: 4.594 ns/op
+# Warmup Iteration   9: 4.607 ns/op
+# Warmup Iteration  10: 5.038 ns/op
+Iteration   1: 5.038 ns/op
+                 "loop": 2.530 ns/op (1 threads)
+                 "ping": 585.287 ns/op (1 threads)
+
+Iteration   2: 5.038 ns/op
+                 "loop": 2.530 ns/op (1 threads)
+                 "ping": 585.261 ns/op (1 threads)
+
+Iteration   3: 5.042 ns/op
+                 "loop": 2.532 ns/op (1 threads)
+                 "ping": 585.421 ns/op (1 threads)
+
+Iteration   4: 4.593 ns/op
+                 "loop": 2.306 ns/op (1 threads)
+                 "ping": 574.649 ns/op (1 threads)
+
+Iteration   5: 5.043 ns/op
+                 "loop": 2.533 ns/op (1 threads)
+                 "ping": 584.725 ns/op (1 threads)
+
+Iteration   6: 4.587 ns/op
+                 "loop": 2.303 ns/op (1 threads)
+                 "ping": 575.541 ns/op (1 threads)
+
+Iteration   7: 4.587 ns/op
+                 "loop": 2.303 ns/op (1 threads)
+                 "ping": 574.993 ns/op (1 threads)
+
+Iteration   8: 4.589 ns/op
+                 "loop": 2.304 ns/op (1 threads)
+                 "ping": 575.042 ns/op (1 threads)
+
+Iteration   9: 5.047 ns/op
+                 "loop": 2.534 ns/op (1 threads)
+                 "ping": 585.457 ns/op (1 threads)
+
+Iteration  10: 5.049 ns/op
+                 "loop": 2.535 ns/op (1 threads)
+                 "ping": 585.483 ns/op (1 threads)
+
+
+Result : 4.861 ±(99.9%) 0.354 ns/op
+  Statistics: (min, avg, max) = (4.587, 4.861, 5.049), stdev = 0.234
+  Confidence interval (99.9%): [4.507, 5.216]
+
+Result "loop": 2.441 ±(99.9%) 0.179 ns/op
+  Statistics: (min, avg, max) = (2.303, 2.441, 2.535), stdev = 0.118
+  Confidence interval (99.9%): [2.262, 2.619]
+
+Result "ping": 581.186 ±(99.9%) 7.989 ns/op
+  Statistics: (min, avg, max) = (574.649, 581.186, 585.483), stdev = 5.284
+  Confidence interval (99.9%): [573.197, 589.174]
+
+
+# Run progress: 53.33% complete, ETA 00:09:30
+# VM invoker: /home/yak/Work/jdks/jdk1.7.0_51/jre/bin/java
+# VM options: -Dburst.size=10 -XX:+UseCondCardMark
+# Fork: 3 of 5
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 2 threads, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: psy.lob.saw.queues.benchmarks.jmh.QueueRoundTripLatency.ring
+# Parameters: (queueScale = 17, queueType = 25)
+# Warmup Iteration   1: 4.738 ns/op
+# Warmup Iteration   2: 4.589 ns/op
+# Warmup Iteration   3: 4.626 ns/op
+# Warmup Iteration   4: 4.997 ns/op
+# Warmup Iteration   5: 4.654 ns/op
+# Warmup Iteration   6: 5.076 ns/op
+# Warmup Iteration   7: 5.083 ns/op
+# Warmup Iteration   8: 5.096 ns/op
+# Warmup Iteration   9: 5.120 ns/op
+# Warmup Iteration  10: 5.123 ns/op
+Iteration   1: 5.079 ns/op
+                 "loop": 2.551 ns/op (1 threads)
+                 "ping": 585.761 ns/op (1 threads)
+
+Iteration   2: 5.083 ns/op
+                 "loop": 2.552 ns/op (1 threads)
+                 "ping": 585.737 ns/op (1 threads)
+
+Iteration   3: 5.082 ns/op
+                 "loop": 2.552 ns/op (1 threads)
+                 "ping": 585.677 ns/op (1 threads)
+
+Iteration   4: 5.083 ns/op
+                 "loop": 2.553 ns/op (1 threads)
+                 "ping": 585.182 ns/op (1 threads)
+
+Iteration   5: 5.074 ns/op
+                 "loop": 2.548 ns/op (1 threads)
+                 "ping": 584.783 ns/op (1 threads)
+
+Iteration   6: 5.092 ns/op
+                 "loop": 2.557 ns/op (1 threads)
+                 "ping": 585.409 ns/op (1 threads)
+
+Iteration   7: 5.076 ns/op
+                 "loop": 2.549 ns/op (1 threads)
+                 "ping": 585.065 ns/op (1 threads)
+
+Iteration   8: 5.138 ns/op
+                 "loop": 2.580 ns/op (1 threads)
+                 "ping": 586.909 ns/op (1 threads)
+
+Iteration   9: 5.109 ns/op
+                 "loop": 2.566 ns/op (1 threads)
+                 "ping": 585.995 ns/op (1 threads)
+
+Iteration  10: 4.543 ns/op
+                 "loop": 2.271 ns/op (1 threads)
+                 "ping": 599.988 ns/op (1 threads)
+
+
+Result : 5.036 ±(99.9%) 0.263 ns/op
+  Statistics: (min, avg, max) = (4.543, 5.036, 5.138), stdev = 0.174
+  Confidence interval (99.9%): [4.773, 5.299]
+
+Result "loop": 2.528 ±(99.9%) 0.137 ns/op
+  Statistics: (min, avg, max) = (2.271, 2.528, 2.580), stdev = 0.091
+  Confidence interval (99.9%): [2.391, 2.665]
+
+Result "ping": 587.051 ±(99.9%) 6.929 ns/op
+  Statistics: (min, avg, max) = (584.783, 587.051, 599.988), stdev = 4.583
+  Confidence interval (99.9%): [580.121, 593.980]
+
+
+# Run progress: 55.00% complete, ETA 00:09:10
+# VM invoker: /home/yak/Work/jdks/jdk1.7.0_51/jre/bin/java
+# VM options: -Dburst.size=10 -XX:+UseCondCardMark
+# Fork: 4 of 5
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 2 threads, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: psy.lob.saw.queues.benchmarks.jmh.QueueRoundTripLatency.ring
+# Parameters: (queueScale = 17, queueType = 25)
+# Warmup Iteration   1: 4.646 ns/op
+# Warmup Iteration   2: 5.033 ns/op
+# Warmup Iteration   3: 4.534 ns/op
+# Warmup Iteration   4: 4.533 ns/op
+# Warmup Iteration   5: 4.498 ns/op
+# Warmup Iteration   6: 4.488 ns/op
+# Warmup Iteration   7: 4.489 ns/op
+# Warmup Iteration   8: 5.187 ns/op
+# Warmup Iteration   9: 5.168 ns/op
+# Warmup Iteration  10: 5.182 ns/op
+Iteration   1: 5.199 ns/op
+                 "loop": 2.611 ns/op (1 threads)
+                 "ping": 598.402 ns/op (1 threads)
+
+Iteration   2: 5.171 ns/op
+                 "loop": 2.597 ns/op (1 threads)
+                 "ping": 598.718 ns/op (1 threads)
+
+Iteration   3: 5.181 ns/op
+                 "loop": 2.602 ns/op (1 threads)
+                 "ping": 598.066 ns/op (1 threads)
+
+Iteration   4: 5.178 ns/op
+                 "loop": 2.600 ns/op (1 threads)
+                 "ping": 597.989 ns/op (1 threads)
+
+Iteration   5: 5.189 ns/op
+                 "loop": 2.606 ns/op (1 threads)
+                 "ping": 597.261 ns/op (1 threads)
+
+Iteration   6: 5.184 ns/op
+                 "loop": 2.603 ns/op (1 threads)
+                 "ping": 598.519 ns/op (1 threads)
+
+Iteration   7: 5.187 ns/op
+                 "loop": 2.605 ns/op (1 threads)
+                 "ping": 598.487 ns/op (1 threads)
+
+Iteration   8: 5.184 ns/op
+                 "loop": 2.603 ns/op (1 threads)
+                 "ping": 598.590 ns/op (1 threads)
+
+Iteration   9: 5.200 ns/op
+                 "loop": 2.611 ns/op (1 threads)
+                 "ping": 597.639 ns/op (1 threads)
+
+Iteration  10: 5.184 ns/op
+                 "loop": 2.603 ns/op (1 threads)
+                 "ping": 599.025 ns/op (1 threads)
+
+
+Result : 5.186 ±(99.9%) 0.013 ns/op
+  Statistics: (min, avg, max) = (5.171, 5.186, 5.200), stdev = 0.009
+  Confidence interval (99.9%): [5.172, 5.199]
+
+Result "loop": 2.604 ±(99.9%) 0.007 ns/op
+  Statistics: (min, avg, max) = (2.597, 2.604, 2.611), stdev = 0.004
+  Confidence interval (99.9%): [2.597, 2.611]
+
+Result "ping": 598.269 ±(99.9%) 0.803 ns/op
+  Statistics: (min, avg, max) = (597.261, 598.269, 599.025), stdev = 0.531
+  Confidence interval (99.9%): [597.467, 599.072]
+
+
+# Run progress: 56.67% complete, ETA 00:08:49
+# VM invoker: /home/yak/Work/jdks/jdk1.7.0_51/jre/bin/java
+# VM options: -Dburst.size=10 -XX:+UseCondCardMark
+# Fork: 5 of 5
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 2 threads, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: psy.lob.saw.queues.benchmarks.jmh.QueueRoundTripLatency.ring
+# Parameters: (queueScale = 17, queueType = 25)
+# Warmup Iteration   1: 5.178 ns/op
+# Warmup Iteration   2: 4.980 ns/op
+# Warmup Iteration   3: 4.998 ns/op
+# Warmup Iteration   4: 4.645 ns/op
+# Warmup Iteration   5: 4.999 ns/op
+# Warmup Iteration   6: 4.993 ns/op
+# Warmup Iteration   7: 4.416 ns/op
+# Warmup Iteration   8: 4.486 ns/op
+# Warmup Iteration   9: 4.491 ns/op
+# Warmup Iteration  10: 5.007 ns/op
+Iteration   1: 5.010 ns/op
+                 "loop": 2.515 ns/op (1 threads)
+                 "ping": 604.887 ns/op (1 threads)
+
+Iteration   2: 5.010 ns/op
+                 "loop": 2.515 ns/op (1 threads)
+                 "ping": 604.517 ns/op (1 threads)
+
+Iteration   3: 5.012 ns/op
+                 "loop": 2.516 ns/op (1 threads)
+                 "ping": 604.512 ns/op (1 threads)
+
+Iteration   4: 5.008 ns/op
+                 "loop": 2.514 ns/op (1 threads)
+                 "ping": 604.533 ns/op (1 threads)
+
+Iteration   5: 5.006 ns/op
+                 "loop": 2.513 ns/op (1 threads)
+                 "ping": 604.509 ns/op (1 threads)
+
+Iteration   6: 5.007 ns/op
+                 "loop": 2.514 ns/op (1 threads)
+                 "ping": 604.673 ns/op (1 threads)
+
+Iteration   7: 5.011 ns/op
+                 "loop": 2.516 ns/op (1 threads)
+                 "ping": 604.174 ns/op (1 threads)
+
+Iteration   8: 5.013 ns/op
+                 "loop": 2.517 ns/op (1 threads)
+                 "ping": 604.651 ns/op (1 threads)
+
+Iteration   9: 5.007 ns/op
+                 "loop": 2.514 ns/op (1 threads)
+                 "ping": 604.752 ns/op (1 threads)
+
+Iteration  10: 5.006 ns/op
+                 "loop": 2.513 ns/op (1 threads)
+                 "ping": 604.649 ns/op (1 threads)
+
+
+Result : 5.009 ±(99.9%) 0.004 ns/op
+  Statistics: (min, avg, max) = (5.006, 5.009, 5.013), stdev = 0.003
+  Confidence interval (99.9%): [5.005, 5.013]
+
+Result "loop": 2.515 ±(99.9%) 0.002 ns/op
+  Statistics: (min, avg, max) = (2.513, 2.515, 2.517), stdev = 0.001
+  Confidence interval (99.9%): [2.513, 2.517]
+
+Result "ping": 604.586 ±(99.9%) 0.286 ns/op
+  Statistics: (min, avg, max) = (604.174, 604.586, 604.887), stdev = 0.189
+  Confidence interval (99.9%): [604.299, 604.872]
+
+
+# Run progress: 58.33% complete, ETA 00:08:29
+# VM invoker: /home/yak/Work/jdks/jdk1.7.0_51/jre/bin/java
+# VM options: -Dburst.size=10 -XX:+UseCondCardMark
+# Fork: 1 of 5
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 2 threads, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: psy.lob.saw.queues.benchmarks.jmh.QueueRoundTripLatency.ring
+# Parameters: (queueScale = 17, queueType = 31)
+# Warmup Iteration   1: 20.879 ns/op
+# Warmup Iteration   2: 20.509 ns/op
+# Warmup Iteration   3: 14.480 ns/op
+# Warmup Iteration   4: 14.387 ns/op
+# Warmup Iteration   5: 14.307 ns/op
+# Warmup Iteration   6: 14.295 ns/op
+# Warmup Iteration   7: 14.310 ns/op
+# Warmup Iteration   8: 14.299 ns/op
+# Warmup Iteration   9: 14.281 ns/op
+# Warmup Iteration  10: 14.334 ns/op
+Iteration   1: 14.335 ns/op
+                 "loop": 7.261 ns/op (1 threads)
+                 "ping": 557.004 ns/op (1 threads)
+
+Iteration   2: 14.345 ns/op
+                 "loop": 7.266 ns/op (1 threads)
+                 "ping": 557.342 ns/op (1 threads)
+
+Iteration   3: 14.330 ns/op
+                 "loop": 7.258 ns/op (1 threads)
+                 "ping": 556.709 ns/op (1 threads)
+
+Iteration   4: 14.326 ns/op
+                 "loop": 7.257 ns/op (1 threads)
+                 "ping": 556.299 ns/op (1 threads)
+
+Iteration   5: 14.331 ns/op
+                 "loop": 7.259 ns/op (1 threads)
+                 "ping": 556.808 ns/op (1 threads)
+
+Iteration   6: 14.340 ns/op
+                 "loop": 7.263 ns/op (1 threads)
+                 "ping": 557.085 ns/op (1 threads)
+
+Iteration   7: 14.329 ns/op
+                 "loop": 7.258 ns/op (1 threads)
+                 "ping": 556.524 ns/op (1 threads)
+
+Iteration   8: 14.350 ns/op
+                 "loop": 7.268 ns/op (1 threads)
+                 "ping": 557.410 ns/op (1 threads)
+
+Iteration   9: 14.563 ns/op
+                 "loop": 7.281 ns/op (1 threads)
+                 "ping": 600.636 ns/op (1 threads)
+
+Iteration  10: 14.103 ns/op
+                 "loop": 7.183 ns/op (1 threads)
+                 "ping": 579.441 ns/op (1 threads)
+
+
+Result : 14.335 ±(99.9%) 0.164 ns/op
+  Statistics: (min, avg, max) = (14.103, 14.335, 14.563), stdev = 0.109
+  Confidence interval (99.9%): [14.171, 14.499]
+
+Result "loop": 7.255 ±(99.9%) 0.040 ns/op
+  Statistics: (min, avg, max) = (7.183, 7.255, 7.281), stdev = 0.026
+  Confidence interval (99.9%): [7.216, 7.295]
+
+Result "ping": 563.526 ±(99.9%) 22.441 ns/op
+  Statistics: (min, avg, max) = (556.299, 563.526, 600.636), stdev = 14.844
+  Confidence interval (99.9%): [541.084, 585.967]
+
+
+# Run progress: 60.00% complete, ETA 00:08:09
+# VM invoker: /home/yak/Work/jdks/jdk1.7.0_51/jre/bin/java
+# VM options: -Dburst.size=10 -XX:+UseCondCardMark
+# Fork: 2 of 5
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 2 threads, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: psy.lob.saw.queues.benchmarks.jmh.QueueRoundTripLatency.ring
+# Parameters: (queueScale = 17, queueType = 31)
+# Warmup Iteration   1: 26.100 ns/op
+# Warmup Iteration   2: 24.417 ns/op
+# Warmup Iteration   3: 20.169 ns/op
+# Warmup Iteration   4: 20.157 ns/op
+# Warmup Iteration   5: 19.965 ns/op
+# Warmup Iteration   6: 19.955 ns/op
+# Warmup Iteration   7: 19.810 ns/op
+# Warmup Iteration   8: 19.673 ns/op
+# Warmup Iteration   9: 19.980 ns/op
+# Warmup Iteration  10: 20.185 ns/op
+Iteration   1: 20.139 ns/op
+                 "loop": 10.223 ns/op (1 threads)
+                 "ping": 669.561 ns/op (1 threads)
+
+Iteration   2: 20.169 ns/op
+                 "loop": 10.239 ns/op (1 threads)
+                 "ping": 670.290 ns/op (1 threads)
+
+Iteration   3: 20.140 ns/op
+                 "loop": 10.224 ns/op (1 threads)
+                 "ping": 670.036 ns/op (1 threads)
+
+Iteration   4: 20.141 ns/op
+                 "loop": 10.224 ns/op (1 threads)
+                 "ping": 670.619 ns/op (1 threads)
+
+Iteration   5: 20.138 ns/op
+                 "loop": 10.222 ns/op (1 threads)
+                 "ping": 669.973 ns/op (1 threads)
+
+Iteration   6: 20.129 ns/op
+                 "loop": 10.218 ns/op (1 threads)
+                 "ping": 669.815 ns/op (1 threads)
+
+Iteration   7: 20.143 ns/op
+                 "loop": 10.225 ns/op (1 threads)
+                 "ping": 670.076 ns/op (1 threads)
+
+Iteration   8: 20.132 ns/op
+                 "loop": 10.220 ns/op (1 threads)
+                 "ping": 669.909 ns/op (1 threads)
+
+Iteration   9: 19.973 ns/op
+                 "loop": 10.141 ns/op (1 threads)
+                 "ping": 656.618 ns/op (1 threads)
+
+Iteration  10: 20.170 ns/op
+                 "loop": 10.239 ns/op (1 threads)
+                 "ping": 670.039 ns/op (1 threads)
+
+
+Result : 20.127 ±(99.9%) 0.085 ns/op
+  Statistics: (min, avg, max) = (19.973, 20.127, 20.170), stdev = 0.056
+  Confidence interval (99.9%): [20.043, 20.212]
+
+Result "loop": 10.217 ±(99.9%) 0.042 ns/op
+  Statistics: (min, avg, max) = (10.141, 10.217, 10.239), stdev = 0.028
+  Confidence interval (99.9%): [10.175, 10.260]
+
+Result "ping": 668.694 ±(99.9%) 6.428 ns/op
+  Statistics: (min, avg, max) = (656.618, 668.694, 670.619), stdev = 4.252
+  Confidence interval (99.9%): [662.265, 675.122]
+
+
+# Run progress: 61.67% complete, ETA 00:07:48
+# VM invoker: /home/yak/Work/jdks/jdk1.7.0_51/jre/bin/java
+# VM options: -Dburst.size=10 -XX:+UseCondCardMark
+# Fork: 3 of 5
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 2 threads, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: psy.lob.saw.queues.benchmarks.jmh.QueueRoundTripLatency.ring
+# Parameters: (queueScale = 17, queueType = 31)
+# Warmup Iteration   1: 21.019 ns/op
+# Warmup Iteration   2: 19.913 ns/op
+# Warmup Iteration   3: 13.906 ns/op
+# Warmup Iteration   4: 13.425 ns/op
+# Warmup Iteration   5: 13.891 ns/op
+# Warmup Iteration   6: 13.832 ns/op
+# Warmup Iteration   7: 13.828 ns/op
+# Warmup Iteration   8: 14.045 ns/op
+# Warmup Iteration   9: 13.896 ns/op
+# Warmup Iteration  10: 14.045 ns/op
+Iteration   1: 13.886 ns/op
+                 "loop": 7.004 ns/op (1 threads)
+                 "ping": 555.779 ns/op (1 threads)
+
+Iteration   2: 14.042 ns/op
+                 "loop": 7.112 ns/op (1 threads)
+                 "ping": 549.029 ns/op (1 threads)
+
+Iteration   3: 14.033 ns/op
+                 "loop": 7.107 ns/op (1 threads)
+                 "ping": 549.417 ns/op (1 threads)
+
+Iteration   4: 14.045 ns/op
+                 "loop": 7.114 ns/op (1 threads)
+                 "ping": 549.072 ns/op (1 threads)
+
+Iteration   5: 14.043 ns/op
+                 "loop": 7.113 ns/op (1 threads)
+                 "ping": 549.159 ns/op (1 threads)
+
+Iteration   6: 14.045 ns/op
+                 "loop": 7.113 ns/op (1 threads)
+                 "ping": 549.266 ns/op (1 threads)
+
+Iteration   7: 14.045 ns/op
+                 "loop": 7.113 ns/op (1 threads)
+                 "ping": 549.285 ns/op (1 threads)
+
+Iteration   8: 14.046 ns/op
+                 "loop": 7.114 ns/op (1 threads)
+                 "ping": 549.099 ns/op (1 threads)
+
+Iteration   9: 14.047 ns/op
+                 "loop": 7.115 ns/op (1 threads)
+                 "ping": 549.115 ns/op (1 threads)
+
+Iteration  10: 14.043 ns/op
+                 "loop": 7.113 ns/op (1 threads)
+                 "ping": 548.936 ns/op (1 threads)
+
+
+Result : 14.028 ±(99.9%) 0.076 ns/op
+  Statistics: (min, avg, max) = (13.886, 14.028, 14.047), stdev = 0.050
+  Confidence interval (99.9%): [13.952, 14.103]
+
+Result "loop": 7.102 ±(99.9%) 0.052 ns/op
+  Statistics: (min, avg, max) = (7.004, 7.102, 7.115), stdev = 0.035
+  Confidence interval (99.9%): [7.050, 7.154]
+
+Result "ping": 549.816 ±(99.9%) 3.175 ns/op
+  Statistics: (min, avg, max) = (548.936, 549.816, 555.779), stdev = 2.100
+  Confidence interval (99.9%): [546.641, 552.990]
+
+
+# Run progress: 63.33% complete, ETA 00:07:28
+# VM invoker: /home/yak/Work/jdks/jdk1.7.0_51/jre/bin/java
+# VM options: -Dburst.size=10 -XX:+UseCondCardMark
+# Fork: 4 of 5
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 2 threads, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: psy.lob.saw.queues.benchmarks.jmh.QueueRoundTripLatency.ring
+# Parameters: (queueScale = 17, queueType = 31)
+# Warmup Iteration   1: 20.464 ns/op
+# Warmup Iteration   2: 20.450 ns/op
+# Warmup Iteration   3: 14.802 ns/op
+# Warmup Iteration   4: 14.690 ns/op
+# Warmup Iteration   5: 14.116 ns/op
+# Warmup Iteration   6: 14.816 ns/op
+# Warmup Iteration   7: 14.816 ns/op
+# Warmup Iteration   8: 14.807 ns/op
+# Warmup Iteration   9: 14.805 ns/op
+# Warmup Iteration  10: 14.809 ns/op
+Iteration   1: 14.804 ns/op
+                 "loop": 7.497 ns/op (1 threads)
+                 "ping": 583.440 ns/op (1 threads)
+
+Iteration   2: 14.812 ns/op
+                 "loop": 7.501 ns/op (1 threads)
+                 "ping": 583.485 ns/op (1 threads)
+
+Iteration   3: 14.817 ns/op
+                 "loop": 7.504 ns/op (1 threads)
+                 "ping": 583.864 ns/op (1 threads)
+
+Iteration   4: 14.813 ns/op
+                 "loop": 7.502 ns/op (1 threads)
+                 "ping": 583.436 ns/op (1 threads)
+
+Iteration   5: 14.811 ns/op
+                 "loop": 7.501 ns/op (1 threads)
+                 "ping": 583.554 ns/op (1 threads)
+
+Iteration   6: 14.810 ns/op
+                 "loop": 7.500 ns/op (1 threads)
+                 "ping": 583.701 ns/op (1 threads)
+
+Iteration   7: 14.846 ns/op
+                 "loop": 7.519 ns/op (1 threads)
+                 "ping": 580.465 ns/op (1 threads)
+
+Iteration   8: 14.815 ns/op
+                 "loop": 7.503 ns/op (1 threads)
+                 "ping": 583.591 ns/op (1 threads)
+
+Iteration   9: 14.811 ns/op
+                 "loop": 7.501 ns/op (1 threads)
+                 "ping": 583.378 ns/op (1 threads)
+
+Iteration  10: 14.815 ns/op
+                 "loop": 7.503 ns/op (1 threads)
+                 "ping": 583.643 ns/op (1 threads)
+
+
+Result : 14.815 ±(99.9%) 0.017 ns/op
+  Statistics: (min, avg, max) = (14.804, 14.815, 14.846), stdev = 0.011
+  Confidence interval (99.9%): [14.798, 14.832]
+
+Result "loop": 7.503 ±(99.9%) 0.009 ns/op
+  Statistics: (min, avg, max) = (7.497, 7.503, 7.519), stdev = 0.006
+  Confidence interval (99.9%): [7.494, 7.512]
+
+Result "ping": 583.256 ±(99.9%) 1.498 ns/op
+  Statistics: (min, avg, max) = (580.465, 583.256, 583.864), stdev = 0.991
+  Confidence interval (99.9%): [581.757, 584.754]
+
+
+# Run progress: 65.00% complete, ETA 00:07:07
+# VM invoker: /home/yak/Work/jdks/jdk1.7.0_51/jre/bin/java
+# VM options: -Dburst.size=10 -XX:+UseCondCardMark
+# Fork: 5 of 5
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 2 threads, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: psy.lob.saw.queues.benchmarks.jmh.QueueRoundTripLatency.ring
+# Parameters: (queueScale = 17, queueType = 31)
+# Warmup Iteration   1: 20.671 ns/op
+# Warmup Iteration   2: 20.875 ns/op
+# Warmup Iteration   3: 13.792 ns/op
+# Warmup Iteration   4: 14.462 ns/op
+# Warmup Iteration   5: 14.612 ns/op
+# Warmup Iteration   6: 14.595 ns/op
+# Warmup Iteration   7: 14.635 ns/op
+# Warmup Iteration   8: 14.622 ns/op
+# Warmup Iteration   9: 14.659 ns/op
+# Warmup Iteration  10: 14.620 ns/op
+Iteration   1: 14.625 ns/op
+                 "loop": 7.408 ns/op (1 threads)
+                 "ping": 569.555 ns/op (1 threads)
+
+Iteration   2: 14.627 ns/op
+                 "loop": 7.408 ns/op (1 threads)
+                 "ping": 569.516 ns/op (1 threads)
+
+Iteration   3: 14.625 ns/op
+                 "loop": 7.408 ns/op (1 threads)
+                 "ping": 569.596 ns/op (1 threads)
+
+Iteration   4: 14.627 ns/op
+                 "loop": 7.409 ns/op (1 threads)
+                 "ping": 569.425 ns/op (1 threads)
+
+Iteration   5: 14.626 ns/op
+                 "loop": 7.408 ns/op (1 threads)
+                 "ping": 569.473 ns/op (1 threads)
+
+Iteration   6: 14.630 ns/op
+                 "loop": 7.410 ns/op (1 threads)
+                 "ping": 569.574 ns/op (1 threads)
+
+Iteration   7: 14.631 ns/op
+                 "loop": 7.411 ns/op (1 threads)
+                 "ping": 569.606 ns/op (1 threads)
+
+Iteration   8: 14.631 ns/op
+                 "loop": 7.411 ns/op (1 threads)
+                 "ping": 569.699 ns/op (1 threads)
+
+Iteration   9: 14.626 ns/op
+                 "loop": 7.408 ns/op (1 threads)
+                 "ping": 569.590 ns/op (1 threads)
+
+Iteration  10: 14.631 ns/op
+                 "loop": 7.411 ns/op (1 threads)
+                 "ping": 569.626 ns/op (1 threads)
+
+
+Result : 14.628 ±(99.9%) 0.004 ns/op
+  Statistics: (min, avg, max) = (14.625, 14.628, 14.631), stdev = 0.002
+  Confidence interval (99.9%): [14.624, 14.632]
+
+Result "loop": 7.409 ±(99.9%) 0.002 ns/op
+  Statistics: (min, avg, max) = (7.408, 7.409, 7.411), stdev = 0.001
+  Confidence interval (99.9%): [7.407, 7.411]
+
+Result "ping": 569.566 ±(99.9%) 0.119 ns/op
+  Statistics: (min, avg, max) = (569.425, 569.566, 569.699), stdev = 0.079
+  Confidence interval (99.9%): [569.447, 569.685]
+
+
+# Run progress: 66.67% complete, ETA 00:06:47
+# VM invoker: /home/yak/Work/jdks/jdk1.7.0_51/jre/bin/java
+# VM options: -Dburst.size=10 -XX:+UseCondCardMark
+# Fork: 1 of 5
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 2 threads, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: psy.lob.saw.queues.benchmarks.jmh.QueueRoundTripLatency.ring
+# Parameters: (queueScale = 17, queueType = 32)
+# Warmup Iteration   1: 21.821 ns/op
+# Warmup Iteration   2: 19.698 ns/op
+# Warmup Iteration   3: 14.485 ns/op
+# Warmup Iteration   4: 14.939 ns/op
+# Warmup Iteration   5: 14.720 ns/op
+# Warmup Iteration   6: 14.724 ns/op
+# Warmup Iteration   7: 14.551 ns/op
+# Warmup Iteration   8: 15.076 ns/op
+# Warmup Iteration   9: 15.066 ns/op
+# Warmup Iteration  10: 15.076 ns/op
+Iteration   1: 14.716 ns/op
+                 "loop": 7.423 ns/op (1 threads)
+                 "ping": 598.327 ns/op (1 threads)
+
+Iteration   2: 14.487 ns/op
+                 "loop": 7.274 ns/op (1 threads)
+                 "ping": 597.685 ns/op (1 threads)
+
+Iteration   3: 15.032 ns/op
+                 "loop": 7.614 ns/op (1 threads)
+                 "ping": 584.024 ns/op (1 threads)
+
+Iteration   4: 14.368 ns/op
+                 "loop": 7.278 ns/op (1 threads)
+                 "ping": 556.279 ns/op (1 threads)
+
+Iteration   5: 14.358 ns/op
+                 "loop": 7.273 ns/op (1 threads)
+                 "ping": 556.534 ns/op (1 threads)
+
+Iteration   6: 14.798 ns/op
+                 "loop": 7.481 ns/op (1 threads)
+                 "ping": 570.504 ns/op (1 threads)
+
+Iteration   7: 14.744 ns/op
+                 "loop": 7.469 ns/op (1 threads)
+                 "ping": 567.788 ns/op (1 threads)
+
+Iteration   8: 14.759 ns/op
+                 "loop": 7.476 ns/op (1 threads)
+                 "ping": 567.723 ns/op (1 threads)
+
+Iteration   9: 14.386 ns/op
+                 "loop": 7.287 ns/op (1 threads)
+                 "ping": 557.441 ns/op (1 threads)
+
+Iteration  10: 14.392 ns/op
+                 "loop": 7.290 ns/op (1 threads)
+                 "ping": 557.706 ns/op (1 threads)
+
+
+Result : 14.604 ±(99.9%) 0.356 ns/op
+  Statistics: (min, avg, max) = (14.358, 14.604, 15.032), stdev = 0.236
+  Confidence interval (99.9%): [14.248, 14.960]
+
+Result "loop": 7.386 ±(99.9%) 0.184 ns/op
+  Statistics: (min, avg, max) = (7.273, 7.386, 7.614), stdev = 0.122
+  Confidence interval (99.9%): [7.202, 7.571]
+
+Result "ping": 571.401 ±(99.9%) 24.867 ns/op
+  Statistics: (min, avg, max) = (556.279, 571.401, 598.327), stdev = 16.448
+  Confidence interval (99.9%): [546.534, 596.268]
+
+
+# Run progress: 68.33% complete, ETA 00:06:27
+# VM invoker: /home/yak/Work/jdks/jdk1.7.0_51/jre/bin/java
+# VM options: -Dburst.size=10 -XX:+UseCondCardMark
+# Fork: 2 of 5
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 2 threads, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: psy.lob.saw.queues.benchmarks.jmh.QueueRoundTripLatency.ring
+# Parameters: (queueScale = 17, queueType = 32)
+# Warmup Iteration   1: 21.866 ns/op
+# Warmup Iteration   2: 19.884 ns/op
+# Warmup Iteration   3: 14.841 ns/op
+# Warmup Iteration   4: 14.628 ns/op
+# Warmup Iteration   5: 14.006 ns/op
+# Warmup Iteration   6: 14.285 ns/op
+# Warmup Iteration   7: 14.590 ns/op
+# Warmup Iteration   8: 15.110 ns/op
+# Warmup Iteration   9: 15.163 ns/op
+# Warmup Iteration  10: 14.605 ns/op
+Iteration   1: 14.564 ns/op
+                 "loop": 7.377 ns/op (1 threads)
+                 "ping": 564.894 ns/op (1 threads)
+
+Iteration   2: 14.582 ns/op
+                 "loop": 7.387 ns/op (1 threads)
+                 "ping": 564.950 ns/op (1 threads)
+
+Iteration   3: 14.589 ns/op
+                 "loop": 7.390 ns/op (1 threads)
+                 "ping": 564.899 ns/op (1 threads)
+
+Iteration   4: 14.604 ns/op
+                 "loop": 7.397 ns/op (1 threads)
+                 "ping": 567.482 ns/op (1 threads)
+
+Iteration   5: 13.863 ns/op
+                 "loop": 7.100 ns/op (1 threads)
+                 "ping": 585.030 ns/op (1 threads)
+
+Iteration   6: 15.135 ns/op
+                 "loop": 7.665 ns/op (1 threads)
+                 "ping": 594.880 ns/op (1 threads)
+
+Iteration   7: 15.046 ns/op
+                 "loop": 7.619 ns/op (1 threads)
+                 "ping": 595.468 ns/op (1 threads)
+
+Iteration   8: 15.114 ns/op
+                 "loop": 7.654 ns/op (1 threads)
+                 "ping": 594.975 ns/op (1 threads)
+
+Iteration   9: 15.065 ns/op
+                 "loop": 7.629 ns/op (1 threads)
+                 "ping": 595.342 ns/op (1 threads)
+
+Iteration  10: 15.194 ns/op
+                 "loop": 7.695 ns/op (1 threads)
+                 "ping": 594.608 ns/op (1 threads)
+
+
+Result : 14.776 ±(99.9%) 0.629 ns/op
+  Statistics: (min, avg, max) = (13.863, 14.776, 15.194), stdev = 0.416
+  Confidence interval (99.9%): [14.147, 15.404]
+
+Result "loop": 7.492 ±(99.9%) 0.290 ns/op
+  Statistics: (min, avg, max) = (7.100, 7.492, 7.695), stdev = 0.192
+  Confidence interval (99.9%): [7.202, 7.781]
+
+Result "ping": 582.253 ±(99.9%) 22.241 ns/op
+  Statistics: (min, avg, max) = (564.894, 582.253, 595.468), stdev = 14.711
+  Confidence interval (99.9%): [560.012, 604.494]
+
+
+# Run progress: 70.00% complete, ETA 00:06:06
+# VM invoker: /home/yak/Work/jdks/jdk1.7.0_51/jre/bin/java
+# VM options: -Dburst.size=10 -XX:+UseCondCardMark
+# Fork: 3 of 5
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 2 threads, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: psy.lob.saw.queues.benchmarks.jmh.QueueRoundTripLatency.ring
+# Parameters: (queueScale = 17, queueType = 32)
+# Warmup Iteration   1: 22.109 ns/op
+# Warmup Iteration   2: 21.110 ns/op
+# Warmup Iteration   3: 15.494 ns/op
+# Warmup Iteration   4: 14.645 ns/op
+# Warmup Iteration   5: 15.473 ns/op
+# Warmup Iteration   6: 15.105 ns/op
+# Warmup Iteration   7: 15.469 ns/op
+# Warmup Iteration   8: 14.933 ns/op
+# Warmup Iteration   9: 14.280 ns/op
+# Warmup Iteration  10: 14.344 ns/op
+Iteration   1: 18.797 ns/op
+                 "loop": 9.550 ns/op (1 threads)
+                 "ping": 591.277 ns/op (1 threads)
+
+Iteration   2: 15.445 ns/op
+                 "loop": 7.824 ns/op (1 threads)
+                 "ping": 592.730 ns/op (1 threads)
+
+Iteration   3: 15.654 ns/op
+                 "loop": 7.931 ns/op (1 threads)
+                 "ping": 595.405 ns/op (1 threads)
+
+Iteration   4: 15.465 ns/op
+                 "loop": 7.834 ns/op (1 threads)
+                 "ping": 593.432 ns/op (1 threads)
+
+Iteration   5: 15.459 ns/op
+                 "loop": 7.832 ns/op (1 threads)
+                 "ping": 593.673 ns/op (1 threads)
+
+Iteration   6: 15.118 ns/op
+                 "loop": 7.660 ns/op (1 threads)
+                 "ping": 576.857 ns/op (1 threads)
+
+Iteration   7: 15.116 ns/op
+                 "loop": 7.658 ns/op (1 threads)
+                 "ping": 576.840 ns/op (1 threads)
+
+Iteration   8: 15.445 ns/op
+                 "loop": 7.825 ns/op (1 threads)
+                 "ping": 592.524 ns/op (1 threads)
+
+Iteration   9: 15.397 ns/op
+                 "loop": 7.800 ns/op (1 threads)
+                 "ping": 590.792 ns/op (1 threads)
+
+Iteration  10: 15.110 ns/op
+                 "loop": 7.655 ns/op (1 threads)
+                 "ping": 577.410 ns/op (1 threads)
+
+
+Result : 15.701 ±(99.9%) 1.668 ns/op
+  Statistics: (min, avg, max) = (15.110, 15.701, 18.797), stdev = 1.103
+  Confidence interval (99.9%): [14.033, 17.369]
+
+Result "loop": 7.957 ±(99.9%) 0.858 ns/op
+  Statistics: (min, avg, max) = (7.655, 7.957, 9.550), stdev = 0.567
+  Confidence interval (99.9%): [7.099, 8.815]
+
+Result "ping": 588.094 ±(99.9%) 11.697 ns/op
+  Statistics: (min, avg, max) = (576.840, 588.094, 595.405), stdev = 7.737
+  Confidence interval (99.9%): [576.397, 599.790]
+
+
+# Run progress: 71.67% complete, ETA 00:05:46
+# VM invoker: /home/yak/Work/jdks/jdk1.7.0_51/jre/bin/java
+# VM options: -Dburst.size=10 -XX:+UseCondCardMark
+# Fork: 4 of 5
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 2 threads, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: psy.lob.saw.queues.benchmarks.jmh.QueueRoundTripLatency.ring
+# Parameters: (queueScale = 17, queueType = 32)
+# Warmup Iteration   1: 21.235 ns/op
+# Warmup Iteration   2: 21.179 ns/op
+# Warmup Iteration   3: 14.610 ns/op
+# Warmup Iteration   4: 14.569 ns/op
+# Warmup Iteration   5: 14.697 ns/op
+# Warmup Iteration   6: 14.676 ns/op
+# Warmup Iteration   7: 14.719 ns/op
+# Warmup Iteration   8: 14.676 ns/op
+# Warmup Iteration   9: 14.685 ns/op
+# Warmup Iteration  10: 14.688 ns/op
+Iteration   1: 14.693 ns/op
+                 "loop": 7.443 ns/op (1 threads)
+                 "ping": 569.693 ns/op (1 threads)
+
+Iteration   2: 14.682 ns/op
+                 "loop": 7.437 ns/op (1 threads)
+                 "ping": 568.872 ns/op (1 threads)
+
+Iteration   3: 14.706 ns/op
+                 "loop": 7.449 ns/op (1 threads)
+                 "ping": 568.818 ns/op (1 threads)
+
+Iteration   4: 14.677 ns/op
+                 "loop": 7.435 ns/op (1 threads)
+                 "ping": 569.080 ns/op (1 threads)
+
+Iteration   5: 14.713 ns/op
+                 "loop": 7.453 ns/op (1 threads)
+                 "ping": 569.824 ns/op (1 threads)
+
+Iteration   6: 14.720 ns/op
+                 "loop": 7.457 ns/op (1 threads)
+                 "ping": 569.131 ns/op (1 threads)
+
+Iteration   7: 14.531 ns/op
+                 "loop": 7.359 ns/op (1 threads)
+                 "ping": 570.991 ns/op (1 threads)
+
+Iteration   8: 14.707 ns/op
+                 "loop": 7.450 ns/op (1 threads)
+                 "ping": 569.337 ns/op (1 threads)
+
+Iteration   9: 14.707 ns/op
+                 "loop": 7.450 ns/op (1 threads)
+                 "ping": 569.242 ns/op (1 threads)
+
+Iteration  10: 14.712 ns/op
+                 "loop": 7.453 ns/op (1 threads)
+                 "ping": 569.406 ns/op (1 threads)
+
+
+Result : 14.685 ±(99.9%) 0.084 ns/op
+  Statistics: (min, avg, max) = (14.531, 14.685, 14.720), stdev = 0.056
+  Confidence interval (99.9%): [14.601, 14.769]
+
+Result "loop": 7.438 ±(99.9%) 0.043 ns/op
+  Statistics: (min, avg, max) = (7.359, 7.438, 7.457), stdev = 0.029
+  Confidence interval (99.9%): [7.395, 7.482]
+
+Result "ping": 569.440 ±(99.9%) 0.957 ns/op
+  Statistics: (min, avg, max) = (568.818, 569.440, 570.991), stdev = 0.633
+  Confidence interval (99.9%): [568.483, 570.396]
+
+
+# Run progress: 73.33% complete, ETA 00:05:26
+# VM invoker: /home/yak/Work/jdks/jdk1.7.0_51/jre/bin/java
+# VM options: -Dburst.size=10 -XX:+UseCondCardMark
+# Fork: 5 of 5
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 2 threads, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: psy.lob.saw.queues.benchmarks.jmh.QueueRoundTripLatency.ring
+# Parameters: (queueScale = 17, queueType = 32)
+# Warmup Iteration   1: 20.361 ns/op
+# Warmup Iteration   2: 20.274 ns/op
+# Warmup Iteration   3: 15.067 ns/op
+# Warmup Iteration   4: 14.950 ns/op
+# Warmup Iteration   5: 14.755 ns/op
+# Warmup Iteration   6: 14.764 ns/op
+# Warmup Iteration   7: 15.195 ns/op
+# Warmup Iteration   8: 14.755 ns/op
+# Warmup Iteration   9: 14.747 ns/op
+# Warmup Iteration  10: 14.748 ns/op
+Iteration   1: 14.747 ns/op
+                 "loop": 7.471 ns/op (1 threads)
+                 "ping": 567.523 ns/op (1 threads)
+
+Iteration   2: 14.758 ns/op
+                 "loop": 7.476 ns/op (1 threads)
+                 "ping": 568.201 ns/op (1 threads)
+
+Iteration   3: 14.740 ns/op
+                 "loop": 7.467 ns/op (1 threads)
+                 "ping": 567.361 ns/op (1 threads)
+
+Iteration   4: 14.770 ns/op
+                 "loop": 7.483 ns/op (1 threads)
+                 "ping": 567.476 ns/op (1 threads)
+
+Iteration   5: 14.738 ns/op
+                 "loop": 7.466 ns/op (1 threads)
+                 "ping": 567.223 ns/op (1 threads)
+
+Iteration   6: 14.740 ns/op
+                 "loop": 7.467 ns/op (1 threads)
+                 "ping": 567.354 ns/op (1 threads)
+
+Iteration   7: 14.744 ns/op
+                 "loop": 7.469 ns/op (1 threads)
+                 "ping": 567.552 ns/op (1 threads)
+
+Iteration   8: 14.746 ns/op
+                 "loop": 7.470 ns/op (1 threads)
+                 "ping": 567.657 ns/op (1 threads)
+
+Iteration   9: 14.747 ns/op
+                 "loop": 7.471 ns/op (1 threads)
+                 "ping": 567.694 ns/op (1 threads)
+
+Iteration  10: 14.742 ns/op
+                 "loop": 7.468 ns/op (1 threads)
+                 "ping": 567.496 ns/op (1 threads)
+
+
+Result : 14.747 ±(99.9%) 0.015 ns/op
+  Statistics: (min, avg, max) = (14.738, 14.747, 14.770), stdev = 0.010
+  Confidence interval (99.9%): [14.733, 14.762]
+
+Result "loop": 7.471 ±(99.9%) 0.008 ns/op
+  Statistics: (min, avg, max) = (7.466, 7.471, 7.483), stdev = 0.005
+  Confidence interval (99.9%): [7.463, 7.478]
+
+Result "ping": 567.554 ±(99.9%) 0.405 ns/op
+  Statistics: (min, avg, max) = (567.223, 567.554, 568.201), stdev = 0.268
+  Confidence interval (99.9%): [567.148, 567.959]
+
+
+# Run progress: 75.00% complete, ETA 00:05:05
+# VM invoker: /home/yak/Work/jdks/jdk1.7.0_51/jre/bin/java
+# VM options: -Dburst.size=10 -XX:+UseCondCardMark
+# Fork: 1 of 5
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 2 threads, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: psy.lob.saw.queues.benchmarks.jmh.QueueRoundTripLatency.ring
+# Parameters: (queueScale = 17, queueType = 33)
+# Warmup Iteration   1: 11.051 ns/op
+# Warmup Iteration   2: 11.121 ns/op
+# Warmup Iteration   3: 10.781 ns/op
+# Warmup Iteration   4: 11.850 ns/op
+# Warmup Iteration   5: 10.990 ns/op
+# Warmup Iteration   6: 11.159 ns/op
+# Warmup Iteration   7: 10.828 ns/op
+# Warmup Iteration   8: 10.297 ns/op
+# Warmup Iteration   9: 10.277 ns/op
+# Warmup Iteration  10: 10.772 ns/op
+Iteration   1: 11.166 ns/op
+                 "loop": 5.640 ns/op (1 threads)
+                 "ping": 551.087 ns/op (1 threads)
+
+Iteration   2: 11.183 ns/op
+                 "loop": 5.649 ns/op (1 threads)
+                 "ping": 551.159 ns/op (1 threads)
+
+Iteration   3: 10.828 ns/op
+                 "loop": 5.433 ns/op (1 threads)
+                 "ping": 573.455 ns/op (1 threads)
+
+Iteration   4: 10.823 ns/op
+                 "loop": 5.430 ns/op (1 threads)
+                 "ping": 577.310 ns/op (1 threads)
+
+Iteration   5: 11.142 ns/op
+                 "loop": 5.617 ns/op (1 threads)
+                 "ping": 546.334 ns/op (1 threads)
+
+Iteration   6: 11.156 ns/op
+                 "loop": 5.636 ns/op (1 threads)
+                 "ping": 545.123 ns/op (1 threads)
+
+Iteration   7: 11.192 ns/op
+                 "loop": 5.654 ns/op (1 threads)
+                 "ping": 544.937 ns/op (1 threads)
+
+Iteration   8: 11.122 ns/op
+                 "loop": 5.618 ns/op (1 threads)
+                 "ping": 542.949 ns/op (1 threads)
+
+Iteration   9: 11.191 ns/op
+                 "loop": 5.643 ns/op (1 threads)
+                 "ping": 552.822 ns/op (1 threads)
+
+Iteration  10: 11.127 ns/op
+                 "loop": 5.621 ns/op (1 threads)
+                 "ping": 550.583 ns/op (1 threads)
+
+
+Result : 11.093 ±(99.9%) 0.217 ns/op
+  Statistics: (min, avg, max) = (10.823, 11.093, 11.192), stdev = 0.143
+  Confidence interval (99.9%): [10.877, 11.310]
+
+Result "loop": 5.594 ±(99.9%) 0.131 ns/op
+  Statistics: (min, avg, max) = (5.430, 5.594, 5.654), stdev = 0.087
+  Confidence interval (99.9%): [5.463, 5.725]
+
+Result "ping": 553.576 ±(99.9%) 18.110 ns/op
+  Statistics: (min, avg, max) = (542.949, 553.576, 577.310), stdev = 11.979
+  Confidence interval (99.9%): [535.465, 571.686]
+
+
+# Run progress: 76.67% complete, ETA 00:04:45
+# VM invoker: /home/yak/Work/jdks/jdk1.7.0_51/jre/bin/java
+# VM options: -Dburst.size=10 -XX:+UseCondCardMark
+# Fork: 2 of 5
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 2 threads, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: psy.lob.saw.queues.benchmarks.jmh.QueueRoundTripLatency.ring
+# Parameters: (queueScale = 17, queueType = 33)
+# Warmup Iteration   1: 11.227 ns/op
+# Warmup Iteration   2: 10.275 ns/op
+# Warmup Iteration   3: 10.263 ns/op
+# Warmup Iteration   4: 11.334 ns/op
+# Warmup Iteration   5: 11.524 ns/op
+# Warmup Iteration   6: 11.507 ns/op
+# Warmup Iteration   7: 11.515 ns/op
+# Warmup Iteration   8: 11.200 ns/op
+# Warmup Iteration   9: 11.188 ns/op
+# Warmup Iteration  10: 11.188 ns/op
+Iteration   1: 11.149 ns/op
+                 "loop": 5.632 ns/op (1 threads)
+                 "ping": 546.082 ns/op (1 threads)
+
+Iteration   2: 11.298 ns/op
+                 "loop": 5.708 ns/op (1 threads)
+                 "ping": 545.974 ns/op (1 threads)
+
+Iteration   3: 11.255 ns/op
+                 "loop": 5.686 ns/op (1 threads)
+                 "ping": 547.569 ns/op (1 threads)
+
+Iteration   4: 11.178 ns/op
+                 "loop": 5.647 ns/op (1 threads)
+                 "ping": 545.752 ns/op (1 threads)
+
+Iteration   5: 11.132 ns/op
+                 "loop": 5.623 ns/op (1 threads)
+                 "ping": 544.053 ns/op (1 threads)
+
+Iteration   6: 11.165 ns/op
+                 "loop": 5.640 ns/op (1 threads)
+                 "ping": 546.433 ns/op (1 threads)
+
+Iteration   7: 11.194 ns/op
+                 "loop": 5.655 ns/op (1 threads)
+                 "ping": 546.394 ns/op (1 threads)
+
+Iteration   8: 11.208 ns/op
+                 "loop": 5.662 ns/op (1 threads)
+                 "ping": 547.644 ns/op (1 threads)
+
+Iteration   9: 11.142 ns/op
+                 "loop": 5.628 ns/op (1 threads)
+                 "ping": 545.631 ns/op (1 threads)
+
+Iteration  10: 11.138 ns/op
+                 "loop": 5.627 ns/op (1 threads)
+                 "ping": 545.375 ns/op (1 threads)
+
+
+Result : 11.186 ±(99.9%) 0.083 ns/op
+  Statistics: (min, avg, max) = (11.132, 11.186, 11.298), stdev = 0.055
+  Confidence interval (99.9%): [11.103, 11.269]
+
+Result "loop": 5.651 ±(99.9%) 0.042 ns/op
+  Statistics: (min, avg, max) = (5.623, 5.651, 5.708), stdev = 0.028
+  Confidence interval (99.9%): [5.609, 5.693]
+
+Result "ping": 546.091 ±(99.9%) 1.578 ns/op
+  Statistics: (min, avg, max) = (544.053, 546.091, 547.644), stdev = 1.044
+  Confidence interval (99.9%): [544.512, 547.669]
+
+
+# Run progress: 78.33% complete, ETA 00:04:24
+# VM invoker: /home/yak/Work/jdks/jdk1.7.0_51/jre/bin/java
+# VM options: -Dburst.size=10 -XX:+UseCondCardMark
+# Fork: 3 of 5
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 2 threads, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: psy.lob.saw.queues.benchmarks.jmh.QueueRoundTripLatency.ring
+# Parameters: (queueScale = 17, queueType = 33)
+# Warmup Iteration   1: 11.190 ns/op
+# Warmup Iteration   2: 10.569 ns/op
+# Warmup Iteration   3: 11.214 ns/op
+# Warmup Iteration   4: 10.869 ns/op
+# Warmup Iteration   5: 11.767 ns/op
+# Warmup Iteration   6: 11.334 ns/op
+# Warmup Iteration   7: 11.802 ns/op
+# Warmup Iteration   8: 11.740 ns/op
+# Warmup Iteration   9: 11.752 ns/op
+# Warmup Iteration  10: 11.741 ns/op
+Iteration   1: 11.750 ns/op
+                 "loop": 5.936 ns/op (1 threads)
+                 "ping": 572.912 ns/op (1 threads)
+
+Iteration   2: 11.763 ns/op
+                 "loop": 5.943 ns/op (1 threads)
+                 "ping": 573.267 ns/op (1 threads)
+
+Iteration   3: 11.763 ns/op
+                 "loop": 5.942 ns/op (1 threads)
+                 "ping": 573.145 ns/op (1 threads)
+
+Iteration   4: 11.761 ns/op
+                 "loop": 5.941 ns/op (1 threads)
+                 "ping": 573.487 ns/op (1 threads)
+
+Iteration   5: 11.741 ns/op
+                 "loop": 5.931 ns/op (1 threads)
+                 "ping": 572.731 ns/op (1 threads)
+
+Iteration   6: 11.769 ns/op
+                 "loop": 5.945 ns/op (1 threads)
+                 "ping": 573.471 ns/op (1 threads)
+
+Iteration   7: 11.744 ns/op
+                 "loop": 5.933 ns/op (1 threads)
+                 "ping": 572.926 ns/op (1 threads)
+
+Iteration   8: 11.759 ns/op
+                 "loop": 5.940 ns/op (1 threads)
+                 "ping": 572.933 ns/op (1 threads)
+
+Iteration   9: 11.788 ns/op
+                 "loop": 5.955 ns/op (1 threads)
+                 "ping": 573.308 ns/op (1 threads)
+
+Iteration  10: 11.789 ns/op
+                 "loop": 5.956 ns/op (1 threads)
+                 "ping": 573.989 ns/op (1 threads)
+
+
+Result : 11.763 ±(99.9%) 0.025 ns/op
+  Statistics: (min, avg, max) = (11.741, 11.763, 11.789), stdev = 0.016
+  Confidence interval (99.9%): [11.738, 11.788]
+
+Result "loop": 5.942 ±(99.9%) 0.013 ns/op
+  Statistics: (min, avg, max) = (5.931, 5.942, 5.956), stdev = 0.008
+  Confidence interval (99.9%): [5.930, 5.955]
+
+Result "ping": 573.217 ±(99.9%) 0.562 ns/op
+  Statistics: (min, avg, max) = (572.731, 573.217, 573.989), stdev = 0.372
+  Confidence interval (99.9%): [572.655, 573.779]
+
+
+# Run progress: 80.00% complete, ETA 00:04:04
+# VM invoker: /home/yak/Work/jdks/jdk1.7.0_51/jre/bin/java
+# VM options: -Dburst.size=10 -XX:+UseCondCardMark
+# Fork: 4 of 5
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 2 threads, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: psy.lob.saw.queues.benchmarks.jmh.QueueRoundTripLatency.ring
+# Parameters: (queueScale = 17, queueType = 33)
+# Warmup Iteration   1: 11.969 ns/op
+# Warmup Iteration   2: 11.410 ns/op
+# Warmup Iteration   3: 12.128 ns/op
+# Warmup Iteration   4: 12.295 ns/op
+# Warmup Iteration   5: 12.026 ns/op
+# Warmup Iteration   6: 13.277 ns/op
+# Warmup Iteration   7: 20.823 ns/op
+# Warmup Iteration   8: 11.711 ns/op
+# Warmup Iteration   9: 11.957 ns/op
+# Warmup Iteration  10: 12.116 ns/op
+Iteration   1: 11.927 ns/op
+                 "loop": 6.025 ns/op (1 threads)
+                 "ping": 587.012 ns/op (1 threads)
+
+Iteration   2: 11.974 ns/op
+                 "loop": 6.048 ns/op (1 threads)
+                 "ping": 587.572 ns/op (1 threads)
+
+Iteration   3: 11.858 ns/op
+                 "loop": 5.989 ns/op (1 threads)
+                 "ping": 588.141 ns/op (1 threads)
+
+Iteration   4: 11.839 ns/op
+                 "loop": 5.980 ns/op (1 threads)
+                 "ping": 589.434 ns/op (1 threads)
+
+Iteration   5: 11.832 ns/op
+                 "loop": 5.976 ns/op (1 threads)
+                 "ping": 588.447 ns/op (1 threads)
+
+Iteration   6: 11.862 ns/op
+                 "loop": 5.992 ns/op (1 threads)
+                 "ping": 587.846 ns/op (1 threads)
+
+Iteration   7: 11.816 ns/op
+                 "loop": 5.968 ns/op (1 threads)
+                 "ping": 587.736 ns/op (1 threads)
+
+Iteration   8: 11.878 ns/op
+                 "loop": 5.999 ns/op (1 threads)
+                 "ping": 589.081 ns/op (1 threads)
+
+Iteration   9: 11.827 ns/op
+                 "loop": 5.974 ns/op (1 threads)
+                 "ping": 587.158 ns/op (1 threads)
+
+Iteration  10: 11.879 ns/op
+                 "loop": 6.000 ns/op (1 threads)
+                 "ping": 588.369 ns/op (1 threads)
+
+
+Result : 11.869 ±(99.9%) 0.074 ns/op
+  Statistics: (min, avg, max) = (11.816, 11.869, 11.974), stdev = 0.049
+  Confidence interval (99.9%): [11.795, 11.943]
+
+Result "loop": 5.995 ±(99.9%) 0.038 ns/op
+  Statistics: (min, avg, max) = (5.968, 5.995, 6.048), stdev = 0.025
+  Confidence interval (99.9%): [5.957, 6.033]
+
+Result "ping": 588.079 ±(99.9%) 1.179 ns/op
+  Statistics: (min, avg, max) = (587.012, 588.079, 589.434), stdev = 0.780
+  Confidence interval (99.9%): [586.900, 589.259]
+
+
+# Run progress: 81.67% complete, ETA 00:03:44
+# VM invoker: /home/yak/Work/jdks/jdk1.7.0_51/jre/bin/java
+# VM options: -Dburst.size=10 -XX:+UseCondCardMark
+# Fork: 5 of 5
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 2 threads, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: psy.lob.saw.queues.benchmarks.jmh.QueueRoundTripLatency.ring
+# Parameters: (queueScale = 17, queueType = 33)
+# Warmup Iteration   1: 11.640 ns/op
+# Warmup Iteration   2: 11.965 ns/op
+# Warmup Iteration   3: 10.607 ns/op
+# Warmup Iteration   4: 11.818 ns/op
+# Warmup Iteration   5: 12.198 ns/op
+# Warmup Iteration   6: 12.242 ns/op
+# Warmup Iteration   7: 12.262 ns/op
+# Warmup Iteration   8: 12.347 ns/op
+# Warmup Iteration   9: 12.253 ns/op
+# Warmup Iteration  10: 12.179 ns/op
+Iteration   1: 12.204 ns/op
+                 "loop": 6.166 ns/op (1 threads)
+                 "ping": 587.431 ns/op (1 threads)
+
+Iteration   2: 12.382 ns/op
+                 "loop": 6.257 ns/op (1 threads)
+                 "ping": 587.351 ns/op (1 threads)
+
+Iteration   3: 12.277 ns/op
+                 "loop": 6.203 ns/op (1 threads)
+                 "ping": 587.394 ns/op (1 threads)
+
+Iteration   4: 12.279 ns/op
+                 "loop": 6.204 ns/op (1 threads)
+                 "ping": 588.156 ns/op (1 threads)
+
+Iteration   5: 12.196 ns/op
+                 "loop": 6.162 ns/op (1 threads)
+                 "ping": 587.801 ns/op (1 threads)
+
+Iteration   6: 12.233 ns/op
+                 "loop": 6.181 ns/op (1 threads)
+                 "ping": 587.930 ns/op (1 threads)
+
+Iteration   7: 12.231 ns/op
+                 "loop": 6.180 ns/op (1 threads)
+                 "ping": 588.469 ns/op (1 threads)
+
+Iteration   8: 12.250 ns/op
+                 "loop": 6.190 ns/op (1 threads)
+                 "ping": 588.508 ns/op (1 threads)
+
+Iteration   9: 12.194 ns/op
+                 "loop": 6.161 ns/op (1 threads)
+                 "ping": 587.428 ns/op (1 threads)
+
+Iteration  10: 12.245 ns/op
+                 "loop": 6.187 ns/op (1 threads)
+                 "ping": 588.148 ns/op (1 threads)
+
+
+Result : 12.249 ±(99.9%) 0.084 ns/op
+  Statistics: (min, avg, max) = (12.194, 12.249, 12.382), stdev = 0.056
+  Confidence interval (99.9%): [12.165, 12.333]
+
+Result "loop": 6.189 ±(99.9%) 0.043 ns/op
+  Statistics: (min, avg, max) = (6.161, 6.189, 6.257), stdev = 0.028
+  Confidence interval (99.9%): [6.146, 6.232]
+
+Result "ping": 587.862 ±(99.9%) 0.679 ns/op
+  Statistics: (min, avg, max) = (587.351, 587.862, 588.508), stdev = 0.449
+  Confidence interval (99.9%): [587.182, 588.541]
+
+
+# Run progress: 83.33% complete, ETA 00:03:23
+# VM invoker: /home/yak/Work/jdks/jdk1.7.0_51/jre/bin/java
+# VM options: -Dburst.size=10 -XX:+UseCondCardMark
+# Fork: 1 of 5
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 2 threads, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: psy.lob.saw.queues.benchmarks.jmh.QueueRoundTripLatency.ring
+# Parameters: (queueScale = 17, queueType = 41)
+# Warmup Iteration   1: 8.332 ns/op
+# Warmup Iteration   2: 7.745 ns/op
+# Warmup Iteration   3: 7.678 ns/op
+# Warmup Iteration   4: 8.126 ns/op
+# Warmup Iteration   5: 8.083 ns/op
+# Warmup Iteration   6: 7.768 ns/op
+# Warmup Iteration   7: 8.086 ns/op
+# Warmup Iteration   8: 8.108 ns/op
+# Warmup Iteration   9: 7.728 ns/op
+# Warmup Iteration  10: 7.721 ns/op
+Iteration   1: 7.730 ns/op
+                 "loop": 3.904 ns/op (1 threads)
+                 "ping": 385.963 ns/op (1 threads)
+
+Iteration   2: 7.825 ns/op
+                 "loop": 3.952 ns/op (1 threads)
+                 "ping": 385.918 ns/op (1 threads)
+
+Iteration   3: 7.720 ns/op
+                 "loop": 3.899 ns/op (1 threads)
+                 "ping": 385.720 ns/op (1 threads)
+
+Iteration   4: 7.729 ns/op
+                 "loop": 3.903 ns/op (1 threads)
+                 "ping": 385.895 ns/op (1 threads)
+
+Iteration   5: 7.731 ns/op
+                 "loop": 3.905 ns/op (1 threads)
+                 "ping": 385.763 ns/op (1 threads)
+
+Iteration   6: 7.728 ns/op
+                 "loop": 3.903 ns/op (1 threads)
+                 "ping": 385.702 ns/op (1 threads)
+
+Iteration   7: 7.740 ns/op
+                 "loop": 3.909 ns/op (1 threads)
+                 "ping": 386.034 ns/op (1 threads)
+
+Iteration   8: 7.734 ns/op
+                 "loop": 3.906 ns/op (1 threads)
+                 "ping": 385.626 ns/op (1 threads)
+
+Iteration   9: 7.726 ns/op
+                 "loop": 3.902 ns/op (1 threads)
+                 "ping": 385.728 ns/op (1 threads)
+
+Iteration  10: 7.723 ns/op
+                 "loop": 3.901 ns/op (1 threads)
+                 "ping": 385.447 ns/op (1 threads)
+
+
+Result : 7.739 ±(99.9%) 0.047 ns/op
+  Statistics: (min, avg, max) = (7.720, 7.739, 7.825), stdev = 0.031
+  Confidence interval (99.9%): [7.692, 7.785]
+
+Result "loop": 3.908 ±(99.9%) 0.024 ns/op
+  Statistics: (min, avg, max) = (3.899, 3.908, 3.952), stdev = 0.016
+  Confidence interval (99.9%): [3.885, 3.932]
+
+Result "ping": 385.780 ±(99.9%) 0.266 ns/op
+  Statistics: (min, avg, max) = (385.447, 385.780, 386.034), stdev = 0.176
+  Confidence interval (99.9%): [385.514, 386.045]
+
+
+# Run progress: 85.00% complete, ETA 00:03:03
+# VM invoker: /home/yak/Work/jdks/jdk1.7.0_51/jre/bin/java
+# VM options: -Dburst.size=10 -XX:+UseCondCardMark
+# Fork: 2 of 5
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 2 threads, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: psy.lob.saw.queues.benchmarks.jmh.QueueRoundTripLatency.ring
+# Parameters: (queueScale = 17, queueType = 41)
+# Warmup Iteration   1: 7.977 ns/op
+# Warmup Iteration   2: 7.972 ns/op
+# Warmup Iteration   3: 8.046 ns/op
+# Warmup Iteration   4: 8.396 ns/op
+# Warmup Iteration   5: 12.160 ns/op
+# Warmup Iteration   6: 8.304 ns/op
+# Warmup Iteration   7: 8.320 ns/op
+# Warmup Iteration   8: 8.312 ns/op
+# Warmup Iteration   9: 8.311 ns/op
+# Warmup Iteration  10: 8.348 ns/op
+Iteration   1: 8.386 ns/op
+                 "loop": 4.241 ns/op (1 threads)
+                 "ping": 368.644 ns/op (1 threads)
+
+Iteration   2: 8.449 ns/op
+                 "loop": 4.274 ns/op (1 threads)
+                 "ping": 367.780 ns/op (1 threads)
+
+Iteration   3: 8.312 ns/op
+                 "loop": 4.205 ns/op (1 threads)
+                 "ping": 360.444 ns/op (1 threads)
+
+Iteration   4: 8.315 ns/op
+                 "loop": 4.206 ns/op (1 threads)
+                 "ping": 360.527 ns/op (1 threads)
+
+Iteration   5: 8.350 ns/op
+                 "loop": 4.223 ns/op (1 threads)
+                 "ping": 367.296 ns/op (1 threads)
+
+Iteration   6: 8.309 ns/op
+                 "loop": 4.203 ns/op (1 threads)
+                 "ping": 360.516 ns/op (1 threads)
+
+Iteration   7: 8.309 ns/op
+                 "loop": 4.203 ns/op (1 threads)
+                 "ping": 360.469 ns/op (1 threads)
+
+Iteration   8: 8.312 ns/op
+                 "loop": 4.204 ns/op (1 threads)
+                 "ping": 360.467 ns/op (1 threads)
+
+Iteration   9: 8.313 ns/op
+                 "loop": 4.205 ns/op (1 threads)
+                 "ping": 360.594 ns/op (1 threads)
+
+Iteration  10: 8.314 ns/op
+                 "loop": 4.205 ns/op (1 threads)
+                 "ping": 360.601 ns/op (1 threads)
+
+
+Result : 8.337 ±(99.9%) 0.071 ns/op
+  Statistics: (min, avg, max) = (8.309, 8.337, 8.449), stdev = 0.047
+  Confidence interval (99.9%): [8.266, 8.408]
+
+Result "loop": 4.217 ±(99.9%) 0.036 ns/op
+  Statistics: (min, avg, max) = (4.203, 4.217, 4.274), stdev = 0.024
+  Confidence interval (99.9%): [4.181, 4.252]
+
+Result "ping": 362.734 ±(99.9%) 5.419 ns/op
+  Statistics: (min, avg, max) = (360.444, 362.734, 368.644), stdev = 3.584
+  Confidence interval (99.9%): [357.315, 368.153]
+
+
+# Run progress: 86.67% complete, ETA 00:02:43
+# VM invoker: /home/yak/Work/jdks/jdk1.7.0_51/jre/bin/java
+# VM options: -Dburst.size=10 -XX:+UseCondCardMark
+# Fork: 3 of 5
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 2 threads, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: psy.lob.saw.queues.benchmarks.jmh.QueueRoundTripLatency.ring
+# Parameters: (queueScale = 17, queueType = 41)
+# Warmup Iteration   1: 7.789 ns/op
+# Warmup Iteration   2: 7.878 ns/op
+# Warmup Iteration   3: 8.107 ns/op
+# Warmup Iteration   4: 8.136 ns/op
+# Warmup Iteration   5: 8.130 ns/op
+# Warmup Iteration   6: 8.126 ns/op
+# Warmup Iteration   7: 8.126 ns/op
+# Warmup Iteration   8: 8.125 ns/op
+# Warmup Iteration   9: 8.122 ns/op
+# Warmup Iteration  10: 8.124 ns/op
+Iteration   1: 8.122 ns/op
+                 "loop": 4.041 ns/op (1 threads)
+                 "ping": 405.242 ns/op (1 threads)
+
+Iteration   2: 7.942 ns/op
+                 "loop": 4.041 ns/op (1 threads)
+                 "ping": 386.496 ns/op (1 threads)
+
+Iteration   3: 8.129 ns/op
+                 "loop": 4.109 ns/op (1 threads)
+                 "ping": 376.733 ns/op (1 threads)
+
+Iteration   4: 8.230 ns/op
+                 "loop": 4.162 ns/op (1 threads)
+                 "ping": 367.778 ns/op (1 threads)
+
+Iteration   5: 8.159 ns/op
+                 "loop": 4.126 ns/op (1 threads)
+                 "ping": 363.343 ns/op (1 threads)
+
+Iteration   6: 8.228 ns/op
+                 "loop": 4.161 ns/op (1 threads)
+                 "ping": 367.583 ns/op (1 threads)
+
+Iteration   7: 8.234 ns/op
+                 "loop": 4.163 ns/op (1 threads)
+                 "ping": 367.697 ns/op (1 threads)
+
+Iteration   8: 8.240 ns/op
+                 "loop": 4.167 ns/op (1 threads)
+                 "ping": 367.948 ns/op (1 threads)
+
+Iteration   9: 8.247 ns/op
+                 "loop": 4.170 ns/op (1 threads)
+                 "ping": 368.055 ns/op (1 threads)
+
+Iteration  10: 8.230 ns/op
+                 "loop": 4.162 ns/op (1 threads)
+                 "ping": 367.619 ns/op (1 threads)
+
+
+Result : 8.176 ±(99.9%) 0.144 ns/op
+  Statistics: (min, avg, max) = (7.942, 8.176, 8.247), stdev = 0.095
+  Confidence interval (99.9%): [8.032, 8.320]
+
+Result "loop": 4.130 ±(99.9%) 0.077 ns/op
+  Statistics: (min, avg, max) = (4.041, 4.130, 4.170), stdev = 0.051
+  Confidence interval (99.9%): [4.053, 4.207]
+
+Result "ping": 373.849 ±(99.9%) 19.422 ns/op
+  Statistics: (min, avg, max) = (363.343, 373.849, 405.242), stdev = 12.847
+  Confidence interval (99.9%): [354.427, 393.272]
+
+
+# Run progress: 88.33% complete, ETA 00:02:22
+# VM invoker: /home/yak/Work/jdks/jdk1.7.0_51/jre/bin/java
+# VM options: -Dburst.size=10 -XX:+UseCondCardMark
+# Fork: 4 of 5
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 2 threads, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: psy.lob.saw.queues.benchmarks.jmh.QueueRoundTripLatency.ring
+# Parameters: (queueScale = 17, queueType = 41)
+# Warmup Iteration   1: 8.322 ns/op
+# Warmup Iteration   2: 8.042 ns/op
+# Warmup Iteration   3: 7.863 ns/op
+# Warmup Iteration   4: 7.956 ns/op
+# Warmup Iteration   5: 7.928 ns/op
+# Warmup Iteration   6: 7.628 ns/op
+# Warmup Iteration   7: 7.858 ns/op
+# Warmup Iteration   8: 7.994 ns/op
+# Warmup Iteration   9: 7.988 ns/op
+# Warmup Iteration  10: 7.987 ns/op
+Iteration   1: 7.990 ns/op
+                 "loop": 4.040 ns/op (1 threads)
+                 "ping": 360.752 ns/op (1 threads)
+
+Iteration   2: 7.985 ns/op
+                 "loop": 4.037 ns/op (1 threads)
+                 "ping": 360.908 ns/op (1 threads)
+
+Iteration   3: 7.990 ns/op
+                 "loop": 4.040 ns/op (1 threads)
+                 "ping": 360.711 ns/op (1 threads)
+
+Iteration   4: 7.988 ns/op
+                 "loop": 4.039 ns/op (1 threads)
+                 "ping": 360.630 ns/op (1 threads)
+
+Iteration   5: 7.992 ns/op
+                 "loop": 4.041 ns/op (1 threads)
+                 "ping": 360.781 ns/op (1 threads)
+
+Iteration   6: 7.988 ns/op
+                 "loop": 4.039 ns/op (1 threads)
+                 "ping": 360.876 ns/op (1 threads)
+
+Iteration   7: 7.985 ns/op
+                 "loop": 4.037 ns/op (1 threads)
+                 "ping": 360.916 ns/op (1 threads)
+
+Iteration   8: 7.851 ns/op
+                 "loop": 3.977 ns/op (1 threads)
+                 "ping": 353.882 ns/op (1 threads)
+
+Iteration   9: 7.892 ns/op
+                 "loop": 3.990 ns/op (1 threads)
+                 "ping": 353.721 ns/op (1 threads)
+
+Iteration  10: 7.893 ns/op
+                 "loop": 3.991 ns/op (1 threads)
+                 "ping": 353.695 ns/op (1 threads)
+
+
+Result : 7.955 ±(99.9%) 0.082 ns/op
+  Statistics: (min, avg, max) = (7.851, 7.955, 7.992), stdev = 0.054
+  Confidence interval (99.9%): [7.874, 8.037]
+
+Result "loop": 4.023 ±(99.9%) 0.039 ns/op
+  Statistics: (min, avg, max) = (3.977, 4.023, 4.041), stdev = 0.026
+  Confidence interval (99.9%): [3.984, 4.062]
+
+Result "ping": 358.687 ±(99.9%) 5.136 ns/op
+  Statistics: (min, avg, max) = (353.695, 358.687, 360.916), stdev = 3.397
+  Confidence interval (99.9%): [353.551, 363.824]
+
+
+# Run progress: 90.00% complete, ETA 00:02:02
+# VM invoker: /home/yak/Work/jdks/jdk1.7.0_51/jre/bin/java
+# VM options: -Dburst.size=10 -XX:+UseCondCardMark
+# Fork: 5 of 5
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 2 threads, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: psy.lob.saw.queues.benchmarks.jmh.QueueRoundTripLatency.ring
+# Parameters: (queueScale = 17, queueType = 41)
+# Warmup Iteration   1: 8.554 ns/op
+# Warmup Iteration   2: 8.117 ns/op
+# Warmup Iteration   3: 8.395 ns/op
+# Warmup Iteration   4: 11.168 ns/op
+# Warmup Iteration   5: 8.738 ns/op
+# Warmup Iteration   6: 8.247 ns/op
+# Warmup Iteration   7: 8.707 ns/op
+# Warmup Iteration   8: 8.251 ns/op
+# Warmup Iteration   9: 8.706 ns/op
+# Warmup Iteration  10: 8.107 ns/op
+Iteration   1: 8.032 ns/op
+                 "loop": 4.110 ns/op (1 threads)
+                 "ping": 365.527 ns/op (1 threads)
+
+Iteration   2: 8.512 ns/op
+                 "loop": 4.305 ns/op (1 threads)
+                 "ping": 370.728 ns/op (1 threads)
+
+Iteration   3: 8.693 ns/op
+                 "loop": 4.398 ns/op (1 threads)
+                 "ping": 370.602 ns/op (1 threads)
+
+Iteration   4: 8.696 ns/op
+                 "loop": 4.400 ns/op (1 threads)
+                 "ping": 370.254 ns/op (1 threads)
+
+Iteration   5: 8.685 ns/op
+                 "loop": 4.394 ns/op (1 threads)
+                 "ping": 370.459 ns/op (1 threads)
+
+Iteration   6: 8.715 ns/op
+                 "loop": 4.409 ns/op (1 threads)
+                 "ping": 371.212 ns/op (1 threads)
+
+Iteration   7: 8.706 ns/op
+                 "loop": 4.404 ns/op (1 threads)
+                 "ping": 370.915 ns/op (1 threads)
+
+Iteration   8: 8.715 ns/op
+                 "loop": 4.354 ns/op (1 threads)
+                 "ping": 382.893 ns/op (1 threads)
+
+Iteration   9: 8.722 ns/op
+                 "loop": 4.384 ns/op (1 threads)
+                 "ping": 375.852 ns/op (1 threads)
+
+Iteration  10: 8.254 ns/op
+                 "loop": 4.174 ns/op (1 threads)
+                 "ping": 368.918 ns/op (1 threads)
+
+
+Result : 8.573 ±(99.9%) 0.364 ns/op
+  Statistics: (min, avg, max) = (8.032, 8.573, 8.722), stdev = 0.240
+  Confidence interval (99.9%): [8.209, 8.937]
+
+Result "loop": 4.333 ±(99.9%) 0.161 ns/op
+  Statistics: (min, avg, max) = (4.110, 4.333, 4.409), stdev = 0.107
+  Confidence interval (99.9%): [4.172, 4.495]
+
+Result "ping": 371.736 ±(99.9%) 7.037 ns/op
+  Statistics: (min, avg, max) = (365.527, 371.736, 382.893), stdev = 4.654
+  Confidence interval (99.9%): [364.699, 378.773]
+
+
+# Run progress: 91.67% complete, ETA 00:01:41
+# VM invoker: /home/yak/Work/jdks/jdk1.7.0_51/jre/bin/java
+# VM options: -Dburst.size=10 -XX:+UseCondCardMark
+# Fork: 1 of 5
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 2 threads, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: psy.lob.saw.queues.benchmarks.jmh.QueueRoundTripLatency.ring
+# Parameters: (queueScale = 17, queueType = 42)
+# Warmup Iteration   1: 10.280 ns/op
+# Warmup Iteration   2: 9.709 ns/op
+# Warmup Iteration   3: 11.467 ns/op
+# Warmup Iteration   4: 11.482 ns/op
+# Warmup Iteration   5: 11.432 ns/op
+# Warmup Iteration   6: 11.343 ns/op
+# Warmup Iteration   7: 11.360 ns/op
+# Warmup Iteration   8: 11.370 ns/op
+# Warmup Iteration   9: 11.394 ns/op
+# Warmup Iteration  10: 11.381 ns/op
+Iteration   1: 11.387 ns/op
+                 "loop": 5.787 ns/op (1 threads)
+                 "ping": 353.776 ns/op (1 threads)
+
+Iteration   2: 11.381 ns/op
+                 "loop": 5.783 ns/op (1 threads)
+                 "ping": 353.883 ns/op (1 threads)
+
+Iteration   3: 11.394 ns/op
+                 "loop": 5.790 ns/op (1 threads)
+                 "ping": 353.806 ns/op (1 threads)
+
+Iteration   4: 11.395 ns/op
+                 "loop": 5.791 ns/op (1 threads)
+                 "ping": 353.884 ns/op (1 threads)
+
+Iteration   5: 11.389 ns/op
+                 "loop": 5.788 ns/op (1 threads)
+                 "ping": 353.795 ns/op (1 threads)
+
+Iteration   6: 11.396 ns/op
+                 "loop": 5.791 ns/op (1 threads)
+                 "ping": 354.049 ns/op (1 threads)
+
+Iteration   7: 11.393 ns/op
+                 "loop": 5.790 ns/op (1 threads)
+                 "ping": 353.936 ns/op (1 threads)
+
+Iteration   8: 11.393 ns/op
+                 "loop": 5.790 ns/op (1 threads)
+                 "ping": 353.894 ns/op (1 threads)
+
+Iteration   9: 11.394 ns/op
+                 "loop": 5.790 ns/op (1 threads)
+                 "ping": 353.858 ns/op (1 threads)
+
+Iteration  10: 11.432 ns/op
+                 "loop": 5.810 ns/op (1 threads)
+                 "ping": 354.501 ns/op (1 threads)
+
+
+Result : 11.395 ±(99.9%) 0.021 ns/op
+  Statistics: (min, avg, max) = (11.381, 11.395, 11.432), stdev = 0.014
+  Confidence interval (99.9%): [11.375, 11.416]
+
+Result "loop": 5.791 ±(99.9%) 0.011 ns/op
+  Statistics: (min, avg, max) = (5.783, 5.791, 5.810), stdev = 0.007
+  Confidence interval (99.9%): [5.780, 5.801]
+
+Result "ping": 353.938 ±(99.9%) 0.322 ns/op
+  Statistics: (min, avg, max) = (353.776, 353.938, 354.501), stdev = 0.213
+  Confidence interval (99.9%): [353.616, 354.260]
+
+
+# Run progress: 93.33% complete, ETA 00:01:21
+# VM invoker: /home/yak/Work/jdks/jdk1.7.0_51/jre/bin/java
+# VM options: -Dburst.size=10 -XX:+UseCondCardMark
+# Fork: 2 of 5
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 2 threads, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: psy.lob.saw.queues.benchmarks.jmh.QueueRoundTripLatency.ring
+# Parameters: (queueScale = 17, queueType = 42)
+# Warmup Iteration   1: 6.886 ns/op
+# Warmup Iteration   2: 7.006 ns/op
+# Warmup Iteration   3: 6.993 ns/op
+# Warmup Iteration   4: 7.008 ns/op
+# Warmup Iteration   5: 6.929 ns/op
+# Warmup Iteration   6: 6.899 ns/op
+# Warmup Iteration   7: 7.045 ns/op
+# Warmup Iteration   8: 6.937 ns/op
+# Warmup Iteration   9: 6.941 ns/op
+# Warmup Iteration  10: 6.918 ns/op
+Iteration   1: 6.921 ns/op
+                 "loop": 3.498 ns/op (1 threads)
+                 "ping": 322.655 ns/op (1 threads)
+
+Iteration   2: 6.985 ns/op
+                 "loop": 3.532 ns/op (1 threads)
+                 "ping": 316.766 ns/op (1 threads)
+
+Iteration   3: 6.985 ns/op
+                 "loop": 3.531 ns/op (1 threads)
+                 "ping": 316.810 ns/op (1 threads)
+
+Iteration   4: 6.981 ns/op
+                 "loop": 3.530 ns/op (1 threads)
+                 "ping": 316.741 ns/op (1 threads)
+
+Iteration   5: 6.979 ns/op
+                 "loop": 3.528 ns/op (1 threads)
+                 "ping": 316.728 ns/op (1 threads)
+
+Iteration   6: 6.988 ns/op
+                 "loop": 3.533 ns/op (1 threads)
+                 "ping": 316.811 ns/op (1 threads)
+
+Iteration   7: 6.979 ns/op
+                 "loop": 3.528 ns/op (1 threads)
+                 "ping": 316.770 ns/op (1 threads)
+
+Iteration   8: 6.980 ns/op
+                 "loop": 3.529 ns/op (1 threads)
+                 "ping": 316.795 ns/op (1 threads)
+
+Iteration   9: 6.985 ns/op
+                 "loop": 3.531 ns/op (1 threads)
+                 "ping": 316.747 ns/op (1 threads)
+
+Iteration  10: 6.984 ns/op
+                 "loop": 3.531 ns/op (1 threads)
+                 "ping": 316.808 ns/op (1 threads)
+
+
+Result : 6.977 ±(99.9%) 0.030 ns/op
+  Statistics: (min, avg, max) = (6.921, 6.977, 6.988), stdev = 0.020
+  Confidence interval (99.9%): [6.947, 7.007]
+
+Result "loop": 3.527 ±(99.9%) 0.016 ns/op
+  Statistics: (min, avg, max) = (3.498, 3.527, 3.533), stdev = 0.010
+  Confidence interval (99.9%): [3.511, 3.543]
+
+Result "ping": 317.363 ±(99.9%) 2.812 ns/op
+  Statistics: (min, avg, max) = (316.728, 317.363, 322.655), stdev = 1.860
+  Confidence interval (99.9%): [314.552, 320.175]
+
+
+# Run progress: 95.00% complete, ETA 00:01:01
+# VM invoker: /home/yak/Work/jdks/jdk1.7.0_51/jre/bin/java
+# VM options: -Dburst.size=10 -XX:+UseCondCardMark
+# Fork: 3 of 5
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 2 threads, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: psy.lob.saw.queues.benchmarks.jmh.QueueRoundTripLatency.ring
+# Parameters: (queueScale = 17, queueType = 42)
+# Warmup Iteration   1: 7.049 ns/op
+# Warmup Iteration   2: 7.146 ns/op
+# Warmup Iteration   3: 6.916 ns/op
+# Warmup Iteration   4: 7.040 ns/op
+# Warmup Iteration   5: 6.965 ns/op
+# Warmup Iteration   6: 6.931 ns/op
+# Warmup Iteration   7: 7.084 ns/op
+# Warmup Iteration   8: 6.903 ns/op
+# Warmup Iteration   9: 7.087 ns/op
+# Warmup Iteration  10: 7.076 ns/op
+Iteration   1: 6.914 ns/op
+                 "loop": 3.491 ns/op (1 threads)
+                 "ping": 328.809 ns/op (1 threads)
+
+Iteration   2: 6.910 ns/op
+                 "loop": 3.492 ns/op (1 threads)
+                 "ping": 328.289 ns/op (1 threads)
+
+Iteration   3: 6.908 ns/op
+                 "loop": 3.491 ns/op (1 threads)
+                 "ping": 328.254 ns/op (1 threads)
+
+Iteration   4: 6.949 ns/op
+                 "loop": 3.512 ns/op (1 threads)
+                 "ping": 328.300 ns/op (1 threads)
+
+Iteration   5: 6.970 ns/op
+                 "loop": 3.523 ns/op (1 threads)
+                 "ping": 328.563 ns/op (1 threads)
+
+Iteration   6: 6.917 ns/op
+                 "loop": 3.495 ns/op (1 threads)
+                 "ping": 328.392 ns/op (1 threads)
+
+Iteration   7: 10.550 ns/op
+                 "loop": 5.361 ns/op (1 threads)
+                 "ping": 330.290 ns/op (1 threads)
+
+Iteration   8: 6.946 ns/op
+                 "loop": 3.510 ns/op (1 threads)
+                 "ping": 328.212 ns/op (1 threads)
+
+Iteration   9: 6.949 ns/op
+                 "loop": 3.512 ns/op (1 threads)
+                 "ping": 328.383 ns/op (1 threads)
+
+Iteration  10: 6.952 ns/op
+                 "loop": 3.513 ns/op (1 threads)
+                 "ping": 328.345 ns/op (1 threads)
+
+
+Result : 7.297 ±(99.9%) 1.728 ns/op
+  Statistics: (min, avg, max) = (6.908, 7.297, 10.550), stdev = 1.143
+  Confidence interval (99.9%): [5.568, 9.025]
+
+Result "loop": 3.690 ±(99.9%) 0.888 ns/op
+  Statistics: (min, avg, max) = (3.491, 3.690, 5.361), stdev = 0.587
+  Confidence interval (99.9%): [2.802, 4.578]
+
+Result "ping": 328.584 ±(99.9%) 0.944 ns/op
+  Statistics: (min, avg, max) = (328.212, 328.584, 330.290), stdev = 0.625
+  Confidence interval (99.9%): [327.639, 329.528]
+
+
+# Run progress: 96.67% complete, ETA 00:00:40
+# VM invoker: /home/yak/Work/jdks/jdk1.7.0_51/jre/bin/java
+# VM options: -Dburst.size=10 -XX:+UseCondCardMark
+# Fork: 4 of 5
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 2 threads, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: psy.lob.saw.queues.benchmarks.jmh.QueueRoundTripLatency.ring
+# Parameters: (queueScale = 17, queueType = 42)
+# Warmup Iteration   1: 6.861 ns/op
+# Warmup Iteration   2: 6.964 ns/op
+# Warmup Iteration   3: 6.903 ns/op
+# Warmup Iteration   4: 6.910 ns/op
+# Warmup Iteration   5: 6.756 ns/op
+# Warmup Iteration   6: 6.710 ns/op
+# Warmup Iteration   7: 6.824 ns/op
+# Warmup Iteration   8: 6.858 ns/op
+# Warmup Iteration   9: 6.959 ns/op
+# Warmup Iteration  10: 6.955 ns/op
+Iteration   1: 6.956 ns/op
+                 "loop": 3.517 ns/op (1 threads)
+                 "ping": 316.676 ns/op (1 threads)
+
+Iteration   2: 6.957 ns/op
+                 "loop": 3.517 ns/op (1 threads)
+                 "ping": 316.594 ns/op (1 threads)
+
+Iteration   3: 6.957 ns/op
+                 "loop": 3.517 ns/op (1 threads)
+                 "ping": 316.516 ns/op (1 threads)
+
+Iteration   4: 6.845 ns/op
+                 "loop": 3.459 ns/op (1 threads)
+                 "ping": 322.786 ns/op (1 threads)
+
+Iteration   5: 6.857 ns/op
+                 "loop": 3.465 ns/op (1 threads)
+                 "ping": 322.654 ns/op (1 threads)
+
+Iteration   6: 6.843 ns/op
+                 "loop": 3.458 ns/op (1 threads)
+                 "ping": 322.756 ns/op (1 threads)
+
+Iteration   7: 6.828 ns/op
+                 "loop": 3.450 ns/op (1 threads)
+                 "ping": 322.911 ns/op (1 threads)
+
+Iteration   8: 6.835 ns/op
+                 "loop": 3.454 ns/op (1 threads)
+                 "ping": 322.689 ns/op (1 threads)
+
+Iteration   9: 6.842 ns/op
+                 "loop": 3.458 ns/op (1 threads)
+                 "ping": 322.743 ns/op (1 threads)
+
+Iteration  10: 6.843 ns/op
+                 "loop": 3.458 ns/op (1 threads)
+                 "ping": 323.214 ns/op (1 threads)
+
+
+Result : 6.876 ±(99.9%) 0.085 ns/op
+  Statistics: (min, avg, max) = (6.828, 6.876, 6.957), stdev = 0.056
+  Confidence interval (99.9%): [6.792, 6.961]
+
+Result "loop": 3.475 ±(99.9%) 0.044 ns/op
+  Statistics: (min, avg, max) = (3.450, 3.475, 3.517), stdev = 0.029
+  Confidence interval (99.9%): [3.432, 3.519]
+
+Result "ping": 320.954 ±(99.9%) 4.554 ns/op
+  Statistics: (min, avg, max) = (316.516, 320.954, 323.214), stdev = 3.012
+  Confidence interval (99.9%): [316.400, 325.508]
+
+
+# Run progress: 98.33% complete, ETA 00:00:20
+# VM invoker: /home/yak/Work/jdks/jdk1.7.0_51/jre/bin/java
+# VM options: -Dburst.size=10 -XX:+UseCondCardMark
+# Fork: 5 of 5
+# Warmup: 10 iterations, 1 s each
+# Measurement: 10 iterations, 1 s each
+# Threads: 2 threads, will synchronize iterations
+# Benchmark mode: Average time, time/op
+# Benchmark: psy.lob.saw.queues.benchmarks.jmh.QueueRoundTripLatency.ring
+# Parameters: (queueScale = 17, queueType = 42)
+# Warmup Iteration   1: 6.748 ns/op
+# Warmup Iteration   2: 6.718 ns/op
+# Warmup Iteration   3: 6.697 ns/op
+# Warmup Iteration   4: 6.801 ns/op
+# Warmup Iteration   5: 6.715 ns/op
+# Warmup Iteration   6: 6.739 ns/op
+# Warmup Iteration   7: 6.872 ns/op
+# Warmup Iteration   8: 6.875 ns/op
+# Warmup Iteration   9: 6.877 ns/op
+# Warmup Iteration  10: 6.884 ns/op
+Iteration   1: 6.876 ns/op
+                 "loop": 3.475 ns/op (1 threads)
+                 "ping": 323.178 ns/op (1 threads)
+
+Iteration   2: 6.875 ns/op
+                 "loop": 3.475 ns/op (1 threads)
+                 "ping": 323.130 ns/op (1 threads)
+
+Iteration   3: 6.879 ns/op
+                 "loop": 3.477 ns/op (1 threads)
+                 "ping": 323.091 ns/op (1 threads)
+
+Iteration   4: 6.881 ns/op
+                 "loop": 3.478 ns/op (1 threads)
+                 "ping": 323.225 ns/op (1 threads)
+
+Iteration   5: 6.874 ns/op
+                 "loop": 3.474 ns/op (1 threads)
+                 "ping": 323.014 ns/op (1 threads)
+
+Iteration   6: 6.881 ns/op
+                 "loop": 3.478 ns/op (1 threads)
+                 "ping": 323.055 ns/op (1 threads)
+
+Iteration   7: 6.872 ns/op
+                 "loop": 3.473 ns/op (1 threads)
+                 "ping": 322.986 ns/op (1 threads)
+
+Iteration   8: 6.835 ns/op
+                 "loop": 3.454 ns/op (1 threads)
+                 "ping": 326.343 ns/op (1 threads)
+
+Iteration   9: 6.806 ns/op
+                 "loop": 3.438 ns/op (1 threads)
+                 "ping": 329.131 ns/op (1 threads)
+
+Iteration  10: 6.867 ns/op
+                 "loop": 3.470 ns/op (1 threads)
+                 "ping": 323.950 ns/op (1 threads)
+
+
+Result : 6.865 ±(99.9%) 0.037 ns/op
+  Statistics: (min, avg, max) = (6.806, 6.865, 6.881), stdev = 0.025
+  Confidence interval (99.9%): [6.827, 6.902]
+
+Result "loop": 3.469 ±(99.9%) 0.019 ns/op
+  Statistics: (min, avg, max) = (3.438, 3.469, 3.478), stdev = 0.013
+  Confidence interval (99.9%): [3.450, 3.488]
+
+Result "ping": 324.110 ±(99.9%) 3.084 ns/op
+  Statistics: (min, avg, max) = (322.986, 324.110, 329.131), stdev = 2.040
+  Confidence interval (99.9%): [321.026, 327.194]
+
+
+Benchmark                                     (queueScale) (queueType)   Mode   Samples         Mean   Mean error    Units
+p.l.s.q.b.j.QueueRoundTripLatency.ring                  17          11   avgt        50      797.332       49.650    ns/op
+p.l.s.q.b.j.QueueRoundTripLatency.ring:loop             17          11   avgt        50      422.027       27.371    ns/op
+p.l.s.q.b.j.QueueRoundTripLatency.ring:ping             17          11   avgt        50     7243.343      192.845    ns/op
+p.l.s.q.b.j.QueueRoundTripLatency.ring                  17          12   avgt        50      126.590       35.978    ns/op
+p.l.s.q.b.j.QueueRoundTripLatency.ring:loop             17          12   avgt        50       65.629       19.100    ns/op
+p.l.s.q.b.j.QueueRoundTripLatency.ring:ping             17          12   avgt        50     2191.500       97.631    ns/op
+p.l.s.q.b.j.QueueRoundTripLatency.ring                  17          21   avgt        50       23.248        0.450    ns/op
+p.l.s.q.b.j.QueueRoundTripLatency.ring:loop             17          21   avgt        50       11.693        0.232    ns/op
+p.l.s.q.b.j.QueueRoundTripLatency.ring:ping             17          21   avgt        50     1838.567       23.208    ns/op
+p.l.s.q.b.j.QueueRoundTripLatency.ring                  17          22   avgt        50       15.800        1.988    ns/op
+p.l.s.q.b.j.QueueRoundTripLatency.ring:loop             17          22   avgt        50        7.965        1.012    ns/op
+p.l.s.q.b.j.QueueRoundTripLatency.ring:ping             17          22   avgt        50      971.050       27.503    ns/op
+p.l.s.q.b.j.QueueRoundTripLatency.ring                  17          23   avgt        50        8.415        0.724    ns/op
+p.l.s.q.b.j.QueueRoundTripLatency.ring:loop             17          23   avgt        50        4.230        0.366    ns/op
+p.l.s.q.b.j.QueueRoundTripLatency.ring:ping             17          23   avgt        50      805.488       52.896    ns/op
+p.l.s.q.b.j.QueueRoundTripLatency.ring                  17          24   avgt        50        7.074        0.143    ns/op
+p.l.s.q.b.j.QueueRoundTripLatency.ring:loop             17          24   avgt        50        3.558        0.072    ns/op
+p.l.s.q.b.j.QueueRoundTripLatency.ring:ping             17          24   avgt        50      608.220       26.119    ns/op
+p.l.s.q.b.j.QueueRoundTripLatency.ring                  17          25   avgt        50        5.163        0.217    ns/op
+p.l.s.q.b.j.QueueRoundTripLatency.ring:loop             17          25   avgt        50        2.592        0.108    ns/op
+p.l.s.q.b.j.QueueRoundTripLatency.ring:ping             17          25   avgt        50      595.835        6.686    ns/op
+p.l.s.q.b.j.QueueRoundTripLatency.ring                  17          31   avgt        50       15.587        1.144    ns/op
+p.l.s.q.b.j.QueueRoundTripLatency.ring:loop             17          31   avgt        50        7.897        0.584    ns/op
+p.l.s.q.b.j.QueueRoundTripLatency.ring:ping             17          31   avgt        50      586.971       21.386    ns/op
+p.l.s.q.b.j.QueueRoundTripLatency.ring                  17          32   avgt        50       14.903        0.325    ns/op
+p.l.s.q.b.j.QueueRoundTripLatency.ring:loop             17          32   avgt        50        7.549        0.166    ns/op
+p.l.s.q.b.j.QueueRoundTripLatency.ring:ping             17          32   avgt        50      575.748        6.377    ns/op
+p.l.s.q.b.j.QueueRoundTripLatency.ring                  17          33   avgt        50       11.632        0.220    ns/op
+p.l.s.q.b.j.QueueRoundTripLatency.ring:loop             17          33   avgt        50        5.874        0.113    ns/op
+p.l.s.q.b.j.QueueRoundTripLatency.ring:ping             17          33   avgt        50      569.765        9.024    ns/op
+p.l.s.q.b.j.QueueRoundTripLatency.ring                  17          41   avgt        50        8.156        0.156    ns/op
+p.l.s.q.b.j.QueueRoundTripLatency.ring:loop             17          41   avgt        50        4.122        0.078    ns/op
+p.l.s.q.b.j.QueueRoundTripLatency.ring:ping             17          41   avgt        50      370.557        5.640    ns/op
+p.l.s.q.b.j.QueueRoundTripLatency.ring                  17          42   avgt        50        7.882        0.915    ns/op
+p.l.s.q.b.j.QueueRoundTripLatency.ring:loop             17          42   avgt        50        3.990        0.469    ns/op
+p.l.s.q.b.j.QueueRoundTripLatency.ring:ping             17          42   avgt        50      328.990        6.564    ns/op

@@ -8,7 +8,7 @@ abstract class CircularArrayQueue4PrePad<E> extends AbstractQueue<E> {
     protected long p00, p01, p02, p03, p04, p05, p06, p07;
 	protected long p10, p11, p12, p13, p14, p15, p16, p17;
 }
-public abstract class CircularArrayQueue4<E> extends AbstractQueue<E> {
+public abstract class CircularArrayQueue4<E> extends CircularArrayQueue4PrePad<E> {
 	private static final int BUFFER_PAD = 32;
 	protected static final long ARRAY_BASE;
 	protected static final int ELEMENT_SHIFT;
@@ -45,9 +45,6 @@ public abstract class CircularArrayQueue4<E> extends AbstractQueue<E> {
 		return (E) UNSAFE.getObject(buffer, offset);
 	}
 	protected final void soElement(final long offset, final E e) {
-		UNSAFE.putOrderedObject(buffer, offset, e);
-	}
-	protected final void soElement(final E[] buffer, final long offset, final E e) {
 		UNSAFE.putOrderedObject(buffer, offset, e);
 	}
 

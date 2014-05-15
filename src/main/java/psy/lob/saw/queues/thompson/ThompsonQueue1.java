@@ -44,6 +44,7 @@ abstract class ThompsonQueue1Fields<E> extends CircularArrayQueue3<E> {
 }
 public final class ThompsonQueue1<E>  extends ThompsonQueue1Fields<E> {
 	protected long p00, p01, p02, p03, p04, p05, p06, p07;
+	protected long p10, p11, p12, p13, p14, p15, p16, p17;
 	public ThompsonQueue1(final int capacity) {
 		super(capacity);
 	}
@@ -85,10 +86,10 @@ public final class ThompsonQueue1<E>  extends ThompsonQueue1Fields<E> {
 			throw new NullPointerException("Null is not a valid element");
 		}
 
-		final long currentProducerIndex = lvProducerIndex();
+		final long currentProducerIndex = lvProducerIndex(); // LoadLoad
 		final long wrapPoint = currentProducerIndex - capacity();
 		if (lpConsumerIndexCache() <= wrapPoint) {
-			spConsumerIndexCache(lvConsumerIndex());
+			spConsumerIndexCache(lvConsumerIndex()); // LoadLoad
 			if (lpConsumerIndexCache() <= wrapPoint) {
 				return false;
 			}
@@ -96,15 +97,15 @@ public final class ThompsonQueue1<E>  extends ThompsonQueue1Fields<E> {
 
 		final int offset = calcOffset(currentProducerIndex);
 		spElement(offset, e);
-		soProducerIndex(currentProducerIndex + 1);
+		soProducerIndex(currentProducerIndex + 1); // StoreStore
 		return true;
 	}
 
 	@Override
 	public E poll() {
-		final long currentConsumerIndex = lvConsumerIndex();
+		final long currentConsumerIndex = lvConsumerIndex(); // LoadLoad
 		if (currentConsumerIndex >= lpProducerIndexCache()) {
-			spProducerIndexCache(lvProducerIndex());
+			spProducerIndexCache(lvProducerIndex()); // LoadLoad
 			if (currentConsumerIndex >= lpProducerIndexCache()) {
 				return null;
 			}
@@ -113,7 +114,7 @@ public final class ThompsonQueue1<E>  extends ThompsonQueue1Fields<E> {
 		final int offset = calcOffset(currentConsumerIndex);
 		final E e = lpElement(offset);
 		spElement(offset, null);
-		soConsumerIndex(currentConsumerIndex + 1);
+		soConsumerIndex(currentConsumerIndex + 1); // StoreStore
 		return e;
 	}
 

@@ -31,87 +31,87 @@ import psy.lob.saw.queues.common.UnsafeAccess;
  * <li>Inline padded atomic counters
  * </ul>
  */
-abstract class ThompsonQueueInlinedL1Pad<E> extends CircularArrayQueue4<E> {
+abstract class ThompsonQueue3L1Pad<E> extends CircularArrayQueue4<E> {
 	protected long p00, p01, p02, p03, p04, p05, p06, p07;
 	protected long p10, p11, p12, p13, p14, p15, p16, p17;
 
-	public ThompsonQueueInlinedL1Pad(int capacity) {
+	public ThompsonQueue3L1Pad(int capacity) {
 		super(capacity);
 	}
 }
 
-abstract class ThompsonQueueInlinedConsumerIndex<E> extends ThompsonQueueInlinedL1Pad<E> {
+abstract class ThompsonQueue3ConsumerIndex<E> extends ThompsonQueue3L1Pad<E> {
 	protected volatile long consumerIndex;
 
-	public ThompsonQueueInlinedConsumerIndex(int capacity) {
+	public ThompsonQueue3ConsumerIndex(int capacity) {
 		super(capacity);
 	}
 }
 
-abstract class ThompsonQueueInlinedL2Pad<E> extends ThompsonQueueInlinedConsumerIndex<E> {
+abstract class ThompsonQueue3L2Pad<E> extends ThompsonQueue3ConsumerIndex<E> {
 	protected long p00, p01, p02, p03, p04, p05, p06, p07;
 
-	public ThompsonQueueInlinedL2Pad(int capacity) {
+	public ThompsonQueue3L2Pad(int capacity) {
 		super(capacity);
 	}
 }
 
-abstract class ThompsonQueueInlinedHeadCache<E> extends ThompsonQueueInlinedL2Pad<E> {
+abstract class ThompsonQueue3HeadCache<E> extends ThompsonQueue3L2Pad<E> {
 	protected long producerIndexCache;
 
-	public ThompsonQueueInlinedHeadCache(int capacity) {
+	public ThompsonQueue3HeadCache(int capacity) {
 		super(capacity);
 	}
 }
 
-abstract class ThompsonQueueInlinedL3Pad<E> extends ThompsonQueueInlinedHeadCache<E> {
+abstract class ThompsonQueue3L3Pad<E> extends ThompsonQueue3HeadCache<E> {
 	protected long p00, p01, p02, p03, p04, p05, p06, p07;
 	protected long p10, p11, p12, p13, p14, p15, p16, p17;
 
-	public ThompsonQueueInlinedL3Pad(int capacity) {
+	public ThompsonQueue3L3Pad(int capacity) {
 		super(capacity);
 	}
 }
 
-abstract class ThompsonQueueInlinedProducerIndex<E> extends ThompsonQueueInlinedL3Pad<E> {
+abstract class ThompsonQueue3ProducerIndex<E> extends ThompsonQueue3L3Pad<E> {
 	protected volatile long producerIndex;
 
-	public ThompsonQueueInlinedProducerIndex(int capacity) {
+	public ThompsonQueue3ProducerIndex(int capacity) {
 		super(capacity);
 	}
 }
 
-abstract class ThompsonQueueInlinedL4Pad<E> extends ThompsonQueueInlinedProducerIndex<E> {
+abstract class ThompsonQueue3L4Pad<E> extends ThompsonQueue3ProducerIndex<E> {
 	protected long p00, p01, p02, p03, p04, p05, p06, p07;
 
-	public ThompsonQueueInlinedL4Pad(int capacity) {
+	public ThompsonQueue3L4Pad(int capacity) {
 		super(capacity);
 	}
 }
 
-abstract class ThompsonQueueInlinedConsumerCache<E> extends ThompsonQueueInlinedL4Pad<E> {
+abstract class ThompsonQueue3ConsumerCache<E> extends ThompsonQueue3L4Pad<E> {
 	protected long consumerIndexCache;
 
-	public ThompsonQueueInlinedConsumerCache(int capacity) {
+	public ThompsonQueue3ConsumerCache(int capacity) {
 		super(capacity);
 	}
 
 }
 
-public final class ThompsonQueueInlined<E> extends ThompsonQueueInlinedConsumerCache<E> {
+public final class ThompsonQueue3<E> extends ThompsonQueue3ConsumerCache<E> {
 	protected long p00, p01, p02, p03, p04, p05, p06, p07;
 	protected long p10, p11, p12, p13, p14, p15, p16, p17;
 	private final static long CONSUMER_INDEX_OFFSET;
 	private final static long PRODUCER_INDEX_OFFSET;
 	static {
 		try {
-			CONSUMER_INDEX_OFFSET = UnsafeAccess.UNSAFE.objectFieldOffset(ThompsonQueueInlinedConsumerIndex.class.getDeclaredField("consumerIndex"));
-			PRODUCER_INDEX_OFFSET = UnsafeAccess.UNSAFE.objectFieldOffset(ThompsonQueueInlinedProducerIndex.class.getDeclaredField("producerIndex"));
+			CONSUMER_INDEX_OFFSET = UnsafeAccess.UNSAFE.objectFieldOffset(ThompsonQueue3ConsumerIndex.class.getDeclaredField("consumerIndex"));
+			PRODUCER_INDEX_OFFSET = UnsafeAccess.UNSAFE.objectFieldOffset(ThompsonQueue3ProducerIndex.class.getDeclaredField("producerIndex"));
 		} catch (NoSuchFieldException e) {
 			throw new RuntimeException(e);
 		}
 	}
-	public ThompsonQueueInlined(int capacity) {
+	public ThompsonQueue3(int capacity) {
 	    super(capacity);
     }
 

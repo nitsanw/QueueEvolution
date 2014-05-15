@@ -29,54 +29,54 @@ import psy.lob.saw.queues.common.UnsafeAccess;
  * <li>Use Unsafe for array access
  * </ul>
  */
-abstract class LamportQueueInlinedL1Pad<E> extends CircularArrayQueue4<E> {
+abstract class LamportQueue5L1Pad<E> extends CircularArrayQueue4<E> {
 	protected long p00, p01, p02, p03, p04, p05, p06, p07;
 	protected long p10, p11, p12, p13, p14, p15, p16, p17;
 
-	public LamportQueueInlinedL1Pad(int capacity) {
+	public LamportQueue5L1Pad(int capacity) {
 		super(capacity);
 	}
 }
 
-abstract class LamportQueueInlinedConsumerIndex<E> extends LamportQueueInlinedL1Pad<E> {
+abstract class LamportQueue5ConsumerIndex<E> extends LamportQueue5L1Pad<E> {
 	protected volatile long consumerIndex;
 
-	public LamportQueueInlinedConsumerIndex(int capacity) {
+	public LamportQueue5ConsumerIndex(int capacity) {
 		super(capacity);
 	}
 }
 
-abstract class LamportQueueInlinedL3Pad<E> extends LamportQueueInlinedConsumerIndex<E> {
+abstract class LamportQueue5L3Pad<E> extends LamportQueue5ConsumerIndex<E> {
 	protected long p00, p01, p02, p03, p04, p05, p06, p07;
 	protected long p10, p11, p12, p13, p14, p15, p16, p17;
 
-	public LamportQueueInlinedL3Pad(int capacity) {
+	public LamportQueue5L3Pad(int capacity) {
 		super(capacity);
 	}
 }
 
-abstract class LamportQueueInlinedProducerIndex<E> extends LamportQueueInlinedL3Pad<E> {
+abstract class LamportQueue5ProducerIndex<E> extends LamportQueue5L3Pad<E> {
 	protected volatile long producerIndex;
 
-	public LamportQueueInlinedProducerIndex(int capacity) {
+	public LamportQueue5ProducerIndex(int capacity) {
 		super(capacity);
 	}
 }
 
-public final class LamportQueueInlined<E> extends LamportQueueInlinedProducerIndex<E> {
+public final class LamportQueue5<E> extends LamportQueue5ProducerIndex<E> {
 	protected long p00, p01, p02, p03, p04, p05, p06, p07;
 	protected long p10, p11, p12, p13, p14, p15, p16, p17;
 	private final static long CONSUMER_INDEX_OFFSET;
 	private final static long PRODUCER_INDEX_OFFSET;
 	static {
 		try {
-			CONSUMER_INDEX_OFFSET = UnsafeAccess.UNSAFE.objectFieldOffset(LamportQueueInlinedConsumerIndex.class.getDeclaredField("consumerIndex"));
-			PRODUCER_INDEX_OFFSET = UnsafeAccess.UNSAFE.objectFieldOffset(LamportQueueInlinedProducerIndex.class.getDeclaredField("producerIndex"));
+			CONSUMER_INDEX_OFFSET = UnsafeAccess.UNSAFE.objectFieldOffset(LamportQueue5ConsumerIndex.class.getDeclaredField("consumerIndex"));
+			PRODUCER_INDEX_OFFSET = UnsafeAccess.UNSAFE.objectFieldOffset(LamportQueue5ProducerIndex.class.getDeclaredField("producerIndex"));
 		} catch (NoSuchFieldException e) {
 			throw new RuntimeException(e);
 		}
 	}
-	public LamportQueueInlined(int capacity) {
+	public LamportQueue5(int capacity) {
 	    super(capacity);
     }
 

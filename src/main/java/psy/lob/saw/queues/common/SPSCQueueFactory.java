@@ -10,10 +10,10 @@ import psy.lob.saw.queues.lamport.LamportQueue1;
 import psy.lob.saw.queues.lamport.LamportQueue2;
 import psy.lob.saw.queues.lamport.LamportQueue3;
 import psy.lob.saw.queues.lamport.LamportQueue4;
-import psy.lob.saw.queues.lamport.LamportQueueInlined;
+import psy.lob.saw.queues.lamport.LamportQueue5;
 import psy.lob.saw.queues.thompson.ThompsonQueue1;
 import psy.lob.saw.queues.thompson.ThompsonQueue2;
-import psy.lob.saw.queues.thompson.ThompsonQueueInlined;
+import psy.lob.saw.queues.thompson.ThompsonQueue3;
 
 public final class SPSCQueueFactory {
 
@@ -33,13 +33,13 @@ public final class SPSCQueueFactory {
         case 24:
             return new LamportQueue4<Integer>(qCapacity);
         case 25:
-            return new LamportQueueInlined<Integer>(qCapacity);
+            return new LamportQueue5<Integer>(qCapacity);
         case 31:
             return new ThompsonQueue1<Integer>(qCapacity);
         case 32:
             return new ThompsonQueue2<Integer>(qCapacity);
         case 33:
-            return new ThompsonQueueInlined<Integer>(qCapacity);
+            return new ThompsonQueue3<Integer>(qCapacity);
         case 41:
             return new FastFlowQueue1<Integer>(qCapacity);
         case 42:

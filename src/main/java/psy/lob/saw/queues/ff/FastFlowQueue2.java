@@ -71,20 +71,8 @@ public final class FastFlowQueue2<E> extends FastFlowQueue2HeadField<E> {
 		super(Math.min(capacity, OFFER_LOOK_AHEAD * 2));
 	}
 
-	private void incProducerIndex() {
-		producerIndex++;
-	}
-
 	private void incConsumerIndex() {
 		consumerIndex++;
-	}
-
-	private long lpLookAheadCache() {
-		return lookAheadCache;
-	}
-
-	private void spLookAheadCache(long lookAheadCache) {
-		this.lookAheadCache = lookAheadCache;
 	}
 
 	@Override
@@ -93,17 +81,17 @@ public final class FastFlowQueue2<E> extends FastFlowQueue2HeadField<E> {
 			throw new NullPointerException("Null is not a valid element");
 		}
 
-		if (lpLookAheadCache() < producerIndex) {
+		if (lookAheadCache < producerIndex) {
 			long lookAheadOffset = calcOffset(producerIndex + OFFER_LOOK_AHEAD);
 			if (null != lvElement(lookAheadOffset)) { // LoadLoad
 				return false;
 			} else {
-				spLookAheadCache(producerIndex + OFFER_LOOK_AHEAD);
+				lookAheadCache = producerIndex + OFFER_LOOK_AHEAD;
 			}
 		}
 		final long offset = calcOffset(producerIndex);
 		soElement(offset, e); // StoreStore
-		incProducerIndex();
+		producerIndex++;
 		return true;
 	}
 
