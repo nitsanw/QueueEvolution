@@ -1,4 +1,7 @@
-examples- Queue Evolution
+NOTE: These are samples! if you want mature versions of lock free queues go to [JCTools](https://github.com/JCTools/JCTools) where implementation graduate and go through some reasonable testing etc.
+========
+
+Queue Evolution Talk - Supporting samples
 ========
 This repository has been setup as supporting collateral for my Queue Evolution talk.
 This is a trimmed down and tidied up version of the revisited branch of my examples repository. The queues are
